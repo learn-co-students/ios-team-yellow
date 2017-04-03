@@ -1,11 +1,8 @@
-//
-//  AppDelegate.swift
-//  HighwayBingo
-//
-//  Created by Oliver  on 4/3/17.
-//  Copyright © 2017 Oliver . All rights reserved.
-//
+///
+/// AppDelegate.swift
+///
 
+import Firebase
 import UIKit
 
 @UIApplicationMain
@@ -13,9 +10,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FIRApp.configure()
         return true
     }
 
