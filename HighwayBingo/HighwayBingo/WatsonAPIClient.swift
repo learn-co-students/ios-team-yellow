@@ -14,6 +14,7 @@ class WatsonAPIClient {
     static var possibleMatches = [String]()
     
     
+    
     class func verifyImage (image: Data) {
         let urlString = "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key=db215296900399c3b1de5ebd4745321297703ab6&version=2016-05-20"
         Alamofire.upload(multipartFormData: { (multipartFormData) in
