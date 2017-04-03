@@ -7,6 +7,10 @@ target 'HighwayBingo' do
 
   # Pods for HighwayBingo
   pod 'Alamofire'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FBSDKCoreKit'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Then'
 end

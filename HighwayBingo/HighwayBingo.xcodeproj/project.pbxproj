@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		A74695A81E929EF400C18CC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */; };
+		A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695AA1E92A14E00C18CC1 /* Secrets.swift */; };
+		A74695AD1E92A58B00C18CC1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74695AC1E92A58B00C18CC1 /* FBSDKLoginKit.framework */; };
+		A74695B31E92AE3D00C18CC1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695B21E92AE3D00C18CC1 /* LoginVC.swift */; };
+		A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695B41E92B33900C18CC1 /* HomeVC.swift */; };
 		A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */; };
-		A7F098BD1E929B0C00BF3FAB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BC1E929B0C00BF3FAB /* ViewController.swift */; };
 		A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098BE1E929B0C00BF3FAB /* Main.storyboard */; };
 		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
 		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
@@ -21,9 +24,12 @@
 		074ED3FCE8F94180214CACFC /* Pods-HighwayBingo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HighwayBingo.release.xcconfig"; path = "Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo.release.xcconfig"; sourceTree = "<group>"; };
 		147540FFA226930511475AE7 /* Pods-HighwayBingo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HighwayBingo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo.debug.xcconfig"; sourceTree = "<group>"; };
 		A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A74695AA1E92A14E00C18CC1 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		A74695AC1E92A58B00C18CC1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Downloads/FacebookSDKs-iOS-4.20.2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		A74695B21E92AE3D00C18CC1 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		A74695B41E92B33900C18CC1 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		A7F098B71E929B0C00BF3FAB /* HighwayBingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighwayBingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A7F098BC1E929B0C00BF3FAB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A7F098BF1E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A7F098C11E929B0C00BF3FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -35,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A74695AD1E92A58B00C18CC1 /* FBSDKLoginKit.framework in Frameworks */,
 				CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,9 +52,34 @@
 		5EEBE07EB0875BEFEDD5A87F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A74695AC1E92A58B00C18CC1 /* FBSDKLoginKit.framework */,
 				01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A74695A91E92A14E00C18CC1 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				A74695AA1E92A14E00C18CC1 /* Secrets.swift */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		A74695AE1E92AE0E00C18CC1 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		A74695B11E92AE3D00C18CC1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A74695B41E92B33900C18CC1 /* HomeVC.swift */,
+				A74695B21E92AE3D00C18CC1 /* LoginVC.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A7F098AE1E929B0C00BF3FAB = {
@@ -72,12 +104,14 @@
 			isa = PBXGroup;
 			children = (
 				A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */,
-				A7F098BC1E929B0C00BF3FAB /* ViewController.swift */,
-				A7F098BE1E929B0C00BF3FAB /* Main.storyboard */,
 				A7F098C11E929B0C00BF3FAB /* Assets.xcassets */,
-				A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */,
+				A7F098BE1E929B0C00BF3FAB /* Main.storyboard */,
 				A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */,
 				A7F098C61E929B0C00BF3FAB /* Info.plist */,
+				A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */,
+				A74695A91E92A14E00C18CC1 /* Lib */,
+				A74695AE1E92AE0E00C18CC1 /* Networking */,
+				A74695B11E92AE3D00C18CC1 /* Views */,
 			);
 			path = HighwayBingo;
 			sourceTree = "<group>";
@@ -216,8 +250,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7F098BD1E929B0C00BF3FAB /* ViewController.swift in Sources */,
+				A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */,
+				A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
+				A74695B31E92AE3D00C18CC1 /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +380,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VX33YRD3F6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMSessionFetcher\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FacebookSDK\"",
+				);
 				INFOPLIST_FILE = HighwayBingo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Oliver.HighwayBingo;
@@ -358,6 +405,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VX33YRD3F6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMSessionFetcher\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FacebookSDK\"",
+				);
 				INFOPLIST_FILE = HighwayBingo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Oliver.HighwayBingo;

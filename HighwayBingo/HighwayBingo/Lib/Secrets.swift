@@ -9,4 +9,3 @@ public enum Secrets {
         public static let secret = "fb737fcec9d8e735f6a2266135571720"
     }
 }
-//https://highwaybingo.firebaseapp.com/__/auth/handler
