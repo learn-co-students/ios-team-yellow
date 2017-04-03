@@ -1,0 +1,388 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */; };
+		A7F098BD1E929B0C00BF3FAB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BC1E929B0C00BF3FAB /* ViewController.swift */; };
+		A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098BE1E929B0C00BF3FAB /* Main.storyboard */; };
+		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
+		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
+		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HighwayBingo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		074ED3FCE8F94180214CACFC /* Pods-HighwayBingo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HighwayBingo.release.xcconfig"; path = "Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo.release.xcconfig"; sourceTree = "<group>"; };
+		147540FFA226930511475AE7 /* Pods-HighwayBingo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HighwayBingo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo.debug.xcconfig"; sourceTree = "<group>"; };
+		A7F098B71E929B0C00BF3FAB /* HighwayBingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighwayBingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A7F098BC1E929B0C00BF3FAB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A7F098BF1E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A7F098C11E929B0C00BF3FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7F098B41E929B0C00BF3FAB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5EEBE07EB0875BEFEDD5A87F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A7F098AE1E929B0C00BF3FAB = {
+			isa = PBXGroup;
+			children = (
+				A7F098B91E929B0C00BF3FAB /* HighwayBingo */,
+				A7F098B81E929B0C00BF3FAB /* Products */,
+				FDA667B6F1018B1B68EA2232 /* Pods */,
+				5EEBE07EB0875BEFEDD5A87F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A7F098B81E929B0C00BF3FAB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7F098B71E929B0C00BF3FAB /* HighwayBingo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7F098B91E929B0C00BF3FAB /* HighwayBingo */ = {
+			isa = PBXGroup;
+			children = (
+				A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */,
+				A7F098BC1E929B0C00BF3FAB /* ViewController.swift */,
+				A7F098BE1E929B0C00BF3FAB /* Main.storyboard */,
+				A7F098C11E929B0C00BF3FAB /* Assets.xcassets */,
+				A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */,
+				A7F098C61E929B0C00BF3FAB /* Info.plist */,
+			);
+			path = HighwayBingo;
+			sourceTree = "<group>";
+		};
+		FDA667B6F1018B1B68EA2232 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				147540FFA226930511475AE7 /* Pods-HighwayBingo.debug.xcconfig */,
+				074ED3FCE8F94180214CACFC /* Pods-HighwayBingo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A7F098B61E929B0C00BF3FAB /* HighwayBingo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7F098C91E929B0C00BF3FAB /* Build configuration list for PBXNativeTarget "HighwayBingo" */;
+			buildPhases = (
+				92542BFB505A666BA1ED74B5 /* [CP] Check Pods Manifest.lock */,
+				A7F098B31E929B0C00BF3FAB /* Sources */,
+				A7F098B41E929B0C00BF3FAB /* Frameworks */,
+				A7F098B51E929B0C00BF3FAB /* Resources */,
+				6ECD3BD16B0BA8ED3D1318D5 /* [CP] Embed Pods Frameworks */,
+				119E26CBCF74085B0E713BA3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HighwayBingo;
+			productName = HighwayBingo;
+			productReference = A7F098B71E929B0C00BF3FAB /* HighwayBingo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A7F098AF1E929B0C00BF3FAB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Oliver ";
+				TargetAttributes = {
+					A7F098B61E929B0C00BF3FAB = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = VX33YRD3F6;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A7F098B21E929B0C00BF3FAB /* Build configuration list for PBXProject "HighwayBingo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A7F098AE1E929B0C00BF3FAB;
+			productRefGroup = A7F098B81E929B0C00BF3FAB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7F098B61E929B0C00BF3FAB /* HighwayBingo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A7F098B51E929B0C00BF3FAB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */,
+				A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */,
+				A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		119E26CBCF74085B0E713BA3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ECD3BD16B0BA8ED3D1318D5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92542BFB505A666BA1ED74B5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A7F098B31E929B0C00BF3FAB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7F098BD1E929B0C00BF3FAB /* ViewController.swift in Sources */,
+				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A7F098BE1E929B0C00BF3FAB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7F098BF1E929B0C00BF3FAB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7F098C41E929B0C00BF3FAB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A7F098C71E929B0C00BF3FAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A7F098C81E929B0C00BF3FAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A7F098CA1E929B0C00BF3FAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 147540FFA226930511475AE7 /* Pods-HighwayBingo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VX33YRD3F6;
+				INFOPLIST_FILE = HighwayBingo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Oliver.HighwayBingo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		A7F098CB1E929B0C00BF3FAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 074ED3FCE8F94180214CACFC /* Pods-HighwayBingo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VX33YRD3F6;
+				INFOPLIST_FILE = HighwayBingo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Oliver.HighwayBingo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7F098B21E929B0C00BF3FAB /* Build configuration list for PBXProject "HighwayBingo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7F098C71E929B0C00BF3FAB /* Debug */,
+				A7F098C81E929B0C00BF3FAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7F098C91E929B0C00BF3FAB /* Build configuration list for PBXNativeTarget "HighwayBingo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7F098CA1E929B0C00BF3FAB /* Debug */,
+				A7F098CB1E929B0C00BF3FAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A7F098AF1E929B0C00BF3FAB /* Project object */;
+}
