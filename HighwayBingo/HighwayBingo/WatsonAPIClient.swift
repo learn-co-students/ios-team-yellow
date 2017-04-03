@@ -41,15 +41,10 @@ class WatsonAPIClient {
                             for item in classesArray {
                                 let possibleMatch = item["class"] as? String ?? ""
                                 self.possibleMatches.append(possibleMatch)
-                                
                             }
                         }
-                        
                     }
                     print("POSSIBLE MATCHES: \(self.possibleMatches)")
-                    
-                
-                    
                 })
             case .failure(let encodingError):
                 print(encodingError)

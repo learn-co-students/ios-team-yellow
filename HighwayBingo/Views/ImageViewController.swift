@@ -9,12 +9,8 @@
 import UIKit
 import MobileCoreServices
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -39,7 +35,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         self.dismiss(animated: true, completion: nil)
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(ViewController.image), nil)
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(ImageViewController.image), nil)
         guard let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {return}
         let smallImage = newImage.resized(withPercentage: 0.25)
         guard let imageData = UIImagePNGRepresentation(smallImage!) else {return}
