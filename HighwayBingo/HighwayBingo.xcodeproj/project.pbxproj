@@ -14,6 +14,7 @@
 		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
 		F0F595511E929DE400E2BE39 /* WatsonAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F595501E929DE400E2BE39 /* WatsonAPIClient.swift */; };
+		F0F595531E92E35500E2BE39 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F595521E92E35500E2BE39 /* ImageExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F0F595501E929DE400E2BE39 /* WatsonAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonAPIClient.swift; sourceTree = "<group>"; };
+		F0F595521E92E35500E2BE39 /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				F0F5954F1E929DBD00E2BE39 /* Utility */,
 				A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */,
 				A7F098BC1E929B0C00BF3FAB /* ViewController.swift */,
+				F0F595521E92E35500E2BE39 /* ImageExtension.swift */,
 				A7F098BE1E929B0C00BF3FAB /* Main.storyboard */,
 				A7F098C11E929B0C00BF3FAB /* Assets.xcassets */,
 				A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */,
@@ -226,6 +229,7 @@
 				A7F098BD1E929B0C00BF3FAB /* ViewController.swift in Sources */,
 				F0F595511E929DE400E2BE39 /* WatsonAPIClient.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
+				F0F595531E92E35500E2BE39 /* ImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

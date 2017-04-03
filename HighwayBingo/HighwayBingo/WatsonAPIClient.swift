@@ -11,6 +11,8 @@ import Alamofire
 
 class WatsonAPIClient {
     
+    static var possibleMatches = [String]()
+    
     
     class func verifyImage (image: Data) {
         let urlString = "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key=db215296900399c3b1de5ebd4745321297703ab6&version=2016-05-20"
@@ -30,7 +32,21 @@ class WatsonAPIClient {
                 upload.responseJSON(completionHandler: { (response) in
                     debugPrint(response)
                     let JSON = response.result.value as? [String:Any] ?? [:]
-                    print(JSON)
+                    let imagesArray = JSON["images"] as? [[String:Any]] ?? [[:]]
+                    for image in imagesArray {
+                        let classifiersArray = image["classifiers"] as? [[String:Any]] ?? [[:]]
+                        for classifier in classifiersArray {
+                            let classesArray = classifier["classes"] as? [[String:Any]] ?? [[:]]
+                            for item in classesArray {
+                                let possibleMatch = item["class"] as? String ?? ""
+                                self.possibleMatches.append(possibleMatch)
+                                
+                            }
+                        }
+                        
+                    }
+                    print("POSSIBLE MATCHES: \(self.possibleMatches)")
+                    
                 
                     
                 })

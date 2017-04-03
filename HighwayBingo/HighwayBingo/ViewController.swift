@@ -11,7 +11,7 @@ import MobileCoreServices
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBOutlet weak var imageView: UIImageView!
+
     
     
 
@@ -37,22 +37,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         self.dismiss(animated: true, completion: nil)
-        if mediaType.isEqual(to: kUTTypeImage as String) {
-            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            imageView.image = image
-            UIImageWriteToSavedPhotosAlbum(image, self, #selector(ViewController.image), nil)
-            guard let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {return}
-            print("GOT NEW IMAGE")
-            let smallImage = newImage.resized(withPercentage: 0.25)
-            print("RESIZED IMAGE")
-            guard let imageData = UIImagePNGRepresentation(smallImage!) else {return}
-            print("GOT IMAGE DATA")
-            print("IMAGE DATA: \(imageData)")
-            WatsonAPIClient.verifyImage(image: imageData)
-            
-        }
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(ViewController.image), nil)
+        guard let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {return}
+        let smallImage = newImage.resized(withPercentage: 0.25)
+        guard let imageData = UIImagePNGRepresentation(smallImage!) else {return}
+        WatsonAPIClient.verifyImage(image: imageData)
+        
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafeRawPointer) {
@@ -63,18 +55,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-
-    
 }
 
-extension UIImage {
-    func resized(withPercentage percentage: CGFloat) -> UIImage? {
-        let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
-        UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
-        defer { UIGraphicsEndImageContext() }
-        draw(in: CGRect(origin: .zero, size: canvasSize))
-        return UIGraphicsGetImageFromCurrentImageContext()
-    }
-}
 
