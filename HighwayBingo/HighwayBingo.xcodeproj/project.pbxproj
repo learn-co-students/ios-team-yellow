@@ -13,6 +13,7 @@
 		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
 		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
+		F0F595511E929DE400E2BE39 /* WatsonAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F595501E929DE400E2BE39 /* WatsonAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A7F098C11E929B0C00BF3FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0F595501E929DE400E2BE39 /* WatsonAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 		A7F098B91E929B0C00BF3FAB /* HighwayBingo */ = {
 			isa = PBXGroup;
 			children = (
+				F0F5954F1E929DBD00E2BE39 /* Utility */,
 				A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */,
 				A7F098BC1E929B0C00BF3FAB /* ViewController.swift */,
 				A7F098BE1E929B0C00BF3FAB /* Main.storyboard */,
@@ -77,6 +80,14 @@
 				A7F098C61E929B0C00BF3FAB /* Info.plist */,
 			);
 			path = HighwayBingo;
+			sourceTree = "<group>";
+		};
+		F0F5954F1E929DBD00E2BE39 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F0F595501E929DE400E2BE39 /* WatsonAPIClient.swift */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 		FDA667B6F1018B1B68EA2232 /* Pods */ = {
@@ -123,7 +134,7 @@
 				TargetAttributes = {
 					A7F098B61E929B0C00BF3FAB = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = VX33YRD3F6;
+						DevelopmentTeam = X3V4LZU6AD;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -213,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7F098BD1E929B0C00BF3FAB /* ViewController.swift in Sources */,
+				F0F595511E929DE400E2BE39 /* WatsonAPIClient.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,11 +351,13 @@
 			baseConfigurationReference = 147540FFA226930511475AE7 /* Pods-HighwayBingo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VX33YRD3F6;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = X3V4LZU6AD;
 				INFOPLIST_FILE = HighwayBingo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Oliver.HighwayBingo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TJ.bingo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -353,11 +367,13 @@
 			baseConfigurationReference = 074ED3FCE8F94180214CACFC /* Pods-HighwayBingo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VX33YRD3F6;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = X3V4LZU6AD;
 				INFOPLIST_FILE = HighwayBingo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Oliver.HighwayBingo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TJ.bingo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -381,6 +397,7 @@
 				A7F098CB1E929B0C00BF3FAB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
