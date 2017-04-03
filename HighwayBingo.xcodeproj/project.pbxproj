@@ -17,9 +17,9 @@
 		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
 		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
-		F0204A4B1E92EA3F00FBD6FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0204A4A1E92EA3F00FBD6FD /* ViewController.swift */; };
-		F0204A4E1E92EA5000FBD6FD /* WatsonAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0204A4D1E92EA5000FBD6FD /* WatsonAPIClient.swift */; };
-		F0204A501E92EA5900FBD6FD /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0204A4F1E92EA5900FBD6FD /* ImageExtension.swift */; };
+		F02AB1AB1E92EC50006EE15C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AA1E92EC50006EE15C /* ViewController.swift */; };
+		F02AB1AD1E92EC58006EE15C /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AC1E92EC58006EE15C /* ImageExtension.swift */; };
+		F02AB1AF1E92EC5D006EE15C /* WatsonAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AE1E92EC5D006EE15C /* WatsonAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,9 +37,9 @@
 		A7F098C11E929B0C00BF3FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F0204A4A1E92EA3F00FBD6FD /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F0204A4D1E92EA5000FBD6FD /* WatsonAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonAPIClient.swift; sourceTree = "<group>"; };
-		F0204A4F1E92EA5900FBD6FD /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		F02AB1AA1E92EC50006EE15C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F02AB1AC1E92EC58006EE15C /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageExtension.swift; path = HighwayBingo/HighwayBingo/ImageExtension.swift; sourceTree = "<group>"; };
+		F02AB1AE1E92EC5D006EE15C /* WatsonAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatsonAPIClient.swift; path = HighwayBingo/HighwayBingo/WatsonAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 		A74695B11E92AE3D00C18CC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F0204A4A1E92EA3F00FBD6FD /* ViewController.swift */,
+				F02AB1AA1E92EC50006EE15C /* ViewController.swift */,
 				A74695B41E92B33900C18CC1 /* HomeVC.swift */,
 				A74695B21E92AE3D00C18CC1 /* LoginVC.swift */,
 			);
@@ -127,8 +127,8 @@
 		F0204A4C1E92EA4500FBD6FD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				F0204A4D1E92EA5000FBD6FD /* WatsonAPIClient.swift */,
-				F0204A4F1E92EA5900FBD6FD /* ImageExtension.swift */,
+				F02AB1AE1E92EC5D006EE15C /* WatsonAPIClient.swift */,
+				F02AB1AC1E92EC58006EE15C /* ImageExtension.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -267,11 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0204A4B1E92EA3F00FBD6FD /* ViewController.swift in Sources */,
-				F0204A4E1E92EA5000FBD6FD /* WatsonAPIClient.swift in Sources */,
+				F02AB1AB1E92EC50006EE15C /* ViewController.swift in Sources */,
+				F02AB1AD1E92EC58006EE15C /* ImageExtension.swift in Sources */,
 				A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */,
-				F0204A501E92EA5900FBD6FD /* ImageExtension.swift in Sources */,
 				A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */,
+				F02AB1AF1E92EC5D006EE15C /* WatsonAPIClient.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
 				A74695B31E92AE3D00C18CC1 /* LoginVC.swift in Sources */,
 			);
