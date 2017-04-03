@@ -7,5 +7,6 @@ target 'HighwayBingo' do
 
   # Pods for HighwayBingo
   pod 'Alamofire'
-
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
 end

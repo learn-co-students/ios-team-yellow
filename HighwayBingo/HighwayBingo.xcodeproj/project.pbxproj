@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A74695A81E929EF400C18CC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */; };
 		A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */; };
 		A7F098BD1E929B0C00BF3FAB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BC1E929B0C00BF3FAB /* ViewController.swift */; };
 		A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098BE1E929B0C00BF3FAB /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 		01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HighwayBingo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		074ED3FCE8F94180214CACFC /* Pods-HighwayBingo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HighwayBingo.release.xcconfig"; path = "Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo.release.xcconfig"; sourceTree = "<group>"; };
 		147540FFA226930511475AE7 /* Pods-HighwayBingo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HighwayBingo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo.debug.xcconfig"; sourceTree = "<group>"; };
+		A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A7F098B71E929B0C00BF3FAB /* HighwayBingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighwayBingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7F098BC1E929B0C00BF3FAB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				A7F098BE1E929B0C00BF3FAB /* Main.storyboard */,
 				A7F098C11E929B0C00BF3FAB /* Assets.xcassets */,
 				A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */,
+				A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */,
 				A7F098C61E929B0C00BF3FAB /* Info.plist */,
 			);
 			path = HighwayBingo;
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */,
+				A74695A81E929EF400C18CC1 /* GoogleService-Info.plist in Resources */,
 				A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */,
 				A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */,
 			);
@@ -381,6 +385,7 @@
 				A7F098CB1E929B0C00BF3FAB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
