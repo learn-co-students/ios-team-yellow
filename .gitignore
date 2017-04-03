@@ -25,6 +25,7 @@ xcuserdata/
 *.xcscmblueprint
 
 .DS_Store
+HighwayBingo/.DS_Store
 
 ## Obj-C/Swift specific
 *.hmap
