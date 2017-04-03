@@ -12,6 +12,9 @@
 		A74695AD1E92A58B00C18CC1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74695AC1E92A58B00C18CC1 /* FBSDKLoginKit.framework */; };
 		A74695B31E92AE3D00C18CC1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695B21E92AE3D00C18CC1 /* LoginVC.swift */; };
 		A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695B41E92B33900C18CC1 /* HomeVC.swift */; };
+		A74695B81E92CA7200C18CC1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695B71E92CA7200C18CC1 /* Player.swift */; };
+		A74695BA1E92CCEE00C18CC1 /* TypeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695B91E92CCEE00C18CC1 /* TypeExtensions.swift */; };
+		A74695BC1E92D6AA00C18CC1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695BB1E92D6AA00C18CC1 /* FirebaseManager.swift */; };
 		A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */; };
 		A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098BE1E929B0C00BF3FAB /* Main.storyboard */; };
 		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
@@ -31,6 +34,9 @@
 		A74695AC1E92A58B00C18CC1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Downloads/FacebookSDKs-iOS-4.20.2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		A74695B21E92AE3D00C18CC1 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		A74695B41E92B33900C18CC1 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		A74695B71E92CA7200C18CC1 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		A74695B91E92CCEE00C18CC1 /* TypeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeExtensions.swift; sourceTree = "<group>"; };
+		A74695BB1E92D6AA00C18CC1 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		A7F098B71E929B0C00BF3FAB /* HighwayBingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighwayBingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7F098BF1E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				A74695AA1E92A14E00C18CC1 /* Secrets.swift */,
+				A74695B91E92CCEE00C18CC1 /* TypeExtensions.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -75,6 +82,7 @@
 		A74695AE1E92AE0E00C18CC1 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A74695BB1E92D6AA00C18CC1 /* FirebaseManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -87,6 +95,14 @@
 				A74695B21E92AE3D00C18CC1 /* LoginVC.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A74695B61E92CA7200C18CC1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A74695B71E92CA7200C18CC1 /* Player.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A7F098AE1E929B0C00BF3FAB = {
@@ -118,6 +134,7 @@
 				A7F098C61E929B0C00BF3FAB /* Info.plist */,
 				A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */,
 				A74695A91E92A14E00C18CC1 /* Lib */,
+				A74695B61E92CA7200C18CC1 /* Models */,
 				A74695AE1E92AE0E00C18CC1 /* Networking */,
 				A74695B11E92AE3D00C18CC1 /* Views */,
 			);
@@ -272,8 +289,11 @@
 				A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */,
 				A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */,
 				F02AB1AF1E92EC5D006EE15C /* WatsonAPIClient.swift in Sources */,
+				A74695BC1E92D6AA00C18CC1 /* FirebaseManager.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
+				A74695B81E92CA7200C18CC1 /* Player.swift in Sources */,
 				A74695B31E92AE3D00C18CC1 /* LoginVC.swift in Sources */,
+				A74695BA1E92CCEE00C18CC1 /* TypeExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
