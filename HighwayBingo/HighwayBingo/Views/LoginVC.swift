@@ -2,16 +2,17 @@
 /// LoginVC.swift
 ///
 
-import UIKit
 import FacebookCore
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FacebookLogin
 import Firebase
 import Then
+import UIKit
 
 class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
+    let firebaseManager = FirebaseManager.shared
     let loginButton = FBSDKLoginButton()
     
     override func viewDidLoad() {
@@ -28,7 +29,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
     func navigateToHomeVC() {
         let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "homeVC") as! HomeVC
-        print(homeVC)
         self.navigationController?.pushViewController(homeVC, animated: true)
     }
 }
@@ -56,8 +56,11 @@ extension FacebookManager {
         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
             if let validationError = error {
                 print("LoginVC -> error validating login: %@", validationError)
-            } else {
+            } else if let user = user {
+                self.firebaseManager.createOrUpdate(user)
                 self.navigateToHomeVC()
+            } else {
+                print("LoginVC -> error validating login")
             }
         }
     }
