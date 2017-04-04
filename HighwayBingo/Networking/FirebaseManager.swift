@@ -33,7 +33,9 @@ final class FirebaseManager {
                 if let image = image {
                     let location = self.storage.child("images/\(_id).jpg")
                     self.save(image, at: location, userParams: params) { success in
-                        if !success { Child.users.setValue(params) }
+                        //if !success { Child.users.setValue(params) }
+                        if !success { Child.users.child(_id).setValue(params) }
+            
                     }
                 }
             }
@@ -55,7 +57,8 @@ final class FirebaseManager {
         location.put(data, metadata: metaData) { (metadata, error) in
             if let imageUrl = metadata?.downloadURL() {
                 let paramsWithImage = userParams += ["imageUrl" : String(describing: imageUrl)]
-                Child.users.setValue(paramsWithImage)
+                let id = paramsWithImage["_id"] ?? "No ID"
+                Child.users.child(id).setValue(paramsWithImage)
                 handler(true)
             } else {
                 print("FirebaseManager -> error saving photo")
