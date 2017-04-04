@@ -7,45 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D2D7C2C1E92FAD5006E46D6 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D7C2B1E92FAD5006E46D6 /* FirebaseManager.swift */; };
-		7D2D7C2E1E92FAE5006E46D6 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D7C2D1E92FAE5006E46D6 /* Player.swift */; };
 		7D2D7C301E92FB00006E46D6 /* TypeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2D7C2F1E92FB00006E46D6 /* TypeExtensions.swift */; };
 		A74695A81E929EF400C18CC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */; };
 		A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695AA1E92A14E00C18CC1 /* Secrets.swift */; };
 		A74695AD1E92A58B00C18CC1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74695AC1E92A58B00C18CC1 /* FBSDKLoginKit.framework */; };
 		A74695B31E92AE3D00C18CC1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695B21E92AE3D00C18CC1 /* LoginVC.swift */; };
 		A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74695B41E92B33900C18CC1 /* HomeVC.swift */; };
+		A7B426661E93E11300FF9352 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B426651E93E11300FF9352 /* Player.swift */; };
+		A7B426681E93E12100FF9352 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B426671E93E12100FF9352 /* FirebaseManager.swift */; };
+		A7B4266A1E93E12C00FF9352 /* WatsonAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B426691E93E12C00FF9352 /* WatsonAPIClient.swift */; };
 		A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */; };
 		A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098BE1E929B0C00BF3FAB /* Main.storyboard */; };
 		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
 		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
-		F02AB1AB1E92EC50006EE15C /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AA1E92EC50006EE15C /* ImageViewController.swift */; };
-		F02AB1AD1E92EC58006EE15C /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AC1E92EC58006EE15C /* ImageExtension.swift */; };
-		F02AB1AF1E92EC5D006EE15C /* WatsonAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AE1E92EC5D006EE15C /* WatsonAPIClient.swift */; };
+		F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AA1E92EC50006EE15C /* ImageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HighwayBingo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		074ED3FCE8F94180214CACFC /* Pods-HighwayBingo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HighwayBingo.release.xcconfig"; path = "Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo.release.xcconfig"; sourceTree = "<group>"; };
 		147540FFA226930511475AE7 /* Pods-HighwayBingo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HighwayBingo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HighwayBingo/Pods-HighwayBingo.debug.xcconfig"; sourceTree = "<group>"; };
-		7D2D7C2B1E92FAD5006E46D6 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseManager.swift; path = HighwayBingo/HighwayBingo/Networking/FirebaseManager.swift; sourceTree = SOURCE_ROOT; };
-		7D2D7C2D1E92FAE5006E46D6 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = HighwayBingo/HighwayBingo/Models/Player.swift; sourceTree = SOURCE_ROOT; };
 		7D2D7C2F1E92FB00006E46D6 /* TypeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeExtensions.swift; sourceTree = "<group>"; };
 		A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A74695AA1E92A14E00C18CC1 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		A74695AC1E92A58B00C18CC1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Downloads/FacebookSDKs-iOS-4.20.2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		A74695B21E92AE3D00C18CC1 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		A74695B41E92B33900C18CC1 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		A7B426651E93E11300FF9352 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		A7B426671E93E12100FF9352 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		A7B426691E93E12C00FF9352 /* WatsonAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonAPIClient.swift; sourceTree = "<group>"; };
 		A7F098B71E929B0C00BF3FAB /* HighwayBingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighwayBingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7F098BF1E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A7F098C11E929B0C00BF3FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F02AB1AA1E92EC50006EE15C /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
-		F02AB1AC1E92EC58006EE15C /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageExtension.swift; path = HighwayBingo/HighwayBingo/ImageExtension.swift; sourceTree = "<group>"; };
-		F02AB1AE1E92EC5D006EE15C /* WatsonAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatsonAPIClient.swift; path = HighwayBingo/HighwayBingo/WatsonAPIClient.swift; sourceTree = "<group>"; };
+		F02AB1AA1E92EC50006EE15C /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,8 @@
 		A74695AE1E92AE0E00C18CC1 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				7D2D7C2B1E92FAD5006E46D6 /* FirebaseManager.swift */,
+				A7B426671E93E12100FF9352 /* FirebaseManager.swift */,
+				A7B426691E93E12C00FF9352 /* WatsonAPIClient.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -90,7 +89,7 @@
 		A74695B11E92AE3D00C18CC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F02AB1AA1E92EC50006EE15C /* ImageViewController.swift */,
+				F02AB1AA1E92EC50006EE15C /* ImageVC.swift */,
 				A74695B41E92B33900C18CC1 /* HomeVC.swift */,
 				A74695B21E92AE3D00C18CC1 /* LoginVC.swift */,
 			);
@@ -100,7 +99,7 @@
 		A74695B61E92CA7200C18CC1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7D2D7C2D1E92FAE5006E46D6 /* Player.swift */,
+				A7B426651E93E11300FF9352 /* Player.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -108,7 +107,6 @@
 		A7F098AE1E929B0C00BF3FAB = {
 			isa = PBXGroup;
 			children = (
-				F0204A4C1E92EA4500FBD6FD /* Utility */,
 				A7F098B91E929B0C00BF3FAB /* HighwayBingo */,
 				A7F098B81E929B0C00BF3FAB /* Products */,
 				FDA667B6F1018B1B68EA2232 /* Pods */,
@@ -139,15 +137,6 @@
 				A74695B11E92AE3D00C18CC1 /* Views */,
 			);
 			path = HighwayBingo;
-			sourceTree = "<group>";
-		};
-		F0204A4C1E92EA4500FBD6FD /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				F02AB1AE1E92EC5D006EE15C /* WatsonAPIClient.swift */,
-				F02AB1AC1E92EC58006EE15C /* ImageExtension.swift */,
-			);
-			name = Utility;
 			sourceTree = "<group>";
 		};
 		FDA667B6F1018B1B68EA2232 /* Pods */ = {
@@ -284,15 +273,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F02AB1AB1E92EC50006EE15C /* ImageViewController.swift in Sources */,
-				F02AB1AD1E92EC58006EE15C /* ImageExtension.swift in Sources */,
-				7D2D7C2C1E92FAD5006E46D6 /* FirebaseManager.swift in Sources */,
+				F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */,
+				A7B4266A1E93E12C00FF9352 /* WatsonAPIClient.swift in Sources */,
 				A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */,
 				A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */,
-				F02AB1AF1E92EC5D006EE15C /* WatsonAPIClient.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
+				A7B426681E93E12100FF9352 /* FirebaseManager.swift in Sources */,
 				A74695B31E92AE3D00C18CC1 /* LoginVC.swift in Sources */,
-				7D2D7C2E1E92FAE5006E46D6 /* Player.swift in Sources */,
+				A7B426661E93E11300FF9352 /* Player.swift in Sources */,
 				7D2D7C301E92FB00006E46D6 /* TypeExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
