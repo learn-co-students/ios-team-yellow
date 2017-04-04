@@ -39,15 +39,6 @@
                     <view key="view" contentMode="scaleToFill" id="S13-z1-5oO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zv2-40-0Dk">
-                                <rect key="frame" x="166" y="323" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -55,10 +46,27 @@
             </objects>
             <point key="canvasLocation" x="2102" y="66"/>
         </scene>
+        <!--New GameVC-->
+        <scene sceneID="a59-qk-pFF">
+            <objects>
+                <viewController storyboardIdentifier="newGameVC" id="kvM-aW-Wwp" customClass="NewGameVC" customModule="HighwayBingo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bdG-M8-qJS"/>
+                        <viewControllerLayoutGuide type="bottom" id="7YQ-mn-0Rx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3WP-bP-D5J">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cJR-qB-l7V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3027" y="-230"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fj9-O7-Hrw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IQ8-Mk-GKr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="lo" automaticallyAdjustsScrollViewInsets="NO" id="tED-Fu-ZvJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="myv-Wm-5yG">
@@ -70,6 +78,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="aTt-Ko-jL4"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IQ8-Mk-GKr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="54" y="66"/>
         </scene>
