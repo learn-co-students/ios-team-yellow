@@ -69,8 +69,11 @@ final class FirebaseManager {
         return game.key
     }
     
-    func sendInvitations(for: GameID, to: [FacebookUser]) {
-        
+    func sendInvitations(for gameId: GameID, to users: [FacebookUser]) {
+        let userIds = users.map { $0.id }
+        userIds.forEach { id in
+            Child.users.child(id).child("notifications").updateChildValues(["invitation":gameId])
+        }
     }
     
     private func getPhoto(url: URL, handler: @escaping (UIImage?) -> ()) {
