@@ -8,6 +8,9 @@ import Then
 class FacebookFriendCell: UITableViewCell {
     
     let nameLabel = UILabel()
+    let addButton = UIButton()
+    
+    weak var delegate: InviteFriendDelegate?
     
     var friend: FacebookUser? {
         didSet {
@@ -19,7 +22,7 @@ class FacebookFriendCell: UITableViewCell {
     static let reuseID = "facebookFriend"
     
     var views: [UIView] {
-        return [nameLabel]
+        return [addButton, nameLabel]
     }
     
     var margins: UILayoutGuide {
@@ -35,6 +38,19 @@ class FacebookFriendCell: UITableViewCell {
         _ = nameLabel.then {
             $0.leftAnchor.constraint(equalTo: margins.leftAnchor).isActive = true
         }
+        
+        _ = addButton.then {
+            $0.setTitle("ADD", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.addTarget(self, action: #selector(self.inviteFriend(_:)), for: UIControlEvents.touchUpInside)
+            $0.backgroundColor = .blue
+            $0.rightAnchor.constraint(equalTo: margins.rightAnchor).isActive = true
+        }
+    }
+    
+    func inviteFriend(_ sender: UIButton!) {
+        guard let friend = friend else { return }
+        delegate?.invite(friend)
     }
     
     required init?(coder aDecoder: NSCoder) {

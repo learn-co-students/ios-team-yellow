@@ -8,11 +8,9 @@ import SwiftyJSON
 final class FacebookManager {
     
     static func getFriends(handler: @escaping ([FacebookUser]) -> ()) {
+        
         let params = ["fields": "id, name, picture"]
-        //
-        // Use test-user ID
-        //
-        let graphRequest = FBSDKGraphRequest(graphPath: "/107053599842003/friends", parameters: params)
+        let graphRequest = FBSDKGraphRequest(graphPath: "/me/friends", parameters: params)
         let connection = FBSDKGraphRequestConnection()
         
         connection.add(graphRequest, completionHandler: { (connection, result, error) in
