@@ -18,6 +18,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut() // this is an instance function
+        
         _ = loginButton.then {
             $0.delegate = self
             view.addSubview($0)
@@ -34,8 +37,8 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
 }
 
 
-private typealias FacebookManager = LoginVC
-extension FacebookManager {
+private typealias FacebookLoginManager = LoginVC
+extension FacebookLoginManager {
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
