@@ -8,6 +8,8 @@ import FirebaseDatabase
 import FirebaseStorage
 import Foundation
 
+typealias GameID = String
+
 final class FirebaseManager {
     
     static let shared = FirebaseManager()
@@ -16,38 +18,34 @@ final class FirebaseManager {
     
     private let storage = FIRStorage.storage(url: "gs://highwaybingo.appspot.com").reference()
     
+    private let userId = UserDefaults.standard.string(forKey: "uid")!
+    
     enum Child {
         static var users: FIRDatabaseReference { return db.child("users") }
+        static var games: FIRDatabaseReference { return db.child("games") }
     }
     
     private init() {}
   
     func createOrUpdate(_ user: FIRUser) {
         let name = user.displayName ?? "Anonymous"
-        let _id = user.uid
-        let params = ["name":name, "_id": _id]
+        let params = ["name":name]
         
         if let imageUrl = user.photoURL {
-            
             getPhoto(url: imageUrl) { image in
                 if let image = image {
-                    let location = self.storage.child("images/\(_id).jpg")
-                    self.save(image, at: location, userParams: params) { success in
-                        //if !success { Child.users.setValue(params) }
-                        if !success { Child.users.child(_id).setValue(params) }
-            
-                    }
+                    let location = self.storage.child("images/\(self.userId).jpg")
+                    self.save(image, at: location, params: params)
+                    return
                 }
             }
         }
+        Child.users.child(userId).setValue(params)
     }
     
-    typealias ImageDownloaded = Bool
-    
-    private func save(_ image: UIImage, at location: FIRStorageReference, userParams: [String : String], handler: @escaping (ImageDownloaded) -> ()) {
-        
+    private func save(_ image: UIImage, at location: FIRStorageReference, params: [String : String]) {
         guard let data = UIImageJPEGRepresentation(image, 0.8) else {
-            handler(false)
+            Child.users.child(userId).setValue(userId)
             return
         }
         
@@ -56,15 +54,23 @@ final class FirebaseManager {
         
         location.put(data, metadata: metaData) { (metadata, error) in
             if let imageUrl = metadata?.downloadURL() {
-                let paramsWithImage = userParams += ["imageUrl" : String(describing: imageUrl)]
-                let id = paramsWithImage["_id"] ?? "No ID"
-                Child.users.child(id).setValue(paramsWithImage)
-                handler(true)
+                let paramsWithImage = params += ["imageUrl" : String(describing: imageUrl)]
+                Child.users.child(self.userId).setValue(paramsWithImage)
             } else {
                 print("FirebaseManager -> error saving photo")
-                handler(false)
+                Child.users.child(self.userId).setValue(params)
             }
         }
+    }
+    
+    func create(_ game: Game) -> GameID {
+        let game = Child.games.childByAutoId()
+        game.setValue(["leader":userId])
+        return game.key
+    }
+    
+    func sendInvitations(for: GameID, to: [FacebookUser]) {
+        
     }
     
     private func getPhoto(url: URL, handler: @escaping (UIImage?) -> ()) {

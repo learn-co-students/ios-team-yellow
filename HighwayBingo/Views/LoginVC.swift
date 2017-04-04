@@ -12,7 +12,6 @@ import UIKit
 
 class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
-    let firebaseManager = FirebaseManager.shared
     let loginButton = FBSDKLoginButton()
     
     override func viewDidLoad() {
@@ -60,7 +59,8 @@ extension FacebookLoginManager {
             if let validationError = error {
                 print("LoginVC -> error validating login: %@", validationError)
             } else if let user = user {
-                self.firebaseManager.createOrUpdate(user)
+                UserDefaults.standard.set(user.uid, forKey: "uid")
+                FirebaseManager.shared.createOrUpdate(user)
                 self.navigateToHomeVC()
             } else {
                 print("LoginVC -> error validating login")
