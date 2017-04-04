@@ -18,7 +18,7 @@ final class FirebaseManager {
     
     private let storage = FIRStorage.storage(url: "gs://highwaybingo.appspot.com").reference()
     
-    private let userId = UserDefaults.standard.string(forKey: "uid")!
+    private let userId = UserDefaults.standard.string(forKey: "userId")!
     
     enum Child {
         static var users: FIRDatabaseReference { return db.child("users") }

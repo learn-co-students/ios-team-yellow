@@ -58,8 +58,8 @@ extension FacebookLoginManager {
         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
             if let validationError = error {
                 print("LoginVC -> error validating login: %@", validationError)
-            } else if let user = user {
-                UserDefaults.standard.set(user.uid, forKey: "uid")
+            } else if let user = user, let userId = AccessToken.current?.userId {
+                UserDefaults.standard.set(userId, forKey: "userId")
                 FirebaseManager.shared.createOrUpdate(user)
                 self.navigateToHomeVC()
             } else {
