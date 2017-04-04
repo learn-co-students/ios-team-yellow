@@ -25,6 +25,17 @@ extension UIImage {
     }
 }
 
+extension UIViewController {
+    
+    var margin: UILayoutGuide {
+        return view.layoutMarginsGuide
+    }
+    
+    var screen: (height: CGFloat, width: CGFloat) {
+        return (view.frame.size.height, view.frame.size.width)
+    }
+}
+
 // MARK: - Overloads
 //
 func += <K, V> (left: [K : V], right: [K : V]) -> [K:V] {
