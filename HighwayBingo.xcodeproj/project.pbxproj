@@ -26,10 +26,12 @@
 		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
 		BEAA057C1E9534960024DE2F /* BoardCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */; };
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
-		F02295121E93E587003247E1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02295111E93E587003247E1 /* Game.swift */; };
-		F02295141E93E5A9003247E1 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02295131E93E5A9003247E1 /* Board.swift */; };
 		F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */; };
 		F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AA1E92EC50006EE15C /* ImageVC.swift */; };
+		F0FC47531E95912700538C3C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47511E95912700538C3C /* Board.swift */; };
+		F0FC47541E95912700538C3C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47521E95912700538C3C /* Game.swift */; };
+		F0FC47561E95917800538C3C /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47551E95917800538C3C /* DataStore.swift */; };
+		F0FC47591E95918400538C3C /* PlayingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47581E95918400538C3C /* PlayingGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,10 +58,12 @@
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionVC.swift; sourceTree = "<group>"; };
-		F02295111E93E587003247E1 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = ../Game.swift; sourceTree = "<group>"; };
-		F02295131E93E5A9003247E1 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Board.swift; path = ../Board.swift; sourceTree = "<group>"; };
 		F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F02AB1AA1E92EC50006EE15C /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
+		F0FC47511E95912700538C3C /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		F0FC47521E95912700538C3C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		F0FC47551E95917800538C3C /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		F0FC47581E95918400538C3C /* PlayingGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 				A74695B21E92AE3D00C18CC1 /* LoginVC.swift */,
 				A7B426731E9418CA00FF9352 /* FacebookFriendCell.swift */,
 				A7B4266D1E93EA1500FF9352 /* NewGameVC.swift */,
+				F0FC47571E95918400538C3C /* Subviews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -120,10 +125,10 @@
 			isa = PBXGroup;
 			children = (
 				A7B426711E940C5B00FF9352 /* FacebookUser.swift */,
+				F0FC47511E95912700538C3C /* Board.swift */,
+				F0FC47521E95912700538C3C /* Game.swift */,
 				F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */,
-				F02295111E93E587003247E1 /* Game.swift */,
 				A7B426651E93E11300FF9352 /* Player.swift */,
-				F02295131E93E5A9003247E1 /* Board.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */,
+				F0FC47551E95917800538C3C /* DataStore.swift */,
 				A7F098C11E929B0C00BF3FAB /* Assets.xcassets */,
 				A7F098BE1E929B0C00BF3FAB /* Main.storyboard */,
 				A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */,
@@ -161,6 +167,14 @@
 				A74695B11E92AE3D00C18CC1 /* Views */,
 			);
 			path = HighwayBingo;
+			sourceTree = "<group>";
+		};
+		F0FC47571E95918400538C3C /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				F0FC47581E95918400538C3C /* PlayingGame.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		FDA667B6F1018B1B68EA2232 /* Pods */ = {
@@ -300,18 +314,20 @@
 				A7B426741E9418CA00FF9352 /* FacebookFriendCell.swift in Sources */,
 				A7B426701E940A9600FF9352 /* FacebookManager.swift in Sources */,
 				F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */,
-				F02295121E93E587003247E1 /* Game.swift in Sources */,
 				A7B4266A1E93E12C00FF9352 /* WatsonAPIClient.swift in Sources */,
 				A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */,
-				F02295141E93E5A9003247E1 /* Board.swift in Sources */,
 				A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */,
+				F0FC47561E95917800538C3C /* DataStore.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
 				A7B426721E940C5B00FF9352 /* FacebookUser.swift in Sources */,
+				F0FC47591E95918400538C3C /* PlayingGame.swift in Sources */,
 				A7B426681E93E12100FF9352 /* FirebaseManager.swift in Sources */,
 				A74695B31E92AE3D00C18CC1 /* LoginVC.swift in Sources */,
 				A7B4266E1E93EA1500FF9352 /* NewGameVC.swift in Sources */,
 				A7B426661E93E11300FF9352 /* Player.swift in Sources */,
+				F0FC47541E95912700538C3C /* Game.swift in Sources */,
 				7D2D7C301E92FB00006E46D6 /* TypeExtensions.swift in Sources */,
+				F0FC47531E95912700538C3C /* Board.swift in Sources */,
 				BEAA057C1E9534960024DE2F /* BoardCollectionVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

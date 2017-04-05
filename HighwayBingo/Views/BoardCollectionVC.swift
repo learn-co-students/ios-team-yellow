@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GameKit
 
 private let reuseIdentifier = "boardCell"
 
@@ -17,12 +18,13 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var images = ["building", "airport", "barn", "bicycle", "boat", "bus", "car", "gas station", "rv", "motel", "motorcycle", "police car", "power line", "restaurant", "restroom", "river", "silo", "subway", "telephone", "train", "truck", "horse", "horse", "horse", "horse"]
-    
+    var images = ["building", "airport", "barn", "bicycle", "boat", "bus", "car", "gas station", "rv", "motel", "motorcycle", "police car", "power line", "restaurant", "restroom", "river", "silo", "subway", "telephone", "train", "truck", "horse", "cold", "warm", "hot"]
+    var board: Board?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        createHighwayBingo()
+        shuffle()
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -66,14 +68,16 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
-        if let image = UIImage(named: images[indexPath.item]) {
-             cell.cellImageView.image = image
+        let name = board?.images[indexPath.item]
+        cell.titleLabel.text = name
+        if let board = board {
+            let image = UIImage(named: board.images[indexPath.item])
+            cell.cellImageView.image = image
         }
+        
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.black.cgColor
         cell.id = indexPath.item + 1
-        let name = images[indexPath.item]
-        cell.titleLabel.text = name
         
         return cell
     }
@@ -86,6 +90,21 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         }
         
     }
+    
+    func shuffle() -> [String]? {
+        if let board = board {
+            board.images = GKRandomSource().arrayByShufflingObjects(in: board.images) as! [String]
+            return board.images
+        } else {
+            return nil
+        }
+        
+    }
+    
+    func createHighwayBingo() {
+        self.board = Board(images: images, name: "Highway Bingo")
+    }
+
 
 }
 

@@ -7,7 +7,7 @@ import SwiftyJSON
 struct Game {
     
     let id: String
-    let board = Board()
+    //let board: Board?
     var players = [Player]()
     let playerIds: [String]
     
