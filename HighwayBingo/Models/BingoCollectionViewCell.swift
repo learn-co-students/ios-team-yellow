@@ -19,4 +19,5 @@ class BingoCollectionViewCell: UICollectionViewCell {
     var title: String = ""
     var id: Int = 0
     
+    
 }

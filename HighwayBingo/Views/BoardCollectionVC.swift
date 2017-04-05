@@ -17,6 +17,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var images = ["building", "airport", "barn", "bicycle", "boat", "bus", "car", "gas station", "rv", "motel", "motorcycle", "police car", "power line", "restaurant", "restroom", "river", "silo", "subway", "telephone", "train", "truck", "horse", "horse", "horse", "horse"]
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,10 +66,14 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
-        
+        if let image = UIImage(named: images[indexPath.item]) {
+             cell.cellImageView.image = image
+        }
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.black.cgColor
         cell.id = indexPath.item + 1
+        let name = images[indexPath.item]
+        cell.titleLabel.text = name
         
         return cell
     }

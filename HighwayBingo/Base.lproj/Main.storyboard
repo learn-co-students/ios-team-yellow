@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -127,11 +128,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="horse" translatesAutoresizingMaskIntoConstraints="NO" id="10h-Os-R5Q">
-                                                    <rect key="frame" x="8" y="0.0" width="34" height="34"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="10h-Os-R5Q">
+                                                    <rect key="frame" x="8" y="3" width="34" height="31"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INV-Ok-YWa" userLabel="Horse">
-                                                    <rect key="frame" x="7" y="34" width="36.5" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="INV-Ok-YWa" userLabel="Horse">
+                                                    <rect key="frame" x="2" y="34" width="47.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -139,7 +140,8 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="10h-Os-R5Q" firstAttribute="top" secondItem="cBC-7V-R4d" secondAttribute="topMargin" constant="-8" id="Fpq-4c-48S"/>
+                                            <constraint firstItem="10h-Os-R5Q" firstAttribute="top" secondItem="cBC-7V-R4d" secondAttribute="topMargin" constant="-5" id="Fpq-4c-48S"/>
+                                            <constraint firstItem="INV-Ok-YWa" firstAttribute="width" secondItem="cBC-7V-R4d" secondAttribute="width" multiplier="0.95" id="In3-cs-zDy"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="10h-Os-R5Q" secondAttribute="trailing" id="QNt-l1-G0r"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="10h-Os-R5Q" secondAttribute="bottom" constant="8" id="i2W-Cr-rpE"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="INV-Ok-YWa" secondAttribute="bottom" constant="-8" id="mLi-iY-P0o"/>
@@ -171,7 +173,4 @@
             <point key="canvasLocation" x="3808.8000000000002" y="64.31784107946028"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="horse" width="352" height="317"/>
-    </resources>
 </document>
