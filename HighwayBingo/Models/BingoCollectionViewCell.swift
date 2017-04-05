@@ -10,6 +10,11 @@ import UIKit
 
 class BingoCollectionViewCell: UICollectionViewCell {
     
+
+    @IBOutlet weak var cellImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    
     var image = UIImage()
     var title: String = ""
     var id: Int = 0

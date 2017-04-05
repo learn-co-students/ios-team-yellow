@@ -147,6 +147,10 @@
                                             <constraint firstItem="INV-Ok-YWa" firstAttribute="centerX" secondItem="cBC-7V-R4d" secondAttribute="centerX" id="o4u-97-YJg"/>
                                             <constraint firstItem="10h-Os-R5Q" firstAttribute="leading" secondItem="cBC-7V-R4d" secondAttribute="leadingMargin" id="uOI-Ky-sol"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="cellImageView" destination="10h-Os-R5Q" id="dm2-7s-x5p"/>
+                                            <outlet property="titleLabel" destination="INV-Ok-YWa" id="i57-vg-0Vg"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
