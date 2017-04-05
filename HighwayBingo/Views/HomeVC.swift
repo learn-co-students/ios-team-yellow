@@ -8,8 +8,6 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    var players = [Player]()
-    
     let newGameLabel = UILabel()
     let playingLabel = UILabel()
     
@@ -20,9 +18,13 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let currentUser = FIRAuth.auth()?.currentUser {
-            players.append(Player(currentUser))
-        }
+        // Fetch User and Game data before setting up View
+        DataStore.shared.fetchCurrentUser() { self.setupView() }
+    }
+    
+    func setupView() {
+    
+        let currentUser = DataStore.shared.currentUser
         
         views.forEach(view.addSubview)
         views.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
@@ -31,6 +33,20 @@ class HomeVC: UIViewController {
             $0.text = "PLAYING"
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: margin.topAnchor, constant:  screen.height * 0.1).isActive = true
+        }
+        
+        for game in currentUser.games {
+            
+            _ = PlayingGame(game: game).then {
+                $0.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview($0)
+                $0.layer.borderColor = UIColor.black.cgColor
+                $0.layer.borderWidth = 1
+                $0.topAnchor.constraint(equalTo: playingLabel.bottomAnchor).isActive = true
+                $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
+                $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
+                $0.heightAnchor.constraint(equalToConstant: 80).isActive = true
+            }
         }
         
         let newGameTap = UITapGestureRecognizer(target: self, action: #selector(self.pushNewGameVC(_:)))

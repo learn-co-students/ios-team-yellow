@@ -106,8 +106,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     }
     
     func createGameAndSendInvitations(_ sender: UIButton!) {
-        let game = Game()
-        let gameId = FirebaseManager.shared.create(game)
+        let gameId = FirebaseManager.shared.createGame()
         FirebaseManager.shared.sendInvitations(for: gameId, to: friendsToInvite)
     }
 }
