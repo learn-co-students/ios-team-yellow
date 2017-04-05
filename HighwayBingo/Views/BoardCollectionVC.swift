@@ -16,6 +16,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +25,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.dataSource = self
         
         collectionView.backgroundColor = UIColor.gray
+        
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -61,12 +63,21 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        cell.backgroundColor = UIColor.purple
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
         
-    
+        cell.backgroundColor = UIColor.purple
+        cell.id = indexPath.item + 1
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+            if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
+                print(cell.id)
+            }
+        }
+        
     }
 
 }

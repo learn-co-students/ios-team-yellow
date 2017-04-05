@@ -12,5 +12,6 @@ import Firebase
 class Game {
     
     let board = Board()
-    let players = [FIRUser]()
+    let players = [String:Board]()
+    
 }

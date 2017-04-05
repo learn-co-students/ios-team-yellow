@@ -53,4 +53,9 @@ class HomeVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    
+    @IBAction func buttonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "boardSegue", sender: self)
+    }
+    
 }

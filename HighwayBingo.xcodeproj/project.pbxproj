@@ -28,6 +28,7 @@
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
 		F02295121E93E587003247E1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02295111E93E587003247E1 /* Game.swift */; };
 		F02295141E93E5A9003247E1 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02295131E93E5A9003247E1 /* Board.swift */; };
+		F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */; };
 		F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AA1E92EC50006EE15C /* ImageVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,8 +56,9 @@
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionVC.swift; sourceTree = "<group>"; };
-		F02295111E93E587003247E1 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		F02295131E93E5A9003247E1 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		F02295111E93E587003247E1 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = ../Game.swift; sourceTree = "<group>"; };
+		F02295131E93E5A9003247E1 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Board.swift; path = ../Board.swift; sourceTree = "<group>"; };
+		F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F02AB1AA1E92EC50006EE15C /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,7 +120,10 @@
 			isa = PBXGroup;
 			children = (
 				A7B426711E940C5B00FF9352 /* FacebookUser.swift */,
+				F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */,
+				F02295111E93E587003247E1 /* Game.swift */,
 				A7B426651E93E11300FF9352 /* Player.swift */,
+				F02295131E93E5A9003247E1 /* Board.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -145,8 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */,
-				F02295111E93E587003247E1 /* Game.swift */,
-				F02295131E93E5A9003247E1 /* Board.swift */,
 				A7F098C11E929B0C00BF3FAB /* Assets.xcassets */,
 				A7F098BE1E929B0C00BF3FAB /* Main.storyboard */,
 				A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */,
@@ -204,7 +207,6 @@
 				TargetAttributes = {
 					A7F098B61E929B0C00BF3FAB = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = VX33YRD3F6;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -294,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */,
 				A7B426741E9418CA00FF9352 /* FacebookFriendCell.swift in Sources */,
 				A7B426701E940A9600FF9352 /* FacebookManager.swift in Sources */,
 				F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */,
@@ -435,7 +438,7 @@
 			baseConfigurationReference = 147540FFA226930511475AE7 /* Pods-HighwayBingo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VX33YRD3F6;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
@@ -460,7 +463,7 @@
 			baseConfigurationReference = 074ED3FCE8F94180214CACFC /* Pods-HighwayBingo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VX33YRD3F6;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
