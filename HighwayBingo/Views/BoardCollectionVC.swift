@@ -13,9 +13,10 @@ private let reuseIdentifier = "boardCell"
 class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     fileprivate let itemsPerRow: CGFloat = 5
-    fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    fileprivate let sectionInsets = UIEdgeInsets(top: -10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +24,11 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.backgroundColor = UIColor.gray
+        //collectionView.backgroundColor = UIColor.gray
+        
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -61,12 +63,22 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        cell.backgroundColor = UIColor.purple
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
         
-    
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.id = indexPath.item + 1
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+            if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
+                print(cell.id)
+            }
+        }
+        
     }
 
 }
@@ -80,20 +92,20 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             
             
             let width = availableWidth
-            let height = width
+            let height = width 
             
             return CGSize(width: width, height: height)
             
             
         }
         
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            return sectionInsets
-            
-        }
+//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//            return sectionInsets
+//            
+//        }
         
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return sectionInsets.left
-        }
+//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//            return sectionInsets.left
+//        }
     
     }
