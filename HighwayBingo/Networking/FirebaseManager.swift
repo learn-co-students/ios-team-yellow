@@ -3,12 +3,20 @@
 ///
 
 import Alamofire
+import AlamofireImage
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 import Foundation
+import SwiftyJSON
 
 typealias GameID = String
+
+extension FIRDatabaseReference {
+    var invitations: FIRDatabaseReference {
+        return child("notifications").child("invitations")
+    }
+}
 
 final class FirebaseManager {
     
@@ -23,6 +31,10 @@ final class FirebaseManager {
     enum Child {
         static var users: FIRDatabaseReference { return db.child("users") }
         static var games: FIRDatabaseReference { return db.child("games") }
+    }
+    
+    private var currentUserNode: FIRDatabaseReference {
+        return Child.users.child(userId)
     }
     
     private init() {}
@@ -40,12 +52,16 @@ final class FirebaseManager {
                 }
             }
         }
-        Child.users.child(userId).setValue(params)
+        currentUserNode.setValue(params)
+    }
+    
+    func addGameToCurrentUser(gameId: GameID) {
+        currentUserNode.child("games").updateChildValues([gameId:true])
     }
     
     private func save(_ image: UIImage, at location: FIRStorageReference, params: [String : String]) {
         guard let data = UIImageJPEGRepresentation(image, 0.8) else {
-            Child.users.child(userId).setValue(userId)
+            currentUserNode.setValue(userId)
             return
         }
         
@@ -55,24 +71,65 @@ final class FirebaseManager {
         location.put(data, metadata: metaData) { (metadata, error) in
             if let imageUrl = metadata?.downloadURL() {
                 let paramsWithImage = params += ["imageUrl" : String(describing: imageUrl)]
-                Child.users.child(self.userId).setValue(paramsWithImage)
+                self.currentUserNode.setValue(paramsWithImage)
             } else {
                 print("FirebaseManager -> error saving photo")
-                Child.users.child(self.userId).setValue(params)
+                self.currentUserNode.setValue(params)
             }
         }
     }
     
-    func create(_ game: Game) -> GameID {
+    func createGame() -> GameID {
         let game = Child.games.childByAutoId()
         game.setValue(["leader":userId])
-        return game.key
+        let gameId = game.key
+        addGameToCurrentUser(gameId: gameId)
+        return gameId
     }
     
     func sendInvitations(for gameId: GameID, to users: [FacebookUser]) {
         let userIds = users.map { $0.id }
         userIds.forEach { id in
-            Child.users.child(id).child("notifications").updateChildValues(["invitation":gameId])
+            Child.users.child(id).invitations.updateChildValues([gameId: true])
+        }
+    }
+    
+    func fetchCurrentUser(handler: @escaping (Player) -> ()) {
+        currentUserNode.observeSingleEvent(of: .value, with: { (snapshot) in
+            let json = JSON(snapshot.value)
+            var player = Player(id: self.userId, from: json)
+            self.fetchGames(player.gameIds) { games in
+                player.games = games
+                handler(player)
+            }
+        }) { (error) in
+            print("FirebaseManager -> error fetching current user\n\t\(error.localizedDescription)")
+        }
+    }
+    
+    func fetchGames(_ gameIds: [GameID], handler: @escaping ([Game]) -> ()) {
+        Child.games.observeSingleEvent(of: .value, with: { (snapshot) in
+            let json = JSON(snapshot.value).dictionaryValue
+            let filtered = json.filter({ gameIds.contains($0.key) })
+            let games = filtered.map { Game(id: $0.key, json: $0.value) }
+            self.fetchPlayers(for: games) { gamesWithPlayers in
+                handler(gamesWithPlayers)
+            }
+        }) { (error) in
+            print("FirebaseManager -> error fetching games\n\t\(error.localizedDescription)")
+        }
+    }
+    
+    func fetchPlayers(for games: [Game], handler: @escaping ([Game]) -> ()) {
+        let playerIds = Set(games.flatMap({ $0.playerIds }))
+        Child.users.observeSingleEvent(of: .value, with: { (snapshot) in
+            let json = JSON(snapshot.value).dictionaryValue
+            let filtered = json.filter({ playerIds.contains($0.key) })
+            let players = filtered.map { Player(id: $0.key, from: $0.value) }
+            let gamesWithPlayers = games.map { $0.update(with: players) }
+            handler(gamesWithPlayers)
+        }) { (error) in
+            print("FirebaseManager -> error fetching games\n\t\(error.localizedDescription)")
         }
     }
     
