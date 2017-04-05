@@ -13,7 +13,7 @@ private let reuseIdentifier = "boardCell"
 class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     fileprivate let itemsPerRow: CGFloat = 5
-    fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    fileprivate let sectionInsets = UIEdgeInsets(top: -10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -24,7 +24,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.backgroundColor = UIColor.gray
+        //collectionView.backgroundColor = UIColor.gray
         
 
         // Register cell classes
@@ -65,7 +65,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
         
-        cell.backgroundColor = UIColor.purple
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.black.cgColor
         cell.id = indexPath.item + 1
         
         return cell
@@ -91,20 +92,20 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             
             
             let width = availableWidth
-            let height = width
+            let height = width 
             
             return CGSize(width: width, height: height)
             
             
         }
         
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            return sectionInsets
-            
-        }
+//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//            return sectionInsets
+//            
+//        }
         
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return sectionInsets.left
-        }
+//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//            return sectionInsets.left
+//        }
     
     }
