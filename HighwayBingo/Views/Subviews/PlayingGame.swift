@@ -24,7 +24,7 @@ class PlayingGame: UIView {
         
         _ = gameTitleLabel.then {
             self.addSubview($0)
-            //$0.text = game.
+            $0.text = game.title
             // Anchors
             $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
             $0.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
@@ -54,8 +54,8 @@ class PlayingGame: UIView {
                 $0.addSubview(nameLabel)
                 playersStackView.addArrangedSubview($0)
                 // Anchors
-                $0.topAnchor.constraint(equalTo: gameTitleLabel.bottomAnchor).isActive = true
-                $0.widthAnchor.constraint(equalToConstant: 80).isActive = true
+                $0.topAnchor.constraint(equalTo: gameTitleLabel.bottomAnchor, constant: 10).isActive = true
+                $0.widthAnchor.constraint(equalToConstant: 70).isActive = true
             }
             
             _ = nameLabel.then {
