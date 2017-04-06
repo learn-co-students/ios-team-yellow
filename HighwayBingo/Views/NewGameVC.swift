@@ -32,6 +32,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     
     override func viewWillAppear(_ animated: Bool) {
         FacebookManager.getFriends() { self.facebookFriends = $0 }
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
