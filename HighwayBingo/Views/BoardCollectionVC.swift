@@ -18,12 +18,12 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var images = ["building", "airport", "barn", "bicycle", "boat", "bus", "car", "gas station", "rv", "motel", "motorcycle", "police car", "power line", "restaurant", "restroom", "river", "silo", "subway", "telephone", "train", "truck", "horse", "cold", "warm", "hot"]
+    
     var board: Board?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createHighwayBingo()
+        createCityBingo()
         shuffle()
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -102,7 +102,13 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func createHighwayBingo() {
+        let images = ["building", "airport", "barn", "bicycle", "boat", "bus", "car", "gas station", "rv", "motel", "motorcycle", "police car", "power line", "restaurant", "restroom", "river", "silo", "subway", "telephone", "train", "truck", "animal", "stop sign", "billboard", "speed limit"]
         self.board = Board(images: images, name: "Highway Bingo")
+    }
+    
+    func createCityBingo() {
+        let images = ["ambulance", "bank", "bar", "bus", "car", "coffee", "crosswalk", "garbage", "hotel", "hydrant", "laundromat", "mailbox", "manhole", "map", "museum", "newspaper", "park", "parking meter", "police car", "skyscraper", "statue", "stoplight", "taxi", "tourist", "vendor"]
+        self.board = Board(images: images, name: "City Bingo")
     }
 
 
