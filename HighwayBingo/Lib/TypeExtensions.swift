@@ -3,6 +3,7 @@
 ///
 
 import Foundation
+import Kingfisher
 import UIKit
 
 // MARK: - String
@@ -52,6 +53,19 @@ extension UIImage {
         defer { UIGraphicsEndImageContext() }
         draw(in: CGRect(origin: .zero, size: canvasSize))
         return UIGraphicsGetImageFromCurrentImageContext()
+    }
+}
+
+extension UIImageView {
+    func kfSetPlayerImage(with url: URL) {
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        kf.setImage(
+            with: url,
+            options: [
+                .processor(processor),
+                .transition(.fade(0.2))
+            ]
+        )
     }
 }
 
