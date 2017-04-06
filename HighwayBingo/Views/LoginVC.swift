@@ -23,7 +23,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         _ = loginButton.then {
             $0.delegate = self
             view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.freeConstraints()
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         }
