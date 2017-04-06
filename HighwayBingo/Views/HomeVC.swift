@@ -23,25 +23,26 @@ class HomeVC: UIViewController {
     }
     
     func setupView() {
-    
-        let currentUser = DataStore.shared.currentUser
         
         views.forEach(view.addSubview)
         views.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         _ = playingLabel.then {
             $0.text = "PLAYING"
+            // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: margin.topAnchor, constant:  screen.height * 0.1).isActive = true
         }
         
-        for game in currentUser.games {
+        for game in DataStore.shared.currentUser.games {
             
             _ = PlayingGame(game: game).then {
-                $0.translatesAutoresizingMaskIntoConstraints = false
                 view.addSubview($0)
+                // Border
                 $0.layer.borderColor = UIColor.black.cgColor
                 $0.layer.borderWidth = 1
+                // Anchors
+                $0.translatesAutoresizingMaskIntoConstraints = false
                 $0.topAnchor.constraint(equalTo: playingLabel.bottomAnchor).isActive = true
                 $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
                 $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
@@ -53,8 +54,10 @@ class HomeVC: UIViewController {
         
         _ = newGameLabel.then {
             $0.text = "NEW GAME"
+            // Gesture Recognizer
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(newGameTap)
+            // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: margin.topAnchor, constant:  screen.height * 0.5).isActive = true
         }
@@ -73,5 +76,4 @@ class HomeVC: UIViewController {
     @IBAction func buttonTapped(_ sender: Any) {
         performSegue(withIdentifier: "boardSegue", sender: self)
     }
-    
 }

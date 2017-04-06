@@ -17,8 +17,8 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let loginManager = FBSDKLoginManager()
-        loginManager.logOut() // this is an instance function
+//        let loginManager = FBSDKLoginManager()
+//        loginManager.logOut()
         
         _ = loginButton.then {
             $0.delegate = self
@@ -54,11 +54,13 @@ extension FacebookLoginManager {
     
     func validateLogin() {
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-        // User's basic profile information is available from the FIRUser object
         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
             if let validationError = error {
                 print("LoginVC -> error validating login: %@", validationError)
             } else if let user = user, let userId = AccessToken.current?.userId {
+                //
+                // We are re-setting the user's name and profile photo every login, the userId "should" stay the same
+                //
                 UserDefaults.standard.set(userId, forKey: "userId")
                 FirebaseManager.shared.createOrUpdate(user)
                 self.navigateToHomeVC()
@@ -71,9 +73,9 @@ extension FacebookLoginManager {
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         do {
             try FIRAuth.auth()?.signOut()
+            print("LoginVC -> user logged out")
         } catch let signOutError as NSError {
             print ("LoginVC -> error while signing out: %@", signOutError)
         }
-        print("LoginVC -> user logged out")
     }
 }

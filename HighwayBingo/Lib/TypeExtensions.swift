@@ -38,6 +38,13 @@ extension UIViewController {
     }
 }
 
+extension UIView {
+    
+    func freeConstraints() {
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
 extension UIImage {
     func resized(withPercentage percentage: CGFloat) -> UIImage? {
         let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
