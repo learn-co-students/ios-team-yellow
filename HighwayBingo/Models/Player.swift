@@ -7,7 +7,6 @@ import SwiftyJSON
 struct Player {
     
     var gameIds: [GameID]
-    var games = [Game]()
     let id: String
     let kindName: String
     let name: String
@@ -34,6 +33,6 @@ struct Player {
 
 extension Player: CustomStringConvertible {
     var description: String {
-        return "Name: \(name), ID: \(id)\nGames: \(games)"
+        return "Name: \(kindName), ID: \(id)\n\tGames count: \(gameIds.count)\n\tNotifications count: \(notifications.count)"
     }
 }

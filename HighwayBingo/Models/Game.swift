@@ -6,20 +6,33 @@ import SwiftyJSON
 
 struct Game {
     
+    typealias Participating = [String : Accepted]
+    
     let gameProgress: GameProgress
     let id: String
+    let leaderId: String
     //let board: Board?
     var players = [Player]()
-    let playerIds: [String]
+    var participants: Participating
+    let title: String
+    
+    var playerIds: [String] {
+        return participants.map { $0.key }
+    }
     
     enum GameProgress: String {
         case notStarted, inProgress, ended
     }
     
     init(id: String, json: JSON) {
-        self.playerIds = json.dictionaryValue.map { $0.value.stringValue }
         self.gameProgress = GameProgress(rawValue: json["status"].stringValue)!
         self.id = id
+        self.leaderId = json["leader"].stringValue
+        self.participants = json["participants"].dictionaryValue.reduce(Participating()) { (dict, invitation) in
+            dict += [invitation.key : invitation.value.boolValue]
+        }
+        self.participants[leaderId] = true
+        self.title = json["title"].stringValue
     }
 }
 
@@ -33,6 +46,6 @@ extension Game {
 
 extension Game: CustomStringConvertible {
     var description: String {
-        return "ID: \(id), PlayerIDs: \(playerIds)"
+        return "GAME \(id)\n\tPlayers (:invitation): \(participants)"
     }
 }
