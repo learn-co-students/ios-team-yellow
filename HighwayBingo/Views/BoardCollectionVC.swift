@@ -25,6 +25,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         super.viewDidLoad()
         createCityBingo()
         shuffle()
+        freeSpace()
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -101,13 +102,23 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         
     }
     
+    func freeSpace() {
+        if let board = board {
+            for (index, image) in board.images.enumerated() {
+                if image == "free space" {
+                    swap(&board.images[index], &board.images[12])
+                }
+            }
+        }
+    }
+    
     func createHighwayBingo() {
         let images = ["building", "airport", "barn", "bicycle", "boat", "bus", "car", "gas station", "rv", "motel", "motorcycle", "police car", "power line", "restaurant", "restroom", "river", "silo", "subway", "telephone", "train", "truck", "animal", "stop sign", "billboard", "speed limit"]
         self.board = Board(images: images, name: "Highway Bingo")
     }
     
     func createCityBingo() {
-        let images = ["ambulance", "bank", "bar", "bus", "car", "coffee", "crosswalk", "garbage", "hotel", "hydrant", "laundromat", "mailbox", "manhole", "map", "museum", "newspaper", "park", "parking meter", "police car", "skyscraper", "statue", "stoplight", "taxi", "tourist", "vendor"]
+        let images = ["ambulance", "bank", "bar", "bus", "car", "coffee", "crosswalk", "garbage", "hotel", "hydrant", "laundromat", "mailbox", "manhole", "map", "museum", "newspaper", "park", "parking meter", "police car", "free space", "statue", "stoplight", "taxi", "tourist", "vendor"]
         self.board = Board(images: images, name: "City Bingo")
     }
 
