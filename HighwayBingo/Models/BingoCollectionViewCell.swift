@@ -22,7 +22,11 @@ class BingoCollectionViewCell: UICollectionViewCell {
         }
     }
     var id: Int = 0
-    var isTapped: Bool = false 
+    var isTapped: Bool = false
     
+    func setUpCell() {
+        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 1
+    }
     
 }

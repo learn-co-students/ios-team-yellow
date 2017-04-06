@@ -58,9 +58,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             let image = UIImage(named: board.images[indexPath.item])
             cell.cellImageView.image = image
         }
-        
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.black.cgColor
+        cell.setUpCell()
         cell.id = indexPath.item + 1
         
         return cell
@@ -73,13 +71,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                 imageVC.cellTitle = cell.title
                 print(cell.title)
                 self.navigationController?.pushViewController(imageVC, animated: false)
-                //checkForWin()
+                checkForWin()
                 print("Cell \(cell.id) was tapped")
             }
         }
-        
-        
-        
     }
     
     

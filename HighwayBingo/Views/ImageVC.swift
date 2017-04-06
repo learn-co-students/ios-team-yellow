@@ -31,35 +31,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-
-//    @IBAction func uploadButtonTapped(_ sender: Any) {
-//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-//            let imagePicker = UIImagePickerController()
-//            imagePicker.delegate = self
-//            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-//            imagePicker.mediaTypes = [kUTTypeImage as String]
-//            imagePicker.allowsEditing = false
-//            self.present(imagePicker, animated: true, completion: nil)
-//        }
-//    }
-    
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//        print("GETTING CALLED!")
-//        self.dismiss(animated: true, completion: nil)
-//        let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
-//        self.navigationController?.pushViewController(imageVC, animated: true)
-//        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-//        //UIImageWriteToSavedPhotosAlbum(image, self, #selector(ImageViewController.image), nil)
-//        guard let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {return}
-//        let smallImage = newImage.resized(withPercentage: 0.25)
-//        guard let imageData = UIImagePNGRepresentation(smallImage!) else {return}
-//        WatsonAPIClient.verifyImage(image: imageData)
-//        
-//    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("*****GETTING CALLED!*****")
@@ -91,14 +62,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
 
     
-    func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafeRawPointer) {
-        if error != nil {
-            let alert = UIAlertController(title: "Save Failed", message: "Failed to save image", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(cancelAction)
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
 }
 
 
