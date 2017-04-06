@@ -11,18 +11,21 @@ class PlayingGame: UIView {
     
     var game: Game
     
+    var views: [UIView] {
+        return [gameTitleLabel, playersStackView]
+    }
+    
     init(game: Game) {
         self.game = game
         super.init(frame: .zero)
-        setupView()
-    }
-    
-    func setupView() {
+        
+        views.forEach(self.addSubview)
+        views.forEach { $0.freeConstraints() }
         
         _ = gameTitleLabel.then {
-            $0.text = "Game Title"
             self.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.text = "Game Title"
+            // Anchors
             $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
             $0.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
@@ -30,14 +33,12 @@ class PlayingGame: UIView {
         }
         
         _ = playersStackView.then {
-            self.addSubview($0)
             $0.axis = .horizontal
             $0.distribution = .equalSpacing
             $0.alignment = .center
             $0.spacing = 25
-            $0.translatesAutoresizingMaskIntoConstraints = false
+            // Anchors
             $0.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-            
             $0.topAnchor.constraint(equalTo: gameTitleLabel.bottomAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         }
@@ -47,21 +48,24 @@ class PlayingGame: UIView {
             let playerCell = UIView()
             let nameLabel = UILabel()
             
+            [playerCell, nameLabel].forEach { $0.freeConstraints() }
+            
             _ = playerCell.then {
                 $0.addSubview(nameLabel)
-                $0.translatesAutoresizingMaskIntoConstraints = false
+                playersStackView.addArrangedSubview($0)
+                // Anchors
                 $0.heightAnchor.constraint(equalToConstant: 80).isActive = true
                 $0.widthAnchor.constraint(equalToConstant: 80).isActive = true
-                playersStackView.addArrangedSubview($0)
             }
             
             _ = nameLabel.then {
                 $0.text = player.kindName
-                $0.translatesAutoresizingMaskIntoConstraints = false
+                // Anchors
                 $0.topAnchor.constraint(equalTo: playerCell.topAnchor).isActive = true
             }
         }
     }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

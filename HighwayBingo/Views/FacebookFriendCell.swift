@@ -10,6 +10,8 @@ class FacebookFriendCell: UITableViewCell {
     let nameLabel = UILabel()
     let addButton = UIButton()
     
+    static let reuseID = "facebookFriend"
+    
     weak var delegate: InviteFriendDelegate?
     
     var friend: FacebookUser? {
@@ -18,8 +20,6 @@ class FacebookFriendCell: UITableViewCell {
             nameLabel.text = friend.name
         }
     }
-    
-    static let reuseID = "facebookFriend"
     
     var views: [UIView] {
         return [addButton, nameLabel]
@@ -33,7 +33,7 @@ class FacebookFriendCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         views.forEach { contentView.addSubview($0) }
-        views.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        views.forEach { $0.freeConstraints() }
         
         _ = nameLabel.then {
             $0.leftAnchor.constraint(equalTo: margins.leftAnchor).isActive = true
@@ -42,8 +42,10 @@ class FacebookFriendCell: UITableViewCell {
         _ = addButton.then {
             $0.setTitle("ADD", for: .normal)
             $0.setTitleColor(.white, for: .normal)
-            $0.addTarget(self, action: #selector(self.inviteFriend(_:)), for: UIControlEvents.touchUpInside)
             $0.backgroundColor = .blue
+            // Call delegate method when tapped
+            $0.addTarget(self, action: #selector(self.inviteFriend(_:)), for: UIControlEvents.touchUpInside)
+            // Anchors
             $0.rightAnchor.constraint(equalTo: margins.rightAnchor).isActive = true
         }
     }

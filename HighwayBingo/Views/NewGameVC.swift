@@ -41,10 +41,11 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         friendsTableView.dataSource = self
         
         views.forEach(view.addSubview)
-        views.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        views.forEach { $0.freeConstraints() }
         
         _ = inviteLabel.then {
             $0.text = "INVITE FRIENDS"
+            // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.35).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
@@ -53,7 +54,9 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         _ = search.then {
             $0.placeholder = "Search"
             $0.underline()
+            // Sends alert when changed
             $0.addTarget(self, action: #selector(textFieldChanged(_:)), for: .editingChanged)
+            // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.55).isActive = true
             $0.widthAnchor.constraint(equalTo: margin.widthAnchor, multiplier: 0.45).isActive = true
@@ -62,8 +65,10 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         _ = inviteButton.then {
             $0.setTitle("SEND", for: .normal)
             $0.setTitleColor(.white, for: .normal)
-            $0.addTarget(self, action: #selector(self.createGameAndSendInvitations(_:)), for: UIControlEvents.touchUpInside)
             $0.backgroundColor = .blue
+            // Create Game and send Invitations when touched
+            $0.addTarget(self, action: #selector(self.createGameAndSendInvitations(_:)), for: UIControlEvents.touchUpInside)
+            // Anchors
             $0.rightAnchor.constraint(equalTo: margin.rightAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: search.bottomAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: margin.widthAnchor, multiplier: 0.45).isActive = true
@@ -71,6 +76,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         
         _ = friendsTableView.then {
             $0.register(FacebookFriendCell.self, forCellReuseIdentifier: FacebookFriendCell.reuseID)
+            // Anchors
             $0.topAnchor.constraint(equalTo: search.bottomAnchor, constant: 20).isActive = true
             $0.widthAnchor.constraint(equalTo: search.widthAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: margin.bottomAnchor).isActive = true
@@ -81,7 +87,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.distribution = .equalSpacing
             $0.alignment = .center
             $0.spacing = 25
-            $0.translatesAutoresizingMaskIntoConstraints = false
+            // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: search.topAnchor).isActive = true
@@ -92,6 +98,8 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         reloadFriendsTableView()
     }
     
+    // Called from FacebookFriendCell.swift
+    //
     func invite(_ friend: FacebookUser) {
         friendsToInvite.append(friend)
         reloadFriendsTableView()
