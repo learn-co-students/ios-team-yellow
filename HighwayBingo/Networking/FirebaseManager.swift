@@ -11,6 +11,7 @@ import Foundation
 import SwiftyJSON
 
 
+typealias Accepted = Bool
 typealias GameID = String
 typealias Params = [String : Any]
 
@@ -42,8 +43,7 @@ final class FirebaseManager {
         return Child.users.child(userId)
     }
     
-    //////
-    ////// APP SETUP
+    //// APP SETUP
     //
     
     // Fetches the User based off the userId in UserDefaults, then calls fetchGames, which in turn calls fetchPlayers
@@ -54,7 +54,7 @@ final class FirebaseManager {
             let json = JSON(snapshot.value)
             var player = Player(id: self.userId, from: json)
             self.fetchGames(player.gameIds) { games in
-                player.games = games
+                DataStore.shared.currentUserGames = games
                 handler(player)
             }
         }) { (error) in
@@ -74,7 +74,7 @@ final class FirebaseManager {
     }
     
     func fetchPlayersFor(_ games: [Game], handler: @escaping ([Game]) -> ()) {
-        let playerIds = Set(games.flatMap({ $0.playerIds }))
+        let playerIds = Set(games.flatMap({ $0.participants.map({ $0.key }) }))
         Child.users.observeSingleEvent(of: .value, with: { (snapshot) in
             let json = JSON(snapshot.value).dictionaryValue
             let players = json.filter({ playerIds.contains($0.key) })
@@ -86,8 +86,7 @@ final class FirebaseManager {
         }
     }
     
-    //////
-    ////// USER CREATION
+    //// USER CREATION
     //
     
     // Creates a game with the Current User as the Leader, and adds the Game to the User in Firebase
@@ -106,15 +105,14 @@ final class FirebaseManager {
         }
     }
     
-    //////
-    ////// GAME CREATION
+    //// GAME CREATION
     //
     
     // Creates a game with Leader = Current User, Status = notStarted, and Invited Participants
     // Adds the game to the Leader with value true, and participants as false (until they accept)
     //
-    func createGame(participants: [FacebookUser]) -> GameID {
-        let params = gameParams(for: participants)
+    func createGame(_ gameTitle: String, participants: [FacebookUser]) -> GameID {
+        let params = gameParams(title: gameTitle, participants: participants)
         let game = Child.games.childByAutoId()
         game.setValue(params)
         let gameId = game.key
@@ -123,27 +121,27 @@ final class FirebaseManager {
         return gameId
     }
     
-    func gameParams(for participants: [FacebookUser]) -> Params {
+    func gameParams(title: String, participants: [FacebookUser]) -> Params {
         let participantsDict = participants.reduce(Params()) { $0.0 += [$0.1.id : false] }
         return [
+            "title" : title,
             "leader" : userId,
             "status" : Game.GameProgress.notStarted.rawValue,
             "participants": participantsDict
         ]
     }
     
-    //////
-    ////// INVITATIONS
+    //// INVITATIONS
     //
 
     // Sends an invitation to a group of User, each will be saved under users/<userId>/notifications/invitations/
     //
-    func sendInvitations(to users: [FacebookUser], from: String, for gameId: GameID) {
-        let params = ["from" : from, "name": "Highway Bingo"]
+    func sendInvitations(to users: [FacebookUser], from: String, for gameId: GameID, name: String) {
+        let params = ["from" : from, "title": name]
         users.forEach { Child.users.child($0.id).invitations.child(gameId).updateChildValues(params) }
     }
     
-    func respondToInvitation(id: GameID, accept: Bool) {
+    func respondToInvitation(id: GameID, accept: Accepted) {
         currentUserNode.invitations.child(id).removeValue()
         accept ? acceptGame(gameId: id) : denyGame(gameId: id)
     }
