@@ -32,6 +32,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     
     override func viewWillAppear(_ animated: Bool) {
         FacebookManager.getFriends() { self.facebookFriends = $0 }
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
@@ -114,9 +115,10 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     }
     
     func createGameAndSendInvitations(_ sender: UIButton!) {
-        let gameId = FirebaseManager.shared.createGame(participants: friendsToInvite)
+        let gameTitle = "Highway Bingo"
+        let gameId = FirebaseManager.shared.createGame(gameTitle, participants: friendsToInvite)
         let from = DataStore.shared.currentUser.kindName
-        FirebaseManager.shared.sendInvitations(to: friendsToInvite, from: from, for: gameId)
+        FirebaseManager.shared.sendInvitations(to: friendsToInvite, from: from, for: gameId, name: gameTitle)
     }
 }
 

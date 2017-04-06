@@ -10,6 +10,8 @@ final class DataStore {
     
     var currentUser = Player()
     
+    var currentUserGames = [Game]()
+    
     private init() {}
     
     func fetchCurrentUser(handler: @escaping () -> ()) {
