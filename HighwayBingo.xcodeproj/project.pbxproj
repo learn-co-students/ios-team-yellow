@@ -28,6 +28,7 @@
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
 		F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */; };
 		F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AA1E92EC50006EE15C /* ImageVC.swift */; };
+		F09B0F5E1E96D62700F8828E /* GameOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */; };
 		F0FC47531E95912700538C3C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47511E95912700538C3C /* Board.swift */; };
 		F0FC47541E95912700538C3C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47521E95912700538C3C /* Game.swift */; };
 		F0FC47561E95917800538C3C /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47551E95917800538C3C /* DataStore.swift */; };
@@ -62,6 +63,7 @@
 		BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionVC.swift; sourceTree = "<group>"; };
 		F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F02AB1AA1E92EC50006EE15C /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
+		F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverviewVC.swift; sourceTree = "<group>"; };
 		F0FC47511E95912700538C3C /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		F0FC47521E95912700538C3C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		F0FC47551E95917800538C3C /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				A74695B41E92B33900C18CC1 /* HomeVC.swift */,
 				F02AB1AA1E92EC50006EE15C /* ImageVC.swift */,
 				A74695B21E92AE3D00C18CC1 /* LoginVC.swift */,
+				F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */,
 				A7B426731E9418CA00FF9352 /* FacebookFriendCell.swift */,
 				A7B4266D1E93EA1500FF9352 /* NewGameVC.swift */,
 				F0FC47571E95918400538C3C /* Subviews */,
@@ -328,6 +331,7 @@
 				A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */,
 				F0FC47561E95917800538C3C /* DataStore.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
+				F09B0F5E1E96D62700F8828E /* GameOverviewVC.swift in Sources */,
 				A7B426721E940C5B00FF9352 /* FacebookUser.swift in Sources */,
 				F0FC47591E95918400538C3C /* PlayingGame.swift in Sources */,
 				A7B426681E93E12100FF9352 /* FirebaseManager.swift in Sources */,
