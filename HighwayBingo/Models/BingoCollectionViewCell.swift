@@ -25,8 +25,14 @@ class BingoCollectionViewCell: UICollectionViewCell {
     var isFilled: Bool = false
     
     func setUpCell() {
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.borderWidth = 1
+        if id == 13 {
+            self.layer.borderColor = UIColor.green.cgColor
+            self.layer.borderWidth = 2
+        } else {
+            self.layer.borderColor = UIColor.black.cgColor
+            self.layer.borderWidth = 1
+        }
+        
     }
     
 }

@@ -21,7 +21,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     
     var board: Board?
-    var filled: [Int] = []
+    var filled: [Int] = [13]
     var winningCombos = [[1, 2, 3, 4, 5,], [6, 7, 8, 9, 10], [11, 12, 13, 14 ,15], [16, 17, 18, 19, 20], [21, 22, 23, 24, 25], [1, 6, 11, 16, 21], [2, 7, 12, 17, 22], [3, 8, 13, 18, 23], [4, 9, 14, 19, 24], [5, 10, 15, 20, 25], [1, 7, 13, 19, 25], [5, 9, 13, 17, 21]]
     var selectedCell: BingoCollectionViewCell?
 
@@ -64,8 +64,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             let image = UIImage(named: board.images[indexPath.item])
             cell.cellImageView.image = image
         }
-        cell.setUpCell()
         cell.id = indexPath.item + 1
+        cell.setUpCell()
         
         return cell
     }
