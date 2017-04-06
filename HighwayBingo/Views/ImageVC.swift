@@ -5,6 +5,10 @@
 import UIKit
 import MobileCoreServices
 
+protocol ImageVCDelegate {
+    func updateCell(image: UIImage)
+}
+
 class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
@@ -12,7 +16,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     
     var cellTitle: String = ""
-    
+    var delegate: ImageVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,11 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         }
 
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     
@@ -56,6 +65,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                     self.statusLabel.isHidden = false
                     self.statusLabel.text = "TRUE"
                     self.statusLabel.textColor = UIColor.green
+                    self.delegate?.updateCell(image: image)
                     break
                 } else {
                     self.loadingSpinner.stopAnimating()

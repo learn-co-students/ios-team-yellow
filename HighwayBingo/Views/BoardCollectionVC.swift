@@ -12,7 +12,7 @@ import MobileCoreServices
 
 private let reuseIdentifier = "boardCell"
 
-class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageVCDelegate {
     
     fileprivate let itemsPerRow: CGFloat = 5
     fileprivate let sectionInsets = UIEdgeInsets(top: -10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -21,8 +21,9 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     
     var board: Board?
-    var tapped: [Int] = []
+    var filled: [Int] = []
     var winningCombos = [[1, 2, 3, 4, 5,], [6, 7, 8, 9, 10], [11, 12, 13, 14 ,15], [16, 17, 18, 19, 20], [21, 22, 23, 24, 25], [1, 6, 11, 16, 21], [2, 7, 12, 17, 22], [3, 8, 13, 18, 23], [4, 9, 14, 19, 24], [5, 10, 15, 20, 25], [1, 7, 13, 19, 25], [5, 9, 13, 17, 21]]
+    var selectedCell: BingoCollectionViewCell?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,8 +68,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let indexPath = collectionView.indexPathsForSelectedItems?.first {
             if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
+                selectedCell = cell
                 let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
                 imageVC.cellTitle = cell.title
+                imageVC.delegate = self
                 print(cell.title)
                 self.navigationController?.pushViewController(imageVC, animated: false)
                 checkForWin()
@@ -80,9 +83,9 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     func checkForWin() {
         for combo in winningCombos {
-            let tappedList = Set(tapped)
+            let filledList = Set(filled)
             let comboSet = Set(combo)
-            let winner = comboSet.isSubset(of: tappedList)
+            let winner = comboSet.isSubset(of: filledList)
             
             if winner == true {
                 print("WINNER")
@@ -156,3 +159,16 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
 //        }
     
     }
+
+extension BoardCollectionVC {
+    func updateCell(image: UIImage) {
+        if let cell = selectedCell {
+            cell.isFilled = true
+            cell.layer.borderColor = UIColor.green.cgColor
+            cell.layer.borderWidth = 2
+            cell.cellImageView.image = image
+            filled.append(cell.id)
+        }
+        
+    }
+}
