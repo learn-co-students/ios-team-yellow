@@ -33,6 +33,11 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.delegate = self
         collectionView.dataSource = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkForWin()
+    }
 
 
     // MARK: UICollectionViewDataSource
@@ -74,7 +79,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                 imageVC.delegate = self
                 print(cell.title)
                 self.navigationController?.pushViewController(imageVC, animated: false)
-                checkForWin()
                 print("Cell \(cell.id) was tapped")
             }
         }
@@ -89,6 +93,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             
             if winner == true {
                 print("WINNER")
+                let winAlert = UIAlertController(title: "WINNER!", message: "You Won!", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                winAlert.addAction(action)
+                self.present(winAlert, animated: true)
             } else {
                 print("NO WINNER YET!")
             }
