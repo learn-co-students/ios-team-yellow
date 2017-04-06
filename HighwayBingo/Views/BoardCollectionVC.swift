@@ -20,6 +20,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     
     var board: Board?
+    var tapped: [Int] = []
+    var winningCombos = [[1, 2, 3, 4, 5,], [6, 7, 8, 9, 10], [11, 12, 13, 14 ,15], [16, 17, 18, 19, 20], [21, 22, 23, 24, 25], [1, 6, 11, 16, 21], [2, 7, 12, 17, 22], [3, 8, 13, 18, 23], [4, 9, 14, 19, 24], [5, 10, 15, 20, 25], [1, 7, 13, 19, 25], [5, 9, 13, 17, 21]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,10 +88,27 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let indexPath = collectionView.indexPathsForSelectedItems?.first {
             if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
-                print(cell.id)
+                cell.isTapped = true
+                tapped.append(cell.id)
+                checkForWin()
+                print("Cell \(cell.id) was tapped")
             }
         }
         
+    }
+    
+    func checkForWin() {
+        for combo in winningCombos {
+            let tappedList = Set(tapped)
+            let comboSet = Set(combo)
+            let winner = comboSet.isSubset(of: tappedList)
+            
+            if winner == true {
+                print("WINNER")
+            } else {
+                print("NO WINNER YET!")
+            }
+        }
     }
     
     func shuffle() -> [String]? {
