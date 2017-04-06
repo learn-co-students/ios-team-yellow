@@ -8,10 +8,11 @@
 
 import UIKit
 import GameKit
+import MobileCoreServices
 
 private let reuseIdentifier = "boardCell"
 
-class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     fileprivate let itemsPerRow: CGFloat = 5
     fileprivate let sectionInsets = UIEdgeInsets(top: -10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -25,35 +26,13 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createTropicalBingo()
+        createCityBingo()
         shuffle()
         freeSpace()
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        //collectionView.backgroundColor = UIColor.gray
-        
-
-        // Register cell classes
-        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -72,7 +51,9 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
         let name = board?.images[indexPath.item]
-        cell.titleLabel.text = name
+        if let name = name {
+            cell.title = name
+        }
         if let board = board {
             let image = UIImage(named: board.images[indexPath.item])
             cell.cellImageView.image = image
@@ -88,14 +69,19 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let indexPath = collectionView.indexPathsForSelectedItems?.first {
             if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
-                cell.isTapped = true
-                tapped.append(cell.id)
-                checkForWin()
+                let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
+                imageVC.cellTitle = cell.title
+                print(cell.title)
+                self.navigationController?.pushViewController(imageVC, animated: false)
+                //checkForWin()
                 print("Cell \(cell.id) was tapped")
             }
         }
         
+        
+        
     }
+    
     
     func checkForWin() {
         for combo in winningCombos {
@@ -124,7 +110,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func freeSpace() {
         if let board = board {
             for (index, image) in board.images.enumerated() {
-                if image == "free space" {
+                if image == "free space" && index != 12 {
                     swap(&board.images[index], &board.images[12])
                 }
             }

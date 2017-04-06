@@ -16,7 +16,11 @@ class BingoCollectionViewCell: UICollectionViewCell {
     
     
     var image = UIImage()
-    var title: String = ""
+    var title: String = "" {
+        didSet {
+            self.titleLabel.text = self.title
+        }
+    }
     var id: Int = 0
     var isTapped: Bool = false 
     
