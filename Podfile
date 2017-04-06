@@ -15,6 +15,7 @@ target 'HighwayBingo' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
+  pod 'Kingfisher'
   pod 'SwiftyJSON'
   pod 'Then'
 end

@@ -62,7 +62,7 @@ class HomeVC: UIViewController {
             $0.addGestureRecognizer(newGameTap)
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant:  screen.height * 0.5).isActive = true
+            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant:  screen.height * 0.75).isActive = true
         }
         
         // Show notifications first (if any)
@@ -80,7 +80,7 @@ class HomeVC: UIViewController {
             $0.freeConstraints()
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 80).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 125).isActive = true
         }
     }
     

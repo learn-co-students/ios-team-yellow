@@ -2,6 +2,7 @@
 /// PlayingGame.swift
 ///
 
+import Kingfisher
 import UIKit
 
 class PlayingGame: UIView {
@@ -47,11 +48,13 @@ class PlayingGame: UIView {
             
             let playerCell = UIView()
             let nameLabel = UILabel()
+            let playerImageView = UIImageView()
             
-            [playerCell, nameLabel].forEach { $0.freeConstraints() }
+            [playerCell, nameLabel, playerImageView].forEach { $0.freeConstraints() }
             
             _ = playerCell.then {
                 $0.addSubview(nameLabel)
+                $0.addSubview(playerImageView)
                 playersStackView.addArrangedSubview($0)
                 // Anchors
                 $0.topAnchor.constraint(equalTo: gameTitleLabel.bottomAnchor, constant: 10).isActive = true
@@ -65,6 +68,17 @@ class PlayingGame: UIView {
                 $0.topAnchor.constraint(equalTo: playerCell.topAnchor).isActive = true
                 $0.leftAnchor.constraint(equalTo: playerCell.leftAnchor).isActive = true
                 $0.widthAnchor.constraint(equalTo: playerCell.widthAnchor).isActive = true
+            }
+            
+            if let url = player.imageUrl {
+                _ = playerImageView.then {
+                    $0.kfSetPlayerImage(with: url)
+                    // Anchors
+                    $0.bottomAnchor.constraint(equalTo: playerCell.bottomAnchor).isActive = true
+                    $0.centerXAnchor.constraint(equalTo: playerCell.centerXAnchor).isActive = true
+                    $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
+                    $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                }
             }
         }
     }
