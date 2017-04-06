@@ -23,7 +23,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createCityBingo()
+        createTropicalBingo()
         shuffle()
         freeSpace()
         collectionView.delegate = self
@@ -120,6 +120,11 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func createCityBingo() {
         let images = ["ambulance", "bank", "bar", "bus", "car", "coffee", "crosswalk", "garbage", "hotel", "hydrant", "laundromat", "mailbox", "manhole", "map", "museum", "newspaper", "park", "parking meter", "police car", "free space", "statue", "stoplight", "taxi", "tourist", "vendor"]
         self.board = Board(images: images, name: "City Bingo")
+    }
+    
+    func createTropicalBingo() {
+        let images = ["bathing suit", "beach chair", "beach", "boat", "coconut", "cooler", "flower", "frozen drink", "ice cream", "jet ski", "lei", "lifeguard", "palm tree", "rock", "sandals", "sandcastle", "seagull", "seashell", "sunglasses", "sunscreen", "surfboard", "towel", "umbrella", "waterfall", "free space"]
+        self.board = Board(images: images, name: "Tropical Bingo")
     }
 
 

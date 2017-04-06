@@ -32,6 +32,8 @@
 		F0FC47541E95912700538C3C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47521E95912700538C3C /* Game.swift */; };
 		F0FC47561E95917800538C3C /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47551E95917800538C3C /* DataStore.swift */; };
 		F0FC47591E95918400538C3C /* PlayingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47581E95918400538C3C /* PlayingGame.swift */; };
+		F0FC4B4B1E969CC900538C3C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC4B4A1E969CC900538C3C /* Notifications.swift */; };
+		F0FC4B4D1E969CDA00538C3C /* NotificationModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC4B4C1E969CDA00538C3C /* NotificationModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		F0FC47521E95912700538C3C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		F0FC47551E95917800538C3C /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		F0FC47581E95918400538C3C /* PlayingGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingGame.swift; sourceTree = "<group>"; };
+		F0FC4B4A1E969CC900538C3C /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		F0FC4B4C1E969CDA00538C3C /* NotificationModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				A7B426711E940C5B00FF9352 /* FacebookUser.swift */,
+				F0FC4B4A1E969CC900538C3C /* Notifications.swift */,
 				F0FC47511E95912700538C3C /* Board.swift */,
 				F0FC47521E95912700538C3C /* Game.swift */,
 				F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */,
@@ -172,6 +177,7 @@
 		F0FC47571E95918400538C3C /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				F0FC4B4C1E969CDA00538C3C /* NotificationModal.swift */,
 				F0FC47581E95918400538C3C /* PlayingGame.swift */,
 			);
 			path = Subviews;
@@ -310,6 +316,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0FC4B4D1E969CDA00538C3C /* NotificationModal.swift in Sources */,
+				F0FC4B4B1E969CC900538C3C /* Notifications.swift in Sources */,
 				F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */,
 				A7B426741E9418CA00FF9352 /* FacebookFriendCell.swift in Sources */,
 				A7B426701E940A9600FF9352 /* FacebookManager.swift in Sources */,
