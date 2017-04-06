@@ -49,12 +49,14 @@
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="buttonTapped:" destination="Pw9-ul-yFI" eventType="touchUpInside" id="L82-VM-HPB"/>
-                                    <segue destination="yEb-oO-Tgk" kind="show" identifier="boardSegue" id="I0f-1Q-aqR"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="yEb-oO-Tgk" kind="show" identifier="boardSegue" id="xTu-tY-RXY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eVa-ex-bYM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
