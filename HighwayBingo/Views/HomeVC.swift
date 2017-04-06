@@ -71,8 +71,13 @@ class HomeVC: UIViewController {
     
     func display(playingGame game: Game) {
         
+        let gameTap = UITapGestureRecognizer(target: self, action: #selector(self.pushGameOverviewVC(_:)))
+        
         _ = PlayingGame(game: game).then {
             playingStackView.addArrangedSubview($0)
+            // Gesture Recognizer
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(gameTap)
             // Border
             $0.layer.borderColor = UIColor.black.cgColor
             $0.layer.borderWidth = 1
@@ -95,6 +100,14 @@ class HomeVC: UIViewController {
             $0.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
             $0.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50).isActive = true
         }
+    }
+    
+    func pushGameOverviewVC(_ sender: UITapGestureRecognizer) {
+        guard let view = sender.view, let gameIndex = playingStackView.subviews.index(of: view) else { return }
+        let game = store.currentUserGames[gameIndex]
+        let gameOverviewVC = self.storyboard?.instantiateViewController(withIdentifier: "gameOverviewVC") as! GameOverviewVC
+        gameOverviewVC.game = game
+        self.navigationController?.pushViewController(gameOverviewVC, animated: true)
     }
     
     func pushNewGameVC(_ sender: UITapGestureRecognizer) {
