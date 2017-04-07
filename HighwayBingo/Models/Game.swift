@@ -8,10 +8,10 @@ struct Game {
     
     typealias Participating = [String : Accepted]
     
+    let currentUserIsLeader: Bool
     let gameProgress: GameProgress
     let id: String
     let leaderId: String
-    //let board: Board?
     var players = [Player]()
     var participants: Participating
     let title: String
@@ -24,10 +24,11 @@ struct Game {
         case notStarted, inProgress, ended
     }
     
-    init(id: String, json: JSON) {
+    init(id: String, json: JSON, userId: String) {
         self.gameProgress = GameProgress(rawValue: json["status"].stringValue)!
         self.id = id
         self.leaderId = json["leader"].stringValue
+        self.currentUserIsLeader = userId == leaderId
         self.participants = json["participants"].dictionaryValue.reduce(Participating()) { (dict, invitation) in
             dict += [invitation.key : invitation.value.boolValue]
         }
@@ -46,6 +47,6 @@ extension Game {
 
 extension Game: CustomStringConvertible {
     var description: String {
-        return "GAME \(id)\n\tPlayers (:invitation): \(participants)"
+        return "GAME \(id), Players Count: \(participants.count), Is Leader: \(currentUserIsLeader)"
     }
 }
