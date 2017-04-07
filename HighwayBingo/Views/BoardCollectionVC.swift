@@ -21,6 +21,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     
     var board: Board?
+    //TODO: Move win logic to Game (or some other) class
     var filled: [Int] = [13]
     var winningCombos = [[1, 2, 3, 4, 5,], [6, 7, 8, 9, 10], [11, 12, 13, 14 ,15], [16, 17, 18, 19, 20], [21, 22, 23, 24, 25], [1, 6, 11, 16, 21], [2, 7, 12, 17, 22], [3, 8, 13, 18, 23], [4, 9, 14, 19, 24], [5, 10, 15, 20, 25], [1, 7, 13, 19, 25], [5, 9, 13, 17, 21]]
     var selectedCell: BingoCollectionViewCell?
@@ -125,17 +126,17 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     func createHighwayBingo() {
         let images = ["building", "airport", "barn", "bicycle", "boat", "bus", "car", "gas station", "rv", "motel", "motorcycle", "police car", "power line", "restaurant", "restroom", "river", "silo", "subway", "telephone", "train", "truck", "animal", "stop sign", "billboard", "speed limit"]
-        self.board = Board(images: images, name: "Highway Bingo")
+        self.board = Board(images: images, name: "Highway Bingo", boardID: 1)
     }
     
     func createCityBingo() {
         let images = ["ambulance", "bank", "bar", "bus", "car", "coffee", "crosswalk", "garbage", "hotel", "hydrant", "laundromat", "mailbox", "manhole", "map", "museum", "newspaper", "park", "parking meter", "police car", "free space", "statue", "stoplight", "taxi", "tourist", "vendor"]
-        self.board = Board(images: images, name: "City Bingo")
+        self.board = Board(images: images, name: "City Bingo", boardID: 2)
     }
     
     func createTropicalBingo() {
         let images = ["bathing suit", "beach chair", "beach", "boat", "coconut", "cooler", "flower", "frozen drink", "ice cream", "jet ski", "lei", "lifeguard", "palm tree", "rock", "sandals", "sandcastle", "seagull", "seashell", "sunglasses", "sunscreen", "surfboard", "towel", "umbrella", "waterfall", "free space"]
-        self.board = Board(images: images, name: "Tropical Bingo")
+        self.board = Board(images: images, name: "Tropical Bingo", boardID: 3)
     }
 
 
