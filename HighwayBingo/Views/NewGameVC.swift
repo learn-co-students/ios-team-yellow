@@ -33,6 +33,12 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     override func viewWillAppear(_ animated: Bool) {
         FacebookManager.getFriends() { self.facebookFriends = $0 }
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.title = "New Game"
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        fixTableViewInsets()
     }
     
     override func viewDidLoad() {
@@ -40,16 +46,37 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         
         friendsTableView.delegate = self
         friendsTableView.dataSource = self
-        
+
         views.forEach(view.addSubview)
         views.forEach { $0.freeConstraints() }
         
         _ = inviteLabel.then {
-            $0.text = "INVITE FRIENDS"
+            $0.text = "Invite Friends"
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.35).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        }
+        
+        _ = friendsTableView.then {
+            $0.register(FacebookFriendCell.self, forCellReuseIdentifier: FacebookFriendCell.reuseID)
+            $0.separatorColor = .white
+            // Anchors
+            $0.topAnchor.constraint(equalTo: search.bottomAnchor, constant: 20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: margin.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: search.widthAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: margin.bottomAnchor).isActive = true
+        }
+        
+        _ = friendsToInviteStackView.then {
+            $0.axis = .horizontal
+            $0.distribution = .equalSpacing
+            $0.alignment = .center
+            $0.spacing = 20
+            // Anchors
+            $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
         
         _ = search.then {
@@ -59,12 +86,12 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.addTarget(self, action: #selector(textFieldChanged(_:)), for: .editingChanged)
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.55).isActive = true
+            $0.topAnchor.constraint(equalTo: friendsToInviteStackView.bottomAnchor, constant: 10).isActive = true
             $0.widthAnchor.constraint(equalTo: margin.widthAnchor, multiplier: 0.45).isActive = true
         }
         
         _ = inviteButton.then {
-            $0.setTitle("SEND", for: .normal)
+            $0.setTitle("Send", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.backgroundColor = .blue
             // Create Game and send Invitations when touched
@@ -72,31 +99,51 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             // Anchors
             $0.rightAnchor.constraint(equalTo: margin.rightAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: search.bottomAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalTo: margin.widthAnchor, multiplier: 0.45).isActive = true
-        }
-        
-        _ = friendsTableView.then {
-            $0.register(FacebookFriendCell.self, forCellReuseIdentifier: FacebookFriendCell.reuseID)
-            // Anchors
-            $0.topAnchor.constraint(equalTo: search.bottomAnchor, constant: 20).isActive = true
-            $0.widthAnchor.constraint(equalTo: search.widthAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: margin.bottomAnchor).isActive = true
-        }
-        
-        _ = friendsToInviteStackView.then {
-            $0.axis = .horizontal
-            $0.distribution = .equalSpacing
-            $0.alignment = .center
-            $0.spacing = 25
-            // Anchors
-            $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: search.topAnchor).isActive = true
         }
     }
     
-    func textFieldChanged(_: UITextField) {
-        reloadFriendsTableView()
+    func addFriendToStackView() {
+        guard let friend = friendsToInvite.last else { return }
+        
+        let friendImageView = UIImageView()
+        let friendView = UIView()
+        
+        [friendImageView, friendView].forEach { $0.freeConstraints() }
+        
+        let _ = friendView.then {
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        }
+        
+        if let url = friend.imageUrl {
+            let _ = friendImageView.then {
+                $0.kfSetPlayerImage(with: url, diameter: 40)
+                friendView.addSubview($0)
+                // Anchors
+                $0.widthAnchor.constraint(equalToConstant: 40).isActive = true
+                $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+                $0.centerXAnchor.constraint(equalTo: friendView.centerXAnchor).isActive = true
+                $0.centerYAnchor.constraint(equalTo: friendView.centerYAnchor).isActive = true
+            }
+        }
+        
+        friendsToInviteStackView.addArrangedSubview(friendView)
+    }
+    
+    func createGameAndSendInvitations(_ sender: UIButton!) {
+        disableButton(sender)
+        let gameTitle = "Highway Bingo"
+        let gameId = FirebaseManager.shared.createGame(gameTitle, participants: friendsToInvite)
+        let from = DataStore.shared.currentUser.kindName
+        FirebaseManager.shared.sendInvitations(to: friendsToInvite, from: from, for: gameId, name: gameTitle)
+    }
+    
+    func disableButton(_ sender: UIButton) {
+        sender.isEnabled = false
+        sender.backgroundColor = .black
+        sender.setTitle("Sent", for: .disabled)
     }
     
     // Called from FacebookFriendCell.swift
@@ -106,19 +153,8 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         reloadFriendsTableView()
     }
     
-    func addFriendToStackView() {
-        guard let friend = friendsToInvite.last else { return }
-        let _ = UILabel().then {
-            $0.text = friend.name
-            friendsToInviteStackView.addArrangedSubview($0)
-        }
-    }
-    
-    func createGameAndSendInvitations(_ sender: UIButton!) {
-        let gameTitle = "Highway Bingo"
-        let gameId = FirebaseManager.shared.createGame(gameTitle, participants: friendsToInvite)
-        let from = DataStore.shared.currentUser.kindName
-        FirebaseManager.shared.sendInvitations(to: friendsToInvite, from: from, for: gameId, name: gameTitle)
+    func textFieldChanged(_: UITextField) {
+        reloadFriendsTableView()
     }
 }
 
@@ -138,8 +174,19 @@ extension FriendsTableView {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "facebookFriend", for: indexPath) as! FacebookFriendCell
+        cell.selectionStyle = .none
         cell.delegate = self
         cell.friend = friendsMatchingSearch[indexPath.row]
         return cell
+    }
+    
+    func fixTableViewInsets() {
+        let zContentInsets = UIEdgeInsets.zero
+        friendsTableView.contentInset = zContentInsets
+        friendsTableView.scrollIndicatorInsets = zContentInsets
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }

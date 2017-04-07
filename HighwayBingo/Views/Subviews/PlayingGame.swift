@@ -72,7 +72,7 @@ class PlayingGame: UIView {
             
             if let url = player.imageUrl {
                 _ = playerImageView.then {
-                    $0.kfSetPlayerImage(with: url)
+                    $0.kfSetPlayerImage(with: url, diameter: 50)
                     // Anchors
                     $0.bottomAnchor.constraint(equalTo: playerCell.bottomAnchor).isActive = true
                     $0.centerXAnchor.constraint(equalTo: playerCell.centerXAnchor).isActive = true
