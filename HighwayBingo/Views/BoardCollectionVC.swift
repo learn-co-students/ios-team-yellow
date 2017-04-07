@@ -12,12 +12,25 @@ import MobileCoreServices
 
 private let reuseIdentifier = "boardCell"
 
+    // commit version
+
 class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageVCDelegate {
     
     fileprivate let itemsPerRow: CGFloat = 5
     fileprivate let sectionInsets = UIEdgeInsets(top: -10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
+    
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    
+    @IBOutlet var winnerView: UIView!
+    
+    var effect : UIVisualEffect!
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBAction func dismissButton(_ sender: UIButton) {
+        animateOut()
+    }
     
     
     var board: Board?
@@ -27,15 +40,30 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        
         createCityBingo()
         shuffle()
         freeSpace()
+        
+        effect = visualEffectView.effect
+        visualEffectView.effect = nil
+        
+        winnerView.layer.cornerRadius = 5
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
+        
         checkForWin()
     }
 
@@ -84,6 +112,36 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
+    // animates winner popup in
+    
+    func animateIn() {
+        self.view.addSubview(winnerView)
+        winnerView.center = self.view.center
+        
+        winnerView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        winnerView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4) {
+            self.visualEffectView.effect = self.effect
+            self.winnerView.alpha = 1
+            self.winnerView.transform = CGAffineTransform.identity
+        }
+    }
+    
+    // animates winner popup out
+    
+    func animateOut() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.winnerView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.winnerView.alpha = 0
+            
+            self.visualEffectView.effect = nil
+        }) { (success : Bool) in
+            self.winnerView.removeFromSuperview()
+        }
+        
+    }
+    
     
     func checkForWin() {
         for combo in winningCombos {
@@ -93,10 +151,11 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             
             if winner == true {
                 print("WINNER")
-                let winAlert = UIAlertController(title: "WINNER!", message: "You Won!", preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                winAlert.addAction(action)
-                self.present(winAlert, animated: true)
+                animateIn()
+//                let winAlert = UIAlertController(title: "WINNER!", message: "You Won!", preferredStyle: .alert)
+//                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                winAlert.addAction(action)
+//                self.present(winAlert, animated: true)
             } else {
                 print("NO WINNER YET!")
             }
