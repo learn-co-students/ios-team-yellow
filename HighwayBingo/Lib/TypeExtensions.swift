@@ -57,8 +57,8 @@ extension UIImage {
 }
 
 extension UIImageView {
-    func kfSetPlayerImage(with url: URL) {
-        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+    func kfSetPlayerImage(with url: URL, diameter: CGFloat) {
+        let processor = RoundCornerImageProcessor(cornerRadius: diameter)
         kf.setImage(
             with: url,
             options: [
