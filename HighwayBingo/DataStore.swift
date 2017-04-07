@@ -8,6 +8,8 @@ final class DataStore {
     
     static let shared = DataStore()
     
+    var currentPlayers = [Player]()
+    
     var currentUser = Player()
     
     var currentUserGames = [Game]()

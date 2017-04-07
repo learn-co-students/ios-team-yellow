@@ -20,6 +20,10 @@ extension FIRDatabaseReference {
     var invitations: FIRDatabaseReference {
         return child("notifications").child("invitations")
     }
+    
+    var verifications: FIRDatabaseReference {
+        return child("notifications").child("verifications")
+    }
 }
 
 
@@ -30,9 +34,9 @@ final class FirebaseManager {
     
     static private let db = FIRDatabase.database().reference()
     
-    private let storage = FIRStorage.storage(url: "gs://highwaybingo.appspot.com").reference()
+    private let storage = FIRStorage.storage(url: Secrets.Firebase.storageUrl).reference()
     
-    private let userId = UserDefaults.standard.string(forKey: "userId")!
+    private let currentUserId = UserDefaults.standard.string(forKey: "userId")!
     
     private enum Child {
         static var users: FIRDatabaseReference { return db.child("users") }
@@ -40,19 +44,17 @@ final class FirebaseManager {
     }
     
     private var currentUserNode: FIRDatabaseReference {
-        return Child.users.child(userId)
+        return Child.users.child(currentUserId)
     }
     
-    //// APP SETUP
-    //
     
-    // Fetches the User based off the userId in UserDefaults, then calls fetchGames, which in turn calls fetchPlayers
-    // When this data is collected the HomeVC can be presented
-    //
+    //// APP SETUP ////
+    
+    // Fetches user based off id in UserDefaults, fetches games and players
     func fetchCurrentUser(handler: @escaping (Player) -> ()) {
         currentUserNode.observeSingleEvent(of: .value, with: { (snapshot) in
             let json = JSON(snapshot.value)
-            var player = Player(id: self.userId, from: json)
+            var player = Player(id: self.currentUserId, from: json)
             self.fetchGames(player.gameIds) { games in
                 DataStore.shared.currentUserGames = games
                 handler(player)
@@ -65,8 +67,8 @@ final class FirebaseManager {
     func fetchGames(_ gameIds: [GameID], handler: @escaping ([Game]) -> ()) {
         Child.games.observeSingleEvent(of: .value, with: { (snapshot) in
             let json = JSON(snapshot.value).dictionaryValue
-            let filtered = json.filter({ gameIds.contains($0.key) })
-            let games = filtered.map { Game(id: $0.key, json: $0.value) }
+            let games = json.filter({ gameIds.contains($0.key) })
+                .map { Game(id: $0.key, json: $0.value, userId: self.currentUserId) }
             self.fetchPlayersFor(games) { gamesWithPlayers in handler(gamesWithPlayers) }
         }) { (error) in
             print("FirebaseManager -> error fetching games\n\t\(error.localizedDescription)")
@@ -79,6 +81,7 @@ final class FirebaseManager {
             let json = JSON(snapshot.value).dictionaryValue
             let players = json.filter({ playerIds.contains($0.key) })
                 .map({ Player(id: $0.key, from: $0.value) })
+            DataStore.shared.currentPlayers = players
             let gamesWithPlayers = games.map { $0.update(with: players) }
             handler(gamesWithPlayers)
         }) { (error) in
@@ -86,16 +89,15 @@ final class FirebaseManager {
         }
     }
     
-    //// USER CREATION
-    //
     
-    // Creates a game with the Current User as the Leader, and adds the Game to the User in Firebase
-    //
+    //// USER ////
+    
+    // Creates a user and looks for their image
     func createOrUpdate(_ user: FIRUser) {
         let name = user.displayName!
         currentUserNode.updateChildValues(["name": name])
         guard let imageUrl = user.photoURL else { return }
-        let location = storage.child("images/\(userId).jpg")
+        let location = storage.child("images/\(currentUserId).jpg")
         getImage(url: imageUrl) { image in
             guard let image = image else { return }
             self.saveImage(image, at: location) { imageUrl in
@@ -105,12 +107,10 @@ final class FirebaseManager {
         }
     }
     
-    //// GAME CREATION
-    //
     
-    // Creates a game with Leader = Current User, Status = notStarted, and Invited Participants
-    // Adds the game to the Leader with value true, and participants as false (until they accept)
-    //
+    //// GAME ////
+    
+    // Creates a game with a leader and invited participants
     func createGame(_ gameTitle: String, participants: [FacebookUser]) -> GameID {
         let params = gameParams(title: gameTitle, participants: participants)
         let game = Child.games.childByAutoId()
@@ -125,35 +125,57 @@ final class FirebaseManager {
         let participantsDict = participants.reduce(Params()) { $0.0 += [$0.1.id : false] }
         return [
             "title" : title,
-            "leader" : userId,
+            "leader" : currentUserId,
             "status" : Game.GameProgress.notStarted.rawValue,
             "participants": participantsDict
         ]
     }
     
-    //// INVITATIONS
-    //
+    func incrementGameStatus(_ game: Game) {
+        switch game.gameProgress {
+        case Game.GameProgress.notStarted:
+            Child.games.child(game.id).updateChildValues(["status" : Game.GameProgress.inProgress.rawValue])
+        default:
+            Child.games.child(game.id).updateChildValues(["status" : Game.GameProgress.ended.rawValue])
+        }
+    }
+    
+    func removeGame(_ gameId: GameID, for userId: String) {
+        Child.users.child(userId).invitations.child(gameId).removeValue()
+        Child.users.child(userId).child("games").child(gameId).removeValue()
+        Child.games.child(gameId).child("participants").child(userId).removeValue()
+    }
+    
+    // Increment game status and remove non-participating users
+    func start(game: Game) {
+        incrementGameStatus(game)
+        game.participants.forEach { (userId, accepted) in
+            if !accepted { removeGame(game.id, for: userId) }
+        }
+    }
 
-    // Sends an invitation to a group of User, each will be saved under users/<userId>/notifications/invitations/
-    //
-    func sendInvitations(to users: [FacebookUser], from: String, for gameId: GameID, name: String) {
-        let params = ["from" : from, "title": name]
-        users.forEach { Child.users.child($0.id).invitations.child(gameId).updateChildValues(params) }
-    }
     
-    func respondToInvitation(id: GameID, accept: Accepted) {
-        currentUserNode.invitations.child(id).removeValue()
-        accept ? acceptGame(gameId: id) : denyGame(gameId: id)
-    }
+    //// INVITATIONS ////
     
-    func acceptGame(gameId: GameID) {
-        Child.games.child(gameId).child("participants").updateChildValues([userId : true])
+    func acceptInvitation(gameId: GameID) {
+        currentUserNode.invitations.child(gameId).removeValue()
+        Child.games.child(gameId).child("participants").updateChildValues([currentUserId : true])
         currentUserNode.child("games").updateChildValues([gameId : true])
     }
     
-    func denyGame(gameId: GameID) {
-        Child.games.child(gameId).child("participants").child(userId).removeValue()
-        currentUserNode.child("games").child(gameId).removeValue()
+    func denyInvitation(gameId: GameID) {
+        removeGame(gameId, for: currentUserId)
+    }
+    
+    // Updates game statuses to true or discards them based on response
+    func respondToInvitation(id: GameID, accept: Accepted) {
+        accept ? acceptInvitation(gameId: id) : denyInvitation(gameId: id)
+    }
+    
+    // Sends an invitation to a group of users
+    func sendInvitations(to users: [FacebookUser], from: String, for gameId: GameID, name: String) {
+        let params = ["from" : from, "title": name]
+        users.forEach { Child.users.child($0.id).invitations.child(gameId).updateChildValues(params) }
     }
 }
 
@@ -161,8 +183,7 @@ final class FirebaseManager {
 private typealias FirebaseStorageManager = FirebaseManager
 extension FirebaseStorageManager {
     
-    // Saves an image in Firebase Storage, we'll use it for Player and Game Cell images
-    //
+    // Saves player and game images in Firebase Storage
     fileprivate func saveImage(_ image: UIImage, at location: FIRStorageReference, handler: @escaping (URL?) -> ()) {
         guard let data = UIImageJPEGRepresentation(image, 0.8) else { handler(nil); return }
         let metaData = FIRStorageMetadata()
