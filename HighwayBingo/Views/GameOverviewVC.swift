@@ -9,12 +9,17 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     let lastPhotoLabel = UILabel()
     let playerLabel = UILabel()
     let playersTableView = UITableView()
+    let startGameButton = UIButton()
+    let waitingForLabel = UILabel()
+
+    var currentUserIsLeader = false
     
     var game: Game? {
         didSet {
             if let game = game {
                 title = game.title
                 players = game.players
+                currentUserIsLeader = game.currentUserIsLeader
             }
         }
     }
@@ -22,7 +27,12 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var players = [Player]()
     
     var views: [UIView] {
-        return [lastPhotoLabel, playerLabel, playersTableView]
+        return [lastPhotoLabel, playerLabel, playersTableView, startGameButton, waitingForLabel]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
@@ -60,13 +70,44 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             $0.topAnchor.constraint(equalTo: playerLabel.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
+        }
+        
+        if currentUserIsLeader {
+            _ = startGameButton.then {
+                $0.setTitle("Start", for: .normal)
+                $0.setTitleColor(.white, for: .normal)
+                $0.backgroundColor = .blue
+                // Start game
+                $0.addTarget(self, action: #selector(self.startGame(_:)), for: UIControlEvents.touchUpInside)
+                // Anchors
+                $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+                $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                $0.widthAnchor.constraint(equalToConstant: 150).isActive = true
+                $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+            }
+        } else {
+            guard
+                let game = game,
+                let waitingForPlayer = players.filter({ $0.id == game.leaderId }).first
+            else { return }
+            
+            _ = waitingForLabel.then {
+                $0.text = "Waiting for \(waitingForPlayer.kindName) to start the game."
+                $0.textAlignment = .center
+                $0.numberOfLines = 0
+                // Anchors
+                $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+                $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                $0.widthAnchor.constraint(equalToConstant: screen.width * 0.75).isActive = true
+                $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+            }
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    func startGame(_: UIButton!) {
+        guard let game = game else { return }
+        FirebaseManager.shared.start(game: game)
     }
 }
 
