@@ -25,7 +25,7 @@ class PlayingGame: UIView {
         
         _ = gameTitleLabel.then {
             self.addSubview($0)
-            $0.text = game.title
+            $0.text = "\(game.boardType) Bingo"
             // Anchors
             $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
             $0.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true

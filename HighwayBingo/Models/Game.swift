@@ -14,7 +14,7 @@ struct Game {
     let leaderId: String
     var players = [Player]()
     var participants: Participating
-    let title: String
+    let boardType: BoardType
     
     var playerIds: [String] {
         return participants.map { $0.key }
@@ -33,7 +33,7 @@ struct Game {
             dict += [invitation.key : invitation.value.boolValue]
         }
         self.participants[leaderId] = true
-        self.title = json["title"].stringValue
+        self.boardType = BoardType(rawValue: json["boardType"].stringValue)!
     }
 }
 

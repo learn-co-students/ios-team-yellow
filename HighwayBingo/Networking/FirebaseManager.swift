@@ -41,6 +41,7 @@ final class FirebaseManager {
     private enum Child {
         static var users: FIRDatabaseReference { return db.child("users") }
         static var games: FIRDatabaseReference { return db.child("games") }
+        static var boards: FIRDatabaseReference { return db.child("boards") }
     }
     
     private var currentUserNode: FIRDatabaseReference {
@@ -111,8 +112,8 @@ final class FirebaseManager {
     //// GAME ////
     
     // Creates a game with a leader and invited participants
-    func createGame(_ gameTitle: String, participants: [FacebookUser]) -> GameID {
-        let params = gameParams(title: gameTitle, participants: participants)
+    func createGame(_ boardType: BoardType, participants: [FacebookUser]) -> GameID {
+        let params = gameParams(boardType: boardType.rawValue, participants: participants)
         let game = Child.games.childByAutoId()
         game.setValue(params)
         let gameId = game.key
@@ -121,10 +122,10 @@ final class FirebaseManager {
         return gameId
     }
     
-    func gameParams(title: String, participants: [FacebookUser]) -> Params {
+    func gameParams(boardType: String, participants: [FacebookUser]) -> Params {
         let participantsDict = participants.reduce(Params()) { $0.0 += [$0.1.id : false] }
         return [
-            "title" : title,
+            "boardType" : boardType,
             "leader" : currentUserId,
             "status" : Game.GameProgress.notStarted.rawValue,
             "participants": participantsDict
@@ -152,6 +153,19 @@ final class FirebaseManager {
         game.participants.forEach { (userId, accepted) in
             if !accepted { removeGame(game.id, for: userId) }
         }
+        createBoard(game: game)
+    }
+    
+    //BOARD//
+    
+    func createBoard(game: Game) {
+        let boardType = game.boardType
+        let board = Board(boardType: boardType)
+        let images = board.images
+        let id = game.id
+        var convertedImages = [String:String]()
+        images.forEach { convertedImages[String($0.0)] = $0.1 }
+        Child.boards.child(id).child("master").setValue(convertedImages)
     }
 
     
@@ -173,8 +187,8 @@ final class FirebaseManager {
     }
     
     // Sends an invitation to a group of users
-    func sendInvitations(to users: [FacebookUser], from: String, for gameId: GameID, name: String) {
-        let params = ["from" : from, "title": name]
+    func sendInvitations(to users: [FacebookUser], from: String, for gameId: GameID, boardType: BoardType) {
+        let params = ["from" : from, "title": boardType.rawValue]
         users.forEach { Child.users.child($0.id).invitations.child(gameId).updateChildValues(params) }
     }
 }

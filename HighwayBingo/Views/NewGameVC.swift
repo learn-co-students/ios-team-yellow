@@ -134,10 +134,10 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     
     func createGameAndSendInvitations(_ sender: UIButton!) {
         disableButton(sender)
-        let gameTitle = "Highway Bingo"
-        let gameId = FirebaseManager.shared.createGame(gameTitle, participants: friendsToInvite)
+        let boardType = BoardType.Highway
+        let gameId = FirebaseManager.shared.createGame(boardType, participants: friendsToInvite)
         let from = DataStore.shared.currentUser.kindName
-        FirebaseManager.shared.sendInvitations(to: friendsToInvite, from: from, for: gameId, name: gameTitle)
+        FirebaseManager.shared.sendInvitations(to: friendsToInvite, from: from, for: gameId, boardType: boardType)
     }
     
     func disableButton(_ sender: UIButton) {

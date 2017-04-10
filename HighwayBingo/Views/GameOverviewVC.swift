@@ -17,7 +17,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var game: Game? {
         didSet {
             if let game = game {
-                title = game.title
+                title = "\(game.boardType) Bingo"
                 players = game.players
                 currentUserIsLeader = game.currentUserIsLeader
             }

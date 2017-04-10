@@ -57,7 +57,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             cell.title = name
         }
         if let board = board {
-            let image = UIImage(named: board.images[indexPath.item])
+            let image = UIImage(named: board.images[indexPath.item]!) //!!!
             cell.cellImageView.image = image
         }
         cell.id = indexPath.item + 1

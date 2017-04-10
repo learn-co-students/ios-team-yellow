@@ -26,6 +26,10 @@ extension Array where Element: Equatable {
     }
 }
 
+// MARK: - Dictionary
+
+
+
 // MARK: - UIKit
 //
 extension UIViewController {
@@ -81,6 +85,8 @@ extension UITextField {
         layer.shadowRadius = 0.0
     }
 }
+
+
 
 
 // MARK: - Overloads
