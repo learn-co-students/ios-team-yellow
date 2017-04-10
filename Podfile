@@ -18,4 +18,5 @@ target 'HighwayBingo' do
   pod 'Kingfisher'
   pod 'SwiftyJSON'
   pod 'Then'
+  pod 'SwiftGifOrigin', '~> 1.6.1'
 end

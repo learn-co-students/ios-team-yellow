@@ -60,6 +60,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.9)
   - Kingfisher (3.6.1)
+  - SwiftGifOrigin (1.6.1)
   - SwiftyJSON (3.1.4)
   - Then (2.1.0)
 
@@ -74,6 +75,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - Kingfisher
+  - SwiftGifOrigin (~> 1.6.1)
   - SwiftyJSON
   - Then
 
@@ -95,9 +97,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   Kingfisher: 2f31cb75f3e98d3d4c406cbdcd9b263e956cfa67
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   Then: 8496793c8fcac95482b943909b440724c7d8d82c
 
-PODFILE CHECKSUM: b76da4af6ab14c95e0618a46f3075f6de55bb518
+PODFILE CHECKSUM: 1253d8b9e1b7be962645b3d8f2fc0f281dec4697
 
 COCOAPODS: 1.2.0

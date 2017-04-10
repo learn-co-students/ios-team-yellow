@@ -24,6 +24,10 @@
 		A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098BE1E929B0C00BF3FAB /* Main.storyboard */; };
 		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
 		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
+		A7FA957E1E9C15C0006D6F27 /* city.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7FA957B1E9C15C0006D6F27 /* city.gif */; };
+		A7FA957F1E9C15C0006D6F27 /* highway.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7FA957C1E9C15C0006D6F27 /* highway.gif */; };
+		A7FA95821E9C1B15006D6F27 /* tropical.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7FA95811E9C1B15006D6F27 /* tropical.gif */; };
+		A7FA95851E9C20F7006D6F27 /* fabian.regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7FA95841E9C1FF0006D6F27 /* fabian.regular.ttf */; };
 		BEAA057C1E9534960024DE2F /* BoardCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */; };
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
 		F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */; };
@@ -61,6 +65,10 @@
 		A7F098C11E929B0C00BF3FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7FA957B1E9C15C0006D6F27 /* city.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = city.gif; sourceTree = "<group>"; };
+		A7FA957C1E9C15C0006D6F27 /* highway.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = highway.gif; sourceTree = "<group>"; };
+		A7FA95811E9C1B15006D6F27 /* tropical.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tropical.gif; sourceTree = "<group>"; };
+		A7FA95841E9C1FF0006D6F27 /* fabian.regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = fabian.regular.ttf; path = ../../../Desktop/fabian.regular.ttf; sourceTree = "<group>"; };
 		BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionVC.swift; sourceTree = "<group>"; };
 		F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BingoCollectionViewCell.swift; path = ../Models/BingoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F02AB1AA1E92EC50006EE15C /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
@@ -169,6 +177,8 @@
 				F0FC47551E95917800538C3C /* DataStore.swift */,
 				A7F098C11E929B0C00BF3FAB /* Assets.xcassets */,
 				A7F098BE1E929B0C00BF3FAB /* Main.storyboard */,
+				A7FA95831E9C1FEB006D6F27 /* Fonts */,
+				A7FA957A1E9C15C0006D6F27 /* Gifs */,
 				A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */,
 				A7F098C61E929B0C00BF3FAB /* Info.plist */,
 				A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */,
@@ -178,6 +188,24 @@
 				A74695B11E92AE3D00C18CC1 /* Views */,
 			);
 			path = HighwayBingo;
+			sourceTree = "<group>";
+		};
+		A7FA957A1E9C15C0006D6F27 /* Gifs */ = {
+			isa = PBXGroup;
+			children = (
+				A7FA957B1E9C15C0006D6F27 /* city.gif */,
+				A7FA957C1E9C15C0006D6F27 /* highway.gif */,
+				A7FA95811E9C1B15006D6F27 /* tropical.gif */,
+			);
+			path = Gifs;
+			sourceTree = "<group>";
+		};
+		A7FA95831E9C1FEB006D6F27 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A7FA95841E9C1FF0006D6F27 /* fabian.regular.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		F0FC47571E95918400538C3C /* Subviews */ = {
@@ -263,8 +291,12 @@
 			files = (
 				A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */,
 				A74695A81E929EF400C18CC1 /* GoogleService-Info.plist in Resources */,
+				A7FA957E1E9C15C0006D6F27 /* city.gif in Resources */,
+				A7FA95821E9C1B15006D6F27 /* tropical.gif in Resources */,
 				A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */,
+				A7FA957F1E9C15C0006D6F27 /* highway.gif in Resources */,
 				A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */,
+				A7FA95851E9C20F7006D6F27 /* fabian.regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
