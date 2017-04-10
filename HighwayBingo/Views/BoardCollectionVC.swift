@@ -83,9 +83,13 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             cell.title = name
         }
         if var board = board, let game = self.game, let player = player {
-            print("***GETTING CALLED!***")
             FirebaseManager.shared.getBoardImage(game: game, userid: player.id, index: index, completion: { (imageName) in
                 if imageName.contains("https") {
+                    let firstURLComponents = imageName.components(separatedBy: "2F")
+                    let secondHalf = firstURLComponents[1]
+                    let secondURLComponents = secondHalf.components(separatedBy: ".jpg")
+                    let name = secondURLComponents[0]
+                    cell.title = name
                     cell.layer.borderColor = UIColor.green.cgColor
                     cell.layer.borderWidth = 2
                     cell.isFilled = true
@@ -93,7 +97,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         DispatchQueue.main.async {
                             cell.cellImageView.image = image
                             board.filled.append(cell.id)
-                            print("FILLED: \(board.filled)")
                         }
                         
                     })
@@ -101,10 +104,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                     cell.setUpCell()
                     cell.cellImageView.image = UIImage(named: imageName)
                 }
-        
-                
-    
-                
             })
 //            let image = UIImage(named: board.images[indexPath.row]!) //!!!
 //            cell.cellImageView.image = image
