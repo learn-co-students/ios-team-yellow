@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tED-Fu-ZvJ">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -21,15 +21,35 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Login Background" translatesAutoresizingMaskIntoConstraints="NO" id="yHf-Dt-XBs">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login Mask" translatesAutoresizingMaskIntoConstraints="NO" id="olR-x2-axo">
+                                <rect key="frame" x="27.666666666666629" y="219.66666666666663" width="359" height="297"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="olR-x2-axo" secondAttribute="height" multiplier="359:297" id="EJP-3v-irt"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="olR-x2-axo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="giE-V2-uMh"/>
+                            <constraint firstItem="olR-x2-axo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yuy-Z1-jpt"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bgM-Cc-MMn"/>
+                    <connections>
+                        <outlet property="loginMaskImageView" destination="olR-x2-axo" id="Zng-Ah-3F2"/>
+                        <outlet property="loginView" destination="8bC-Xf-vdC" id="C2Q-1b-wn2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1056.8" y="66.11694152923539"/>
+            <point key="canvasLocation" x="1056.5217391304348" y="66.032608695652172"/>
         </scene>
         <!--HomeVC-->
         <scene sceneID="59K-JU-CU3">
@@ -40,7 +60,7 @@
                         <viewControllerLayoutGuide type="bottom" id="a4p-yY-Uow"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="S13-z1-5oO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWP-MF-X9B">
@@ -71,7 +91,7 @@
                         <viewControllerLayoutGuide type="bottom" id="7YQ-mn-0Rx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3WP-bP-D5J">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -89,7 +109,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eXe-PR-LgK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RtZ-Fl-fow">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -125,7 +145,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ym9-gx-asz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5AM-gR-WVk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VS5-K0-gSR">
@@ -151,7 +171,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EXx-a1-B8s">
-                                <rect key="frame" x="16" y="58" width="343" height="343"/>
+                                <rect key="frame" x="20" y="58" width="374" height="374"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EXx-a1-B8s" secondAttribute="height" multiplier="1:1" id="07m-9k-GJ9"/>
@@ -174,7 +194,7 @@
                                                     <rect key="frame" x="8" y="3" width="34" height="31"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="INV-Ok-YWa" userLabel="Horse">
-                                                    <rect key="frame" x="2" y="34" width="47.5" height="16"/>
+                                                    <rect key="frame" x="2" y="34" width="47.666666666666664" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -247,18 +267,18 @@
                         <viewControllerLayoutGuide type="bottom" id="LmY-6X-eA4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="W8Z-Ku-kc7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l8l-p9-ELZ">
-                                <rect key="frame" x="67" y="125" width="240" height="240"/>
+                                <rect key="frame" x="87" y="125" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="l8l-p9-ELZ" secondAttribute="height" multiplier="1:1" id="Gan-XX-liw"/>
                                     <constraint firstAttribute="width" constant="240" id="umV-cG-tsQ"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u92-n3-e08">
-                                <rect key="frame" x="166" y="481" width="42" height="21"/>
+                                <rect key="frame" x="186" y="481" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -269,7 +289,7 @@
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGX-wB-qgB">
-                                <rect key="frame" x="164" y="521" width="47" height="30"/>
+                                <rect key="frame" x="183.66666666666663" y="521" width="47" height="30"/>
                                 <state key="normal" title="Retake"/>
                                 <connections>
                                     <action selector="retakeTapped:" destination="3vk-4n-HqB" eventType="touchUpInside" id="eKr-5x-CgC"/>
@@ -297,4 +317,8 @@
             <point key="canvasLocation" x="4604" y="63.418290854572717"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Login Background" width="375" height="667"/>
+        <image name="Login Mask" width="359" height="297"/>
+    </resources>
 </document>
