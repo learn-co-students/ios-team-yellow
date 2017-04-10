@@ -184,27 +184,16 @@ final class FirebaseManager {
         }
     }
     
+    
+    
     //IMAGES//
     
+    //Updates the image url in Firebase Database
     func updateImage(imageURL: URL, game: Game, userid: String, index: String) {
         Child.boards.child(game.id).child(userid).updateChildValues([index : String(describing: imageURL)])
     }
     
-//    func updateBoardImage(game: Game, userid: String, index: String, completion: @escaping (UIImage, UIColor) -> ()) {
-//        Child.boards.child(game.id).child(userid).child(index).observeSingleEvent(of: .value, with: { (snapshot) in
-//            let imageName = snapshot.value as! String
-//            if imageName.contains("https") {
-//                self.downloadImage(url: imageName, completion: { (image) in
-//                    completion(image, UIColor.green)
-//                })
-//            } else {
-//                if let baseImage = UIImage(named: imageName) {
-//                    completion(baseImage, UIColor.black)
-//                }
-//            }
-//        })
-//    }
-    
+    //Retrieves the name of the image
     func getBoardImage(game: Game, userid: String, index: String, completion: @escaping (String) -> ()) {
         Child.boards.child(game.id).child(userid).child(index).observeSingleEvent(of: .value, with: { (snapshot) in
             let imageName = snapshot.value as! String
@@ -212,7 +201,7 @@ final class FirebaseManager {
         })
     }
 
-    
+    //Downloads the image from a url
     func downloadImage(url: String, completion: @escaping (UIImage) -> ()) {
         let url = URL(string: url)
         let session = URLSession.shared

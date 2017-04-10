@@ -21,45 +21,28 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
-    
     @IBOutlet var winnerView: UIView!
-    
-    var effect : UIVisualEffect!
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func dismissButton(_ sender: UIButton) {
         animateOut()
     }
     
-    
+    var effect : UIVisualEffect!
     var board: Board?
     var game: Game?
     var player: Player?
-    //TODO: Move win logic to Game (or some other) class
-    
     var selectedCell: BingoCollectionViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         effect = visualEffectView.effect
         visualEffectView.effect = nil
-        
         winnerView.layer.cornerRadius = 5
 
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-    
     
     // MARK: UICollectionViewDataSource
     
@@ -77,14 +60,12 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
-        let name = board?.images[indexPath.item]
         let index = String(indexPath.item)
-        if let name = name {
-            cell.title = name
-        }
         if var board = board, let game = self.game, let player = player {
+            //Retrieve Image From Firebase
             FirebaseManager.shared.getBoardImage(game: game, userid: player.id, index: index, completion: { (imageName) in
                 if imageName.contains("https") {
+                    //Set Up Cell if Image is Not a Stock Image
                     let firstURLComponents = imageName.components(separatedBy: "2F")
                     let secondHalf = firstURLComponents[1]
                     let secondURLComponents = secondHalf.components(separatedBy: ".jpg")
@@ -101,18 +82,24 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         
                     })
                 } else {
+                    //Set Up Cell if Image is a Stock Image
+                    let name = board.images[indexPath.item]
+                    if let name = name {
+                        cell.title = name
+                    }
+
                     cell.setUpCell()
                     cell.cellImageView.image = UIImage(named: imageName)
                 }
             })
-//            let image = UIImage(named: board.images[indexPath.row]!) //!!!
-//            cell.cellImageView.image = image
         }
         cell.id = indexPath.item + 1
         cell.setUpCell()
         
         return cell
     }
+    
+    //Decides what happens when a cell is selected
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let indexPath = collectionView.indexPathsForSelectedItems?.first {
@@ -182,6 +169,8 @@ extension BoardCollectionVC : UICollectionViewDelegateFlowLayout {
     
     
 }
+
+//Delegate method to update the cells
 
 extension BoardCollectionVC {
     func updateCell(image: UIImage) {
