@@ -3,6 +3,7 @@
 ///
 
 import Then
+import SwiftGifOrigin
 import UIKit
 
 protocol InviteFriendDelegate: class {
@@ -11,12 +12,19 @@ protocol InviteFriendDelegate: class {
 
 class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, InviteFriendDelegate {
     
-    let inviteButton = UIButton()
-    let inviteLabel = UILabel()
-    let search = UITextField()
+    let boardTypeImageView = UIImageView()
+    let boardTypeLabel = UILabel()
     let friendsTableView = UITableView()
     let friendsToInviteStackView = UIStackView()
+    let inviteButton = UIButton()
+    let inviteLabel = UILabel()
+    let leftArrow = UIImageView()
+    var navigationBarHeight: CGFloat = 0
+    let rightArrow = UIImageView()
+    let search = UITextField()
     
+    let boardTypes = BoardType.all
+    var currentBoardType = BoardType.Highway.rawValue
     var facebookFriends = [FacebookUser]()
     let firebaseManager = FirebaseManager.shared
     var friendsMatchingSearch = [FacebookUser]()
@@ -27,7 +35,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     }
     
     var views: [UIView] {
-        return [friendsTableView, friendsToInviteStackView, inviteButton, inviteLabel, search]
+        return [boardTypeImageView, boardTypeLabel, leftArrow, rightArrow, friendsTableView, friendsToInviteStackView, inviteButton, inviteLabel, search]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,11 +58,61 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         views.forEach(view.addSubview)
         views.forEach { $0.freeConstraints() }
         
+        navigationBarHeight = navigationController!.navigationBar.frame.height
+        
+        _ = boardTypeImageView.then {
+            $0.loadGif(name: currentBoardType.lowercased())
+            // Anchors
+            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.45).isActive = true
+        }
+        
+        _ = boardTypeLabel.then {
+            $0.text = currentBoardType.uppercased()
+            $0.textAlignment = .center
+            $0.textColor = .white
+            $0.font = UIFont(name: "Fabian-Regular", size: 60)
+            // Anchors
+            $0.centerXAnchor.constraint(equalTo: boardTypeImageView.centerXAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: boardTypeImageView.centerYAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        }
+        
+        let leftArrowTap = UITapGestureRecognizer(target: self, action: #selector(self.cycleBoardTypeLeft(_:)))
+    
+        _ = leftArrow.then {
+            $0.image = #imageLiteral(resourceName: "arrow-left")
+            // Gesture Recognizer
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(leftArrowTap)
+            // Anchors
+            $0.centerYAnchor.constraint(equalTo: boardTypeImageView.centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        }
+        
+        let rightArrowTap = UITapGestureRecognizer(target: self, action: #selector(self.cycleBoardTypeRight(_:)))
+        
+        _ = rightArrow.then {
+            $0.image = #imageLiteral(resourceName: "arrow-right")
+            // Gesture Recognizer
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(rightArrowTap)
+            // Anchors
+            $0.centerYAnchor.constraint(equalTo: boardTypeImageView.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        }
+        
         _ = inviteLabel.then {
             $0.text = "Invite Friends"
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.35).isActive = true
+            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.5).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
         
@@ -132,6 +190,24 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         friendsToInviteStackView.addArrangedSubview(friendView)
     }
     
+    func cycleBoardTypeLeft(_: UIImageView) {
+        guard var i = boardTypes.index(of: currentBoardType) else { return }
+        i = i == boardTypes.startIndex ? boardTypes.endIndex - 1 : i - 1
+        transitionBoardType(index: i)
+    }
+    
+    func cycleBoardTypeRight(_: UIImageView) {
+        guard var i = boardTypes.index(of: currentBoardType) else { return }
+        i = i + 1 == boardTypes.endIndex ? boardTypes.startIndex : i + 1
+        transitionBoardType(index: i)
+    }
+    
+    func transitionBoardType(index: Int) {
+        currentBoardType = boardTypes[index]
+        boardTypeImageView.loadGif(name: currentBoardType.lowercased())
+        boardTypeLabel.text = currentBoardType.uppercased()
+    }
+
     func createGameAndSendInvitations(_ sender: UIButton!) {
         disableButton(sender)
         let boardType = BoardType.Highway
@@ -190,3 +266,4 @@ extension FriendsTableView {
         return 60
     }
 }
+
