@@ -184,9 +184,52 @@ final class FirebaseManager {
         }
     }
     
-    func updateBoardImage(imageURL: URL, game: Game, userid: String, index: String) {
+    //IMAGES//
+    
+    func updateImage(imageURL: URL, game: Game, userid: String, index: String) {
         Child.boards.child(game.id).child(userid).updateChildValues([index : String(describing: imageURL)])
     }
+    
+//    func updateBoardImage(game: Game, userid: String, index: String, completion: @escaping (UIImage, UIColor) -> ()) {
+//        Child.boards.child(game.id).child(userid).child(index).observeSingleEvent(of: .value, with: { (snapshot) in
+//            let imageName = snapshot.value as! String
+//            if imageName.contains("https") {
+//                self.downloadImage(url: imageName, completion: { (image) in
+//                    completion(image, UIColor.green)
+//                })
+//            } else {
+//                if let baseImage = UIImage(named: imageName) {
+//                    completion(baseImage, UIColor.black)
+//                }
+//            }
+//        })
+//    }
+    
+    func getBoardImage(game: Game, userid: String, index: String, completion: @escaping (String) -> ()) {
+        Child.boards.child(game.id).child(userid).child(index).observeSingleEvent(of: .value, with: { (snapshot) in
+            let imageName = snapshot.value as! String
+            completion(imageName)
+        })
+    }
+
+    
+    func downloadImage(url: String, completion: @escaping (UIImage) -> ()) {
+        let url = URL(string: url)
+        let session = URLSession.shared
+        if let url = url {
+            let dataTask = session.dataTask(with: url) { (data, response, error) in
+                if let imageData = data {
+                    if let image = UIImage(data: imageData) {
+                        completion(image)
+                    }
+                    
+                }
+            }
+            dataTask.resume()
+        }
+        
+    }
+    
 
     
     //// INVITATIONS ////

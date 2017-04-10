@@ -42,7 +42,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         effect = visualEffectView.effect
         visualEffectView.effect = nil
@@ -78,12 +78,36 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
         let name = board?.images[indexPath.item]
+        let index = String(indexPath.item)
         if let name = name {
             cell.title = name
         }
-        if let board = board {
-            let image = UIImage(named: board.images[indexPath.row]!) //!!!
-            cell.cellImageView.image = image
+        if var board = board, let game = self.game, let player = player {
+            print("***GETTING CALLED!***")
+            FirebaseManager.shared.getBoardImage(game: game, userid: player.id, index: index, completion: { (imageName) in
+                if imageName.contains("https") {
+                    cell.layer.borderColor = UIColor.green.cgColor
+                    cell.layer.borderWidth = 2
+                    cell.isFilled = true
+                    FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
+                        DispatchQueue.main.async {
+                            cell.cellImageView.image = image
+                            board.filled.append(cell.id)
+                            print("FILLED: \(board.filled)")
+                        }
+                        
+                    })
+                } else {
+                    cell.setUpCell()
+                    cell.cellImageView.image = UIImage(named: imageName)
+                }
+        
+                
+    
+                
+            })
+//            let image = UIImage(named: board.images[indexPath.row]!) //!!!
+//            cell.cellImageView.image = image
         }
         cell.id = indexPath.item + 1
         cell.setUpCell()

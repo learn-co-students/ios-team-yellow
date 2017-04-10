@@ -21,7 +21,7 @@ enum BoardType: String {
     }
 }
 
-struct Board {
+class Board {
     
     var images = [Int:String]()
     var boardType: BoardType

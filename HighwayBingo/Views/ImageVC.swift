@@ -76,7 +76,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                     let location = self.storage.child("images/\(self.cellTitle).jpg")
                     FirebaseManager.shared.saveImage(image, at: location) { imageUrl in
                         guard let url = imageUrl, let game = self.game, let player = self.player else { return }
-                        FirebaseManager.shared.updateBoardImage(imageURL: url, game: game, userid: player.id, index: self.index)
+                        FirebaseManager.shared.updateImage(imageURL: url, game: game, userid: player.id, index: self.index)
                     }
 
                     break
