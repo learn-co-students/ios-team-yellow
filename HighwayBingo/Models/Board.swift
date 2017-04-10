@@ -9,6 +9,14 @@ import SwiftyJSON
 enum BoardType: String {
     case Highway, City, Tropical
     
+    static var all: [String] {
+        return [
+            BoardType.Highway.rawValue,
+            BoardType.City.rawValue,
+            BoardType.Tropical.rawValue
+        ]
+    }
+    
     var images: [String] {
         switch self {
         case .Highway:

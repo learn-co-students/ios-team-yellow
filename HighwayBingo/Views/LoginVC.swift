@@ -14,6 +14,11 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
     let loginButton = FBSDKLoginButton()
     
+    @IBOutlet var loginView: UIView!
+    
+    @IBOutlet weak var loginMaskImageView: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,8 +29,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             $0.delegate = self
             view.addSubview($0)
             $0.freeConstraints()
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: loginMaskImageView.centerXAnchor).isActive = true
+//            $0.centerYAnchor.constraint(equalTo: loginMaskImageView.centerYAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: loginMaskImageView.centerYAnchor, constant: +30 ).isActive = true
         }
     }
     
@@ -78,4 +84,12 @@ extension FacebookLoginManager {
             print ("LoginVC -> error while signing out: %@", signOutError)
         }
     }
+    
+    func configureLogin() {
+        
+        
+        
+        
+    }
+    
 }
