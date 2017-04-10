@@ -149,23 +149,39 @@ final class FirebaseManager {
     
     // Increment game status and remove non-participating users
     func start(game: Game) {
-        incrementGameStatus(game)
+        let images = getBoardImages(game: game)
+        let id = game.id
         game.participants.forEach { (userId, accepted) in
-            if !accepted { removeGame(game.id, for: userId) }
+            if accepted {
+                Child.boards.child(id).child(userId).setValue(images)
+            } else {
+                removeGame(id, for: userId)
+            }
         }
-        createBoard(game: game)
+        incrementGameStatus(game)
     }
     
     //BOARD//
     
-    func createBoard(game: Game) {
+    func getBoardImages(game: Game) -> [String:String] {
         let boardType = game.boardType
         let board = Board(boardType: boardType)
         let images = board.images
-        let id = game.id
         var convertedImages = [String:String]()
         images.forEach { convertedImages[String($0.0)] = $0.1 }
-        Child.boards.child(id).child("master").setValue(convertedImages)
+        return convertedImages
+    }
+    
+    
+    func getBoard(for game: Game, userid: String, handler: @escaping (Board?) -> ()) {
+        let boardType = game.boardType
+        Child.boards.child(game.id).child(userid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let json = JSON(snapshot.value).arrayValue
+            let board = Board(boardType: boardType, images: json)
+            handler(board)
+        }) { (error) in
+            print("FirebaseManager -> error fetching boards\n\t\(error.localizedDescription)")
+        }
     }
 
     

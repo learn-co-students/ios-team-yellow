@@ -15,6 +15,7 @@ struct Game {
     var players = [Player]()
     var participants: Participating
     let boardType: BoardType
+    var boards = [String:Board]()
     
     var playerIds: [String] {
         return participants.map { $0.key }

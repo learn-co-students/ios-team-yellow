@@ -33,7 +33,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     
-    var board: Board!
+    var board: Board?
     //TODO: Move win logic to Game (or some other) class
     
     var selectedCell: BingoCollectionViewCell?
@@ -80,7 +80,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             cell.title = name
         }
         if let board = board {
-            let image = UIImage(named: board.images[indexPath.item]!) //!!!
+            print(board.images)
+            print(indexPath.item)
+            print(indexPath.row)
+            let image = UIImage(named: board.images[indexPath.row]!) //!!!
             cell.cellImageView.image = image
         }
         cell.id = indexPath.item + 1
@@ -162,7 +165,7 @@ extension BoardCollectionVC {
             cell.layer.borderColor = UIColor.green.cgColor
             cell.layer.borderWidth = 2
             cell.cellImageView.image = image
-            board.filled.append(cell.id)
+            board?.filled.append(cell.id)
         }
         
     }

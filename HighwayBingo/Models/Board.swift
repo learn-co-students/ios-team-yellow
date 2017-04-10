@@ -4,6 +4,7 @@
 
 import Foundation
 import GameKit
+import SwiftyJSON
 
 enum BoardType: String {
     case Highway, City, Tropical
@@ -23,18 +24,36 @@ enum BoardType: String {
 struct Board {
     
     var images = [Int:String]()
-    var name: String
+    var boardType: BoardType
     var filled: [Int] = [13]
-    var winningCombos = [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14 ,15], [16, 17, 18, 19, 20], [21, 22, 23, 24, 25], [1, 6, 11, 16, 21], [2, 7, 12, 17, 22], [3, 8, 13, 18, 23], [4, 9, 14, 19, 24], [5, 10, 15, 20, 25], [1, 7, 13, 19, 25], [5, 9, 13, 17, 21]]
-    //var individualID: Int?
+    var winningCombos = [
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10],
+        [11, 12, 13, 14 ,15],
+        [16, 17, 18, 19, 20],
+        [21, 22, 23, 24, 25],
+        [1, 6, 11, 16, 21],
+        [2, 7, 12, 17, 22],
+        [3, 8, 13, 18, 23],
+        [4, 9, 14, 19, 24],
+        [5, 10, 15, 20, 25],
+        [1, 7, 13, 19, 25],
+        [5, 9, 13, 17, 21]
+    ]
     
     init(boardType: BoardType) {
-        self.name = "\(boardType.rawValue) Bingo"
+        self.boardType = boardType
         let _images = shuffle(images: boardType.images)
         for (index, image) in _images.enumerated() {
-            let i = index + 1
-            self.images[i] = i == 13 ? "free space" : image
+            self.images[index] = index == 12 ? "free space" : image
         }
+    }
+    
+    init(boardType: BoardType, images: [JSON]) {
+        self.boardType = boardType
+        var convertedImages = [Int:String]()
+        for i in 0...24 { convertedImages[i] = images[i].stringValue }
+        self.images = convertedImages
     }
     
     func checkForWin() -> Bool {
@@ -51,10 +70,6 @@ struct Board {
     
 }
 
-
-
-
-
 func shuffle(images: [String]) -> [String] {
     return GKRandomSource().arrayByShufflingObjects(in: images) as! [String]
 }
@@ -66,5 +81,11 @@ func freeSpace(images: inout [String]) -> [String] {
         }
     }
     return images
+}
+
+extension Board: CustomStringConvertible {
+    var description: String {
+        return "Board: \(boardType), Images: \(images.values)"
+    }
 }
 
