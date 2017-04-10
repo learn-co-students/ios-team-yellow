@@ -52,6 +52,15 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        for family: String in UIFont.familyNames
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNames(forFamilyName: family)
+            {
+                print("== \(names)")
+            }
+        }
+        
         friendsTableView.delegate = self
         friendsTableView.dataSource = self
 
@@ -73,7 +82,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.text = currentBoardType.uppercased()
             $0.textAlignment = .center
             $0.textColor = .white
-            $0.font = UIFont(name: "Fabian-Regular", size: 60)
+            $0.font = UIFont(name: "Fabian", size: 60)
             // Anchors
             $0.centerXAnchor.constraint(equalTo: boardTypeImageView.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: boardTypeImageView.centerYAnchor).isActive = true
