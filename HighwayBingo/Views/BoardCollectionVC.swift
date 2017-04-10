@@ -34,6 +34,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     
     var board: Board?
+    var game: Game?
+    var player: Player?
     //TODO: Move win logic to Game (or some other) class
     
     var selectedCell: BingoCollectionViewCell?
@@ -80,9 +82,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             cell.title = name
         }
         if let board = board {
-            print(board.images)
-            print(indexPath.item)
-            print(indexPath.row)
             let image = UIImage(named: board.images[indexPath.row]!) //!!!
             cell.cellImageView.image = image
         }
@@ -98,6 +97,9 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                 selectedCell = cell
                 let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
                 imageVC.cellTitle = cell.title
+                imageVC.game = game
+                imageVC.player = player
+                imageVC.index = String(indexPath.item)
                 imageVC.delegate = self
                 print(cell.title)
                 self.navigationController?.pushViewController(imageVC, animated: false)

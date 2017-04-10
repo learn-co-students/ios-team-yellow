@@ -183,6 +183,10 @@ final class FirebaseManager {
             print("FirebaseManager -> error fetching boards\n\t\(error.localizedDescription)")
         }
     }
+    
+    func updateBoardImage(imageURL: URL, game: Game, userid: String, index: String) {
+        Child.boards.child(game.id).child(userid).updateChildValues([index : String(describing: imageURL)])
+    }
 
     
     //// INVITATIONS ////
@@ -214,7 +218,7 @@ private typealias FirebaseStorageManager = FirebaseManager
 extension FirebaseStorageManager {
     
     // Saves player and game images in Firebase Storage
-    fileprivate func saveImage(_ image: UIImage, at location: FIRStorageReference, handler: @escaping (URL?) -> ()) {
+     func saveImage(_ image: UIImage, at location: FIRStorageReference, handler: @escaping (URL?) -> ()) {
         guard let data = UIImageJPEGRepresentation(image, 0.8) else { handler(nil); return }
         let metaData = FIRStorageMetadata()
         metaData.contentType = "image/jpg"

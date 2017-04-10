@@ -4,6 +4,8 @@
 
 import UIKit
 import MobileCoreServices
+import FirebaseStorage
+import FirebaseDatabase
 
 protocol ImageVCDelegate {
     func updateCell(image: UIImage)
@@ -15,8 +17,13 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     
+    private let storage = FIRStorage.storage(url: Secrets.Firebase.storageUrl).reference()
+    
     var cellTitle: String = ""
+    var game: Game?
+    var player: Player?
     var delegate: ImageVCDelegate?
+    var index: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +73,12 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                     self.statusLabel.text = "TRUE"
                     self.statusLabel.textColor = UIColor.green
                     self.delegate?.updateCell(image: image)
+                    let location = self.storage.child("images/\(self.cellTitle).jpg")
+                    FirebaseManager.shared.saveImage(image, at: location) { imageUrl in
+                        guard let url = imageUrl, let game = self.game, let player = self.player else { return }
+                        FirebaseManager.shared.updateBoardImage(imageURL: url, game: game, userid: player.id, index: self.index)
+                    }
+
                     break
                 } else {
                     self.loadingSpinner.stopAnimating()

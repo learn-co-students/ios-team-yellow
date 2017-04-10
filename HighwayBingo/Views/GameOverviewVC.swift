@@ -110,9 +110,11 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         FirebaseManager.shared.start(game: game)
     }
     
-    func pushBoardCollectionVC(board: Board) {
+    func pushBoardCollectionVC(board: Board, game: Game, player: Player) {
         let boardCollectionVC = self.storyboard?.instantiateViewController(withIdentifier: "boardCollectionVC") as! BoardCollectionVC
         boardCollectionVC.board = board
+        boardCollectionVC.game = game
+        boardCollectionVC.player = player
         self.navigationController?.pushViewController(boardCollectionVC, animated: true)
         
     }
@@ -145,7 +147,7 @@ extension GameOverviewVC {
         let player = players[indexPath.row]
         FirebaseManager.shared.getBoard(for: game, userid: player.id) { (board) in
             if let board = board {
-                self.pushBoardCollectionVC(board: board)
+                self.pushBoardCollectionVC(board: board, game: game, player: player)
             }
         }
         
