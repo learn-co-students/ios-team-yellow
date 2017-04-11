@@ -145,7 +145,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.axis = .horizontal
             $0.distribution = .equalSpacing
             $0.alignment = .center
-            $0.spacing = 20
+            $0.spacing = 10
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 10).isActive = true

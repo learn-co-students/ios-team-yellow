@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tED-Fu-ZvJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tED-Fu-ZvJ">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,7 +29,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login Mask" translatesAutoresizingMaskIntoConstraints="NO" id="olR-x2-axo">
-                                <rect key="frame" x="27.666666666666629" y="219.66666666666663" width="359" height="297"/>
+                                <rect key="frame" x="27.666666666666657" y="219.66666666666663" width="359" height="297"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="olR-x2-axo" secondAttribute="height" multiplier="359:297" id="EJP-3v-irt"/>
                                 </constraints>
@@ -62,16 +62,6 @@
                     <view key="view" contentMode="scaleToFill" id="S13-z1-5oO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWP-MF-X9B">
-                                <rect key="frame" x="292" y="41" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="Pw9-ul-yFI" eventType="touchUpInside" id="L82-VM-HPB"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
@@ -289,7 +279,7 @@
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGX-wB-qgB">
-                                <rect key="frame" x="183.66666666666663" y="521" width="47" height="30"/>
+                                <rect key="frame" x="183.66666666666666" y="521" width="47" height="30"/>
                                 <state key="normal" title="Retake"/>
                                 <connections>
                                     <action selector="retakeTapped:" destination="3vk-4n-HqB" eventType="touchUpInside" id="eKr-5x-CgC"/>
