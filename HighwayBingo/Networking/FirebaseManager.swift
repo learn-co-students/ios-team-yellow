@@ -271,8 +271,8 @@ final class FirebaseManager {
     ///VERIFICATIONS///
     
     func sendVerification(to users: [String], from: String, game: Game, imageURL: URL, imageName: String) {
-        let params = ["from":from, "imageName":imageName, "imageURL":String(describing: imageURL)]
-        users.forEach {Child.users.child($0).verifications.child(game.id).updateChildValues(params)}
+        let params = ["from":from, "imageURL":String(describing: imageURL)]
+        users.forEach {Child.users.child($0).verifications.child(game.id).child(imageName).updateChildValues(params)}
     }
 }
 

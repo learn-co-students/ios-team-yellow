@@ -104,8 +104,10 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         verificationButton.translatesAutoresizingMaskIntoConstraints = false
         verificationButton.isUserInteractionEnabled = true
         verificationButton.setTitle("Ask Friends to Verify", for: .normal)
-        verificationButton.addTarget(self, action: #selector(verifyButtonTapped), for: .touchUpInside)
         verificationButton.setTitleColor(UIColor.red, for: .normal)
+        verificationButton.setTitle("Sent", for: .disabled)
+        verificationButton.setTitleColor(UIColor.white, for: .disabled)
+        verificationButton.addTarget(self, action: #selector(verifyButtonTapped), for: .touchUpInside)
         verificationButton.backgroundColor = UIColor.gray
         verificationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         verificationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
@@ -114,15 +116,22 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     func verifyButtonTapped(_ sender: UIButton) {
+        disableButton(sender)
         guard let game = game, let player = player else {return}
         let location = self.storage.child("images/\(game.id)/\(player.id)/\(self.cellTitle).jpg")
         guard let image = self.imageView.image else {return}
         FirebaseManager.shared.saveImage(image, at: location) { imageUrl in
             guard let url = imageUrl, let game = self.game, let player = self.player  else { return }
-            let playerIDs = game.playerIds
+            var playerIDs = game.playerIds
+            let currentUserID = player.id
+            playerIDs.remove(object: currentUserID)
             FirebaseManager.shared.sendVerification(to: playerIDs, from: player.kindName, game: game, imageURL: url, imageName: self.cellTitle)
 
         }
+    }
+    
+    func disableButton(_ sender: UIButton) {
+        sender.isEnabled = false
     }
 //    _ = inviteButton.then {
 //    $0.isUserInteractionEnabled = false
