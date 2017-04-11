@@ -24,6 +24,7 @@
 		A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098BE1E929B0C00BF3FAB /* Main.storyboard */; };
 		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
 		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
+		BE181F381E9D7FD000513CA7 /* pageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE181F371E9D7FD000513CA7 /* pageVC.swift */; };
 		BEAA057C1E9534960024DE2F /* BoardCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */; };
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
 		F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */; };
@@ -61,6 +62,7 @@
 		A7F098C11E929B0C00BF3FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE181F371E9D7FD000513CA7 /* pageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pageVC.swift; sourceTree = "<group>"; };
 		BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionVC.swift; sourceTree = "<group>"; };
 		F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BingoCollectionViewCell.swift; path = ../Models/BingoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F02AB1AA1E92EC50006EE15C /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		A74695B11E92AE3D00C18CC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE181F371E9D7FD000513CA7 /* pageVC.swift */,
 				BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */,
 				A74695B41E92B33900C18CC1 /* HomeVC.swift */,
 				F02AB1AA1E92EC50006EE15C /* ImageVC.swift */,
@@ -328,6 +331,7 @@
 				F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */,
 				A7B426741E9418CA00FF9352 /* FacebookFriendCell.swift in Sources */,
 				A7B426701E940A9600FF9352 /* FacebookManager.swift in Sources */,
+				BE181F381E9D7FD000513CA7 /* pageVC.swift in Sources */,
 				F05B49B11E97D67C000EA57B /* PlayerCell.swift in Sources */,
 				F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */,
 				A7B4266A1E93E12C00FF9352 /* WatsonAPIClient.swift in Sources */,
