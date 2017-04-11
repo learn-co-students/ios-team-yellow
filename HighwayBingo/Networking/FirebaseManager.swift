@@ -82,7 +82,6 @@ final class FirebaseManager {
             let json = JSON(snapshot.value).dictionaryValue
             let players = json.filter({ playerIds.contains($0.key) })
                 .map({ Player(id: $0.key, from: $0.value) })
-            DataStore.shared.currentPlayers = players
             let gamesWithPlayers = games.map { $0.update(with: players) }
             handler(gamesWithPlayers)
         }) { (error) in

@@ -54,15 +54,6 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for family: String in UIFont.familyNames
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNames(forFamilyName: family)
-            {
-                print("== \(names)")
-            }
-        }
-        
         friendsTableView.delegate = self
         friendsTableView.dataSource = self
 
@@ -132,11 +123,12 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         }
         
         _ = inviteLabel.then {
+            $0.font = UIFont(name: "BelleroseLight", size: 30)
             $0.text = "Invite Friends"
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.5).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.475).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
         
         _ = friendsTableView.then {
@@ -146,7 +138,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.topAnchor.constraint(equalTo: search.bottomAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: margin.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: search.widthAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: margin.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: margin.bottomAnchor, constant: -110).isActive = true
         }
         
         _ = friendsToInviteStackView.then {
@@ -157,31 +149,38 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
         
         _ = search.then {
             $0.placeholder = "Search"
             $0.underline()
+            $0.font = UIFont(name: "BelleroseLight", size: 20)
             // Sends alert when changed
             $0.addTarget(self, action: #selector(textFieldChanged(_:)), for: .editingChanged)
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: friendsToInviteStackView.bottomAnchor, constant: 10).isActive = true
-            $0.widthAnchor.constraint(equalTo: margin.widthAnchor, multiplier: 0.45).isActive = true
+            $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 25).isActive = true
         }
         
         _ = inviteButton.then {
+            $0.isUserInteractionEnabled = false
             $0.setTitle("Send", for: .normal)
-            $0.setTitleColor(.white, for: .normal)
-            $0.backgroundColor = .blue
+            $0.setTitleColor(.black, for: .normal)
+            $0.setTitle("Sent", for: .disabled)
+            $0.setTitleColor(.white, for: .disabled)
+            $0.titleLabel?.font = UIFont(name: "BelleroseLight", size: 20)
+            // Border
+            $0.purpleBorder()
             // Create Game and send Invitations when touched
             $0.addTarget(self, action: #selector(self.createGameAndSendInvitations(_:)), for: UIControlEvents.touchUpInside)
             // Anchors
             $0.rightAnchor.constraint(equalTo: margin.rightAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: search.bottomAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            $0.widthAnchor.constraint(equalTo: margin.widthAnchor, multiplier: 0.45).isActive = true
+            $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.topAnchor.constraint(equalTo: margin.bottomAnchor, constant: -80).isActive = true
         }
     }
     
@@ -216,11 +215,13 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     func boardTypeTapped (_: UILabel) {
         boardTypeSelected = !boardTypeSelected
         if boardTypeSelected {
+            inviteButton.isUserInteractionEnabled = true
             boardTypeTintView.backgroundColor = currentBoardType.tint
             leftArrow.isHidden = true
             rightArrow.isHidden = true
             boardTypeLabel.textColor = .black
         } else {
+            inviteButton.isUserInteractionEnabled = false
             boardTypeTintView.backgroundColor = .clear
             leftArrow.isHidden = false
             rightArrow.isHidden = false
@@ -255,8 +256,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     
     func disableButton(_ sender: UIButton) {
         sender.isEnabled = false
-        sender.backgroundColor = .black
-        sender.setTitle("Sent", for: .disabled)
+        sender.backgroundColor = UIColor(red:0.76, green:0.14, blue:1.00, alpha:1.0)
     }
     
     // Called from FacebookFriendCell.swift
