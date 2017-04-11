@@ -35,7 +35,7 @@ extension Array where Element: Equatable {
 
 extension UIButton {
     
-    func purpleBorder() {
+    override func purpleBorder() {
         titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 5.0, 0.0)
         backgroundColor = .clear
         layer.cornerRadius = 5
@@ -59,6 +59,13 @@ extension UIView {
     
     func freeConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func purpleBorder() {
+        backgroundColor = .white
+        layer.cornerRadius = 5
+        layer.borderWidth = 1
+        layer.borderColor = UIColor(red:0.76, green:0.14, blue:1.00, alpha:1.0).cgColor
     }
 }
 
