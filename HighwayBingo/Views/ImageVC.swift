@@ -17,6 +17,8 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     
+    let verificationButton = UIButton()
+    
     private let storage = FIRStorage.storage(url: Secrets.Firebase.storageUrl).reference()
     
     var cellTitle: String = ""
@@ -82,6 +84,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
 
                     break
                 } else {
+                    self.setUpVerificationButton()
                     self.loadingSpinner.stopAnimating()
                     self.loadingSpinner.isHidden = true
                     self.statusLabel.isHidden = false
@@ -93,6 +96,50 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         self.dismiss(animated: true, completion: nil)
         
     }
+    
+    func setUpVerificationButton() {
+        print("SETTING UP BUTTON")
+        view.addSubview(verificationButton)
+        verificationButton.translatesAutoresizingMaskIntoConstraints = false
+        verificationButton.isUserInteractionEnabled = true
+        verificationButton.setTitle("Ask Friends to Verify", for: .normal)
+        verificationButton.addTarget(self, action: #selector(verifyButtonTapped), for: .touchUpInside)
+        verificationButton.setTitleColor(UIColor.red, for: .normal)
+        verificationButton.backgroundColor = UIColor.gray
+        verificationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        verificationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        verificationButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0).isActive = true
+        verificationButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func verifyButtonTapped(_ sender: UIButton) {
+        let location = self.storage.child("images/\(self.cellTitle).jpg")
+        guard let image = self.imageView.image else {return}
+        FirebaseManager.shared.saveImage(image, at: location) { imageUrl in
+            guard let url = imageUrl, let game = self.game, let player = self.player  else { return }
+            let playerIDs = game.playerIds
+            FirebaseManager.shared.sendVerification(to: playerIDs, from: player.kindName, game: game, imageURL: url, imageName: self.cellTitle)
+
+        }
+    }
+//    _ = inviteButton.then {
+//    $0.isUserInteractionEnabled = false
+//    $0.setTitle("Send", for: .normal)
+//    $0.setTitleColor(.black, for: .normal)
+//    $0.setTitle("Sent", for: .disabled)
+//    $0.setTitleColor(.white, for: .disabled)
+//    $0.titleLabel?.font = UIFont(name: "BelleroseLight", size: 20)
+//    // Border
+//    $0.purpleBorder()
+//    // Create Game and send Invitations when touched
+//    $0.addTarget(self, action: #selector(self.createGameAndSendInvitations(_:)), for: UIControlEvents.touchUpInside)
+//    // Anchors
+//    $0.rightAnchor.constraint(equalTo: margin.rightAnchor).isActive = true
+//    $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
+//    $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//    $0.topAnchor.constraint(equalTo: margin.bottomAnchor, constant: -80).isActive = true
+//    }
+
     
     @IBAction func retakeTapped(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
