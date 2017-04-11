@@ -108,12 +108,13 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     //Decides what happens when a cell is selected
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let game = game, let player = player {
-            FirebaseManager.shared.getBoardID(for: game, userid: player.id) { (boardID) in
-                let currentUserID = DataStore.shared.currentUser.id
-                if boardID == currentUserID {
-                    if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                        if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+            if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
+                if let game = game, let player = player {
+                    FirebaseManager.shared.getBoardID(for: game, userid: player.id) { (boardID) in
+                        let currentUserID = DataStore.shared.currentUser.id
+                        //If it is your board...
+                        if boardID == currentUserID {
                             self.selectedCell = cell
                             let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
                             imageVC.cellTitle = cell.title
@@ -124,11 +125,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                             print(cell.title)
                             self.navigationController?.pushViewController(imageVC, animated: false)
                             print("Cell \(cell.id) was tapped")
-                        }
-                    }
-                } else {
-                    if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-                        if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
+                        //If it is not your board...
+                        } else {
                             self.updatePic(image: cell.cellImageView.image!)
                             print("THIS IS NOT YOUR BORAD")
                         }
@@ -137,7 +135,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             }
         }
     }
-    
+
+    //Add Image View to View Selected Picture on Opponent's Board
     func setUpPicView() {
         view.addSubview(picView)
         let dismissTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
@@ -159,7 +158,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     
     func imageTapped(_ sender: UITapGestureRecognizer) {
         print("TAPPED!")
-        collectionView.isUserInteractionEnabled = true 
+        collectionView.isUserInteractionEnabled = true
         picView.isHidden = true
     }
     
