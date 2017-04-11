@@ -8,12 +8,23 @@ import GameKit
 enum BoardType: String {
     case Highway, City, Tropical
     
-    static var all: [String] {
+    static var all: [BoardType] {
         return [
-            BoardType.Highway.rawValue,
-            BoardType.City.rawValue,
-            BoardType.Tropical.rawValue
+            BoardType.Highway,
+            BoardType.City,
+            BoardType.Tropical
         ]
+    }
+    
+    var tint: UIColor {
+        switch self {
+        case .Highway:
+            return UIColor(red:0.39, green:0.65, blue:0.95, alpha:0.5)
+        case .City:
+            return UIColor(red:0.95, green:0.75, blue:0.36, alpha:0.5)
+        case .Tropical:
+            return UIColor(red:0.65, green:0.86, blue:0.34, alpha:0.5)
+        }
     }
     
     var images: [String] {
