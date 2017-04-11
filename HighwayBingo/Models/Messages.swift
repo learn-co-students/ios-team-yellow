@@ -1,16 +1,16 @@
 ///
-/// Notifications.swift
+/// Messages.swift
 ///
 
 import SwiftyJSON
 
-protocol Notification {
+protocol Message {
     var displayText: String { get }
     var id: String { get }
     var from: String { get }
 }
 
-struct Invitation: Notification {
+struct Invitation: Message {
 
     let id: String
     let gameTitle: String
@@ -27,7 +27,7 @@ struct Invitation: Notification {
     }
 }
 
-struct Verification: Notification {
+struct Verification: Message {
     
     let id: String
     let imageName: String

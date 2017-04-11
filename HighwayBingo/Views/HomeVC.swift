@@ -22,17 +22,13 @@ class HomeVC: UIViewController {
         
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "BelleroseLight", size: 20)!]
+        title = "We need a name for our app!"
         
         playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         // Fetch User and Game data before setting up View
         DataStore.shared.fetchCurrentUser() {
-            print("CURRENT USER ID: \(DataStore.shared.currentUser.id)")
             self.setupView()
         }
-        
-        
     }
     
     func setupView() {
@@ -40,8 +36,11 @@ class HomeVC: UIViewController {
         views.forEach(view.addSubview)
         views.forEach { $0.freeConstraints() }
         
+        let navigationBarHeight: CGFloat = navigationController!.navigationBar.frame.height
+        
         // New game label
         let newGameTap = UITapGestureRecognizer(target: self, action: #selector(self.pushNewGameVC(_:)))
+        let newGameButtonTap = UITapGestureRecognizer(target: self, action: #selector(self.pushNewGameVC(_:)))
         
         _ = newGameLabel.then {
             $0.text = "NEW GAME"
@@ -51,14 +50,14 @@ class HomeVC: UIViewController {
             $0.addGestureRecognizer(newGameTap)
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant:  screen.height * 0.05).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight + 40).isActive = true
         }
         
         _ = newGameButton.then {
             $0.image = #imageLiteral(resourceName: "new")
             // Gesture Recognizer
             $0.isUserInteractionEnabled = true
-            $0.addGestureRecognizer(newGameTap)
+            $0.addGestureRecognizer(newGameButtonTap)
             // Anchors
             $0.leadingAnchor.constraint(equalTo: newGameLabel.trailingAnchor, constant: 5).isActive = true
             $0.bottomAnchor.constraint(equalTo: newGameLabel.bottomAnchor, constant: -5).isActive = true
@@ -72,7 +71,7 @@ class HomeVC: UIViewController {
             $0.font = UIFont(name: "BelleroseLight", size: 30)
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant:  screen.height * 0.15).isActive = true
+            $0.topAnchor.constraint(equalTo: newGameLabel.bottomAnchor).isActive = true
         }
         
         _ = playingScrollView.then {
@@ -100,8 +99,8 @@ class HomeVC: UIViewController {
         
         store.currentUserGames.forEach { display(playingGame: $0) }
         
-        // Show notifications first (if any)
-        store.currentUser.notifications.forEach { display(notification: $0) }
+        // Show messages first (if any)
+        store.currentUser.messages.forEach { display(message: $0) }
     }
     
     func display(playingGame game: Game) {
@@ -124,8 +123,8 @@ class HomeVC: UIViewController {
         }
     }
     
-    func display(notification: Notification) {
-        _ = NotificationModal(notification: notification).then {
+    func display(message: Message) {
+        _ = MessageModal(message: message).then {
             view.addSubview($0)
             $0.backgroundColor = .yellow
             // Anchors

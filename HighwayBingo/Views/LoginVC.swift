@@ -28,9 +28,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         _ = loginButton.then {
             $0.delegate = self
             view.addSubview($0)
+            // Anchors
             $0.freeConstraints()
             $0.centerXAnchor.constraint(equalTo: loginMaskImageView.centerXAnchor).isActive = true
-//            $0.centerYAnchor.constraint(equalTo: loginMaskImageView.centerYAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: loginMaskImageView.centerYAnchor, constant: +30 ).isActive = true
         }
     }
@@ -64,12 +64,12 @@ extension FacebookLoginManager {
             if let validationError = error {
                 print("LoginVC -> error validating login: %@", validationError)
             } else if let user = user, let userId = AccessToken.current?.userId {
-                //
-                // We are re-setting the user's name and profile photo every login, the userId "should" stay the same
-                //
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                }
                 UserDefaults.standard.set(userId, forKey: "userId")
                 FirebaseManager.shared.createOrUpdate(user)
-                self.navigateToHomeVC()
+                // self.navigateToHomeVC()
             } else {
                 print("LoginVC -> error validating login")
             }
@@ -84,12 +84,4 @@ extension FacebookLoginManager {
             print ("LoginVC -> error while signing out: %@", signOutError)
         }
     }
-    
-    func configureLogin() {
-        
-        
-        
-        
-    }
-    
 }
