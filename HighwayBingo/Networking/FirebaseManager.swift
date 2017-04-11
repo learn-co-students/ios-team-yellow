@@ -184,6 +184,16 @@ final class FirebaseManager {
         }
     }
     
+    func getBoardID(for game: Game, userid: String, handler: @escaping (String) -> ()) {
+        let boardType = game.boardType
+        Child.boards.child(game.id).child(userid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let id = JSON(snapshot.key).stringValue
+            handler(id)
+        }) { (error) in
+            print("FirebaseManager -> error fetching boards\n\t\(error.localizedDescription)")
+        }
+    }
+    
     
     //// IMAGES ////
     

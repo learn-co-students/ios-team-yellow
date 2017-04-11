@@ -34,7 +34,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     var player: Player?
     var selectedCell: BingoCollectionViewCell?
     
+    let picView = UIImageView()
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         effect = visualEffectView.effect
         visualEffectView.effect = nil
@@ -42,6 +45,9 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
 
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        setUpPicView()
+        
     }
     
     // MARK: UICollectionViewDataSource
@@ -104,19 +110,59 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let indexPath = collectionView.indexPathsForSelectedItems?.first {
             if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
-                selectedCell = cell
-                let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
-                imageVC.cellTitle = cell.title
-                imageVC.game = game
-                imageVC.player = player
-                imageVC.index = String(indexPath.item)
-                imageVC.delegate = self
-                print(cell.title)
-                self.navigationController?.pushViewController(imageVC, animated: false)
-                print("Cell \(cell.id) was tapped")
+                if let game = game, let player = player {
+                    FirebaseManager.shared.getBoardID(for: game, userid: player.id) { (boardID) in
+                        let currentUserID = DataStore.shared.currentUser.id
+                        //If it is your board...
+                        if boardID == currentUserID {
+                            self.selectedCell = cell
+                            let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
+                            imageVC.cellTitle = cell.title
+                            imageVC.game = self.game
+                            imageVC.player = self.player
+                            imageVC.index = String(indexPath.item)
+                            imageVC.delegate = self
+                            print(cell.title)
+                            self.navigationController?.pushViewController(imageVC, animated: false)
+                            print("Cell \(cell.id) was tapped")
+                        //If it is not your board...
+                        } else {
+                            self.updatePic(image: cell.cellImageView.image!)
+                            print("THIS IS NOT YOUR BORAD")
+                        }
+                    }
+                }
             }
         }
     }
+
+    //Add Image View to View Selected Picture on Opponent's Board
+    func setUpPicView() {
+        view.addSubview(picView)
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        picView.addGestureRecognizer(dismissTap)
+        picView.isHidden = true
+        picView.isUserInteractionEnabled = true
+        picView.translatesAutoresizingMaskIntoConstraints = false
+        picView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        picView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        picView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+        picView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+    }
+    
+    func updatePic(image: UIImage) {
+        picView.image = image
+        picView.isHidden = false
+        collectionView.isUserInteractionEnabled = false
+    }
+    
+    func imageTapped(_ sender: UITapGestureRecognizer) {
+        print("TAPPED!")
+        collectionView.isUserInteractionEnabled = true
+        picView.isHidden = true
+    }
+    
+    
     
     // animates winner popup in
     
