@@ -267,6 +267,13 @@ final class FirebaseManager {
         let params = ["from" : from, "title": boardType.rawValue]
         users.forEach { Child.users.child($0.id).invitations.child(gameId).updateChildValues(params) }
     }
+    
+    ///VERIFICATIONS///
+    
+    func sendVerification(to users: [String], from: String, game: Game, imageURL: URL, imageName: String) {
+        let params = ["from":from, "imageURL":String(describing: imageURL)]
+        users.forEach {Child.users.child($0).verifications.child(game.id).child(imageName).updateChildValues(params)}
+    }
 }
 
 
