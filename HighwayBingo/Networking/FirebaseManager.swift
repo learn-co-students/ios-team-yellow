@@ -122,7 +122,8 @@ final class FirebaseManager {
     }
     
     func gameParams(boardType: String, participants: [FacebookUser]) -> Params {
-        let participantsDict = participants.reduce(Params()) { $0.0 += [$0.1.id : false] }
+        var participantsDict = participants.reduce(Params()) { $0.0 += [$0.1.id : false] }
+        participantsDict[currentUserId] = true
         return [
             "boardType" : boardType,
             "leader" : currentUserId,
@@ -225,8 +226,20 @@ final class FirebaseManager {
             }
             dataTask.resume()
         }
-        
     }
+    
+    func addLastPic(imageURL: URL, game: Game, userid: String) {
+        Child.games.child(game.id).child("participants").child(userid).child("last pic").setValue(String(describing: imageURL))
+    }
+    
+    func getLastPic(game: Game, userid: String, completion: @escaping (String) -> ()) {
+        Child.games.child(game.id).child("participants").child(userid).child("last pic").observeSingleEvent(of: .value, with: { (snapshot) in
+            let imageName = snapshot.value as? String ?? ""
+            completion(imageName)
+        })
+    }
+
+    
     
 
     

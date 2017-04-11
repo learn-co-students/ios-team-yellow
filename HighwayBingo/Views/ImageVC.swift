@@ -77,6 +77,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                     FirebaseManager.shared.saveImage(image, at: location) { imageUrl in
                         guard let url = imageUrl, let game = self.game, let player = self.player else { return }
                         FirebaseManager.shared.updateImage(imageURL: url, game: game, userid: player.id, index: self.index)
+                        FirebaseManager.shared.addLastPic(imageURL: url, game: game, userid: player.id)
                     }
 
                     break

@@ -9,8 +9,10 @@ class PlayerCell: UITableViewCell {
     
     let nameLabel = UILabel()
     let playerImageView = UIImageView()
+    let lastPicImageView = UIImageView()
     
     let screenSize = UIScreen.main.bounds
+    var lastPicImageURL: URL?
     
     static let reuseID = "player"
     
@@ -21,11 +23,15 @@ class PlayerCell: UITableViewCell {
             nameLabel.text = player.kindName
             guard let url = player.imageUrl else { return }
             playerImageView.kfSetPlayerImage(with: url, diameter: 80)
+            if let lastPicURL = player.lastPic {
+                lastPicImageView.kfSetPlayerImage(with: lastPicURL, diameter: 80)
+            }
+            
         }
     }
     
     var views: [UIView] {
-        return [nameLabel, playerImageView]
+        return [nameLabel, playerImageView, lastPicImageView]
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -53,8 +59,16 @@ class PlayerCell: UITableViewCell {
             $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
+        
+        _ = lastPicImageView.then {
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: screenSize.width * 0.64).isActive = true
+            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -10).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        }
     }
     
+        
     
     
     required init?(coder aDecoder: NSCoder) {

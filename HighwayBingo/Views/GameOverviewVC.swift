@@ -11,6 +11,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     let playersTableView = UITableView()
     let startGameButton = UIButton()
     let waitingForLabel = UILabel()
+    
 
     var currentUserIsLeader = false
     
@@ -73,6 +74,8 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
         }
         
+        
+        
         if currentUserIsLeader {
             _ = startGameButton.then {
                 $0.setTitle("Start", for: .normal)
@@ -131,9 +134,15 @@ extension GameOverviewVC {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath) as! PlayerCell
         cell.selectionStyle = .none
-        cell.player = players[indexPath.row]
         cell.game = game!
+        FirebaseManager.shared.getLastPic(game: game!, userid: players[indexPath.row].id) { (imageString) in
+            let imageURL = URL(string: imageString)
+            self.players[indexPath.row].lastPic = imageURL
+            cell.player = self.players[indexPath.row]
+        }
         return cell
+        
+        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

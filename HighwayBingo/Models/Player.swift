@@ -12,6 +12,7 @@ struct Player {
     let name: String
     let notifications: [Notification]
     let imageUrl: URL?
+    var lastPic: URL?
     
     init(id: String, from json: JSON) {
         self.gameIds = json["games"].dictionaryValue.map { $0.key }

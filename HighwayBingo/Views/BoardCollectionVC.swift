@@ -143,6 +143,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         picView.addGestureRecognizer(dismissTap)
         picView.isHidden = true
         picView.isUserInteractionEnabled = true
+        picView.backgroundColor = UIColor.white
         picView.translatesAutoresizingMaskIntoConstraints = false
         picView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         picView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
