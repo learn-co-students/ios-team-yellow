@@ -93,18 +93,8 @@ func shuffle(images: [String]) -> [String] {
     return GKRandomSource().arrayByShufflingObjects(in: images) as! [String]
 }
 
-func freeSpace(images: inout [String]) -> [String] {
-    for (index, image) in images.enumerated() {
-        if image == "free space" && index != 12 {
-            swap(&images[index], &images[12])
-        }
-    }
-    return images
-}
-
 extension Board: CustomStringConvertible {
     var description: String {
         return "Board: \(boardType), Images: \(images.values)"
     }
 }
-

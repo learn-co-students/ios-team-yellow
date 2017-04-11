@@ -32,6 +32,18 @@ extension Array where Element: Equatable {
 
 // MARK: - UIKit
 //
+
+extension UIButton {
+    
+    func purpleBorder() {
+        titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 5.0, 0.0)
+        backgroundColor = .clear
+        layer.cornerRadius = 5
+        layer.borderWidth = 1
+        layer.borderColor = UIColor(red:0.76, green:0.14, blue:1.00, alpha:1.0).cgColor
+    }
+}
+
 extension UIViewController {
     
     var margin: UILayoutGuide {
@@ -51,6 +63,7 @@ extension UIView {
 }
 
 extension UIImage {
+    
     func resized(withPercentage percentage: CGFloat) -> UIImage? {
         let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
         UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
@@ -61,6 +74,7 @@ extension UIImage {
 }
 
 extension UIImageView {
+    
     func kfSetPlayerImage(with url: URL, diameter: CGFloat) {
         let processor = RoundCornerImageProcessor(cornerRadius: diameter)
         kf.setImage(
@@ -76,6 +90,7 @@ extension UIImageView {
 extension UITextField {
     
     func underline() {
+        layer.sublayerTransform = CATransform3DMakeTranslation(0, -5, 0)
         borderStyle = .none
         layer.backgroundColor = UIColor.white.cgColor
         layer.masksToBounds = false

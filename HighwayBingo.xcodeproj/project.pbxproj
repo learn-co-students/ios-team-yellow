@@ -20,19 +20,20 @@
 		A7B426701E940A9600FF9352 /* FacebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4266F1E940A9600FF9352 /* FacebookManager.swift */; };
 		A7B426721E940C5B00FF9352 /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B426711E940C5B00FF9352 /* FacebookUser.swift */; };
 		A7B426741E9418CA00FF9352 /* FacebookFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B426731E9418CA00FF9352 /* FacebookFriendCell.swift */; };
+		A7DF61381E9CF4CB0050C52E /* bellerose.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7DF61321E9CF4CB0050C52E /* bellerose.ttf */; };
+		A7DF61391E9CF4CB0050C52E /* fabian.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7DF61331E9CF4CB0050C52E /* fabian.ttf */; };
+		A7DF613A1E9CF4CB0050C52E /* city.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7DF61351E9CF4CB0050C52E /* city.gif */; };
+		A7DF613B1E9CF4CB0050C52E /* highway.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7DF61361E9CF4CB0050C52E /* highway.gif */; };
+		A7DF613C1E9CF4CB0050C52E /* tropical.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7DF61371E9CF4CB0050C52E /* tropical.gif */; };
 		A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */; };
 		A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098BE1E929B0C00BF3FAB /* Main.storyboard */; };
 		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
 		A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */; };
-		A7FA957E1E9C15C0006D6F27 /* city.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7FA957B1E9C15C0006D6F27 /* city.gif */; };
-		A7FA957F1E9C15C0006D6F27 /* highway.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7FA957C1E9C15C0006D6F27 /* highway.gif */; };
-		A7FA95821E9C1B15006D6F27 /* tropical.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7FA95811E9C1B15006D6F27 /* tropical.gif */; };
 		BEAA057C1E9534960024DE2F /* BoardCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */; };
 		CA853300FC966A4B5328B33B /* Pods_HighwayBingo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC9F0729B09753776D98D0 /* Pods_HighwayBingo.framework */; };
 		F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */; };
 		F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AA1E92EC50006EE15C /* ImageVC.swift */; };
 		F05B49B11E97D67C000EA57B /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05B49B01E97D67C000EA57B /* PlayerCell.swift */; };
-		F05F09981E9C348600B28952 /* fabian.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F05F09971E9C31BE00B28952 /* fabian.ttf */; };
 		F09B0F5E1E96D62700F8828E /* GameOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */; };
 		F0FC47531E95912700538C3C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47511E95912700538C3C /* Board.swift */; };
 		F0FC47541E95912700538C3C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47521E95912700538C3C /* Game.swift */; };
@@ -59,20 +60,21 @@
 		A7B4266F1E940A9600FF9352 /* FacebookManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
 		A7B426711E940C5B00FF9352 /* FacebookUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
 		A7B426731E9418CA00FF9352 /* FacebookFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookFriendCell.swift; sourceTree = "<group>"; };
+		A7DF61321E9CF4CB0050C52E /* bellerose.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bellerose.ttf; sourceTree = "<group>"; };
+		A7DF61331E9CF4CB0050C52E /* fabian.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fabian.ttf; sourceTree = "<group>"; };
+		A7DF61351E9CF4CB0050C52E /* city.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = city.gif; sourceTree = "<group>"; };
+		A7DF61361E9CF4CB0050C52E /* highway.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = highway.gif; sourceTree = "<group>"; };
+		A7DF61371E9CF4CB0050C52E /* tropical.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tropical.gif; sourceTree = "<group>"; };
 		A7F098B71E929B0C00BF3FAB /* HighwayBingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighwayBingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7F098BF1E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A7F098C11E929B0C00BF3FAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7FA957B1E9C15C0006D6F27 /* city.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = city.gif; sourceTree = "<group>"; };
-		A7FA957C1E9C15C0006D6F27 /* highway.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = highway.gif; sourceTree = "<group>"; };
-		A7FA95811E9C1B15006D6F27 /* tropical.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tropical.gif; sourceTree = "<group>"; };
 		BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionVC.swift; sourceTree = "<group>"; };
 		F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BingoCollectionViewCell.swift; path = ../Models/BingoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F02AB1AA1E92EC50006EE15C /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		F05B49B01E97D67C000EA57B /* PlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
-		F05F09971E9C31BE00B28952 /* fabian.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fabian.ttf; sourceTree = "<group>"; };
 		F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverviewVC.swift; sourceTree = "<group>"; };
 		F0FC47511E95912700538C3C /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		F0FC47521E95912700538C3C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -107,6 +109,8 @@
 		A74695A91E92A14E00C18CC1 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				A7DF61311E9CF4CB0050C52E /* Fonts */,
+				A7DF61341E9CF4CB0050C52E /* Gifs */,
 				A74695AA1E92A14E00C18CC1 /* Secrets.swift */,
 				7D2D7C2F1E92FB00006E46D6 /* TypeExtensions.swift */,
 			);
@@ -152,6 +156,25 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		A7DF61311E9CF4CB0050C52E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A7DF61321E9CF4CB0050C52E /* bellerose.ttf */,
+				A7DF61331E9CF4CB0050C52E /* fabian.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A7DF61341E9CF4CB0050C52E /* Gifs */ = {
+			isa = PBXGroup;
+			children = (
+				A7DF61351E9CF4CB0050C52E /* city.gif */,
+				A7DF61361E9CF4CB0050C52E /* highway.gif */,
+				A7DF61371E9CF4CB0050C52E /* tropical.gif */,
+			);
+			path = Gifs;
+			sourceTree = "<group>";
+		};
 		A7F098AE1E929B0C00BF3FAB = {
 			isa = PBXGroup;
 			children = (
@@ -180,32 +203,12 @@
 				A7F098C31E929B0C00BF3FAB /* LaunchScreen.storyboard */,
 				A74695A71E929EF400C18CC1 /* GoogleService-Info.plist */,
 				A7F098C61E929B0C00BF3FAB /* Info.plist */,
-				A7FA95831E9C1FEB006D6F27 /* Fonts */,
-				A7FA957A1E9C15C0006D6F27 /* Gifs */,
 				A74695A91E92A14E00C18CC1 /* Lib */,
 				A74695B61E92CA7200C18CC1 /* Models */,
 				A74695AE1E92AE0E00C18CC1 /* Networking */,
 				A74695B11E92AE3D00C18CC1 /* Views */,
 			);
 			path = HighwayBingo;
-			sourceTree = "<group>";
-		};
-		A7FA957A1E9C15C0006D6F27 /* Gifs */ = {
-			isa = PBXGroup;
-			children = (
-				A7FA957B1E9C15C0006D6F27 /* city.gif */,
-				A7FA957C1E9C15C0006D6F27 /* highway.gif */,
-				A7FA95811E9C1B15006D6F27 /* tropical.gif */,
-			);
-			path = Gifs;
-			sourceTree = "<group>";
-		};
-		A7FA95831E9C1FEB006D6F27 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				F05F09971E9C31BE00B28952 /* fabian.ttf */,
-			);
-			name = Fonts;
 			sourceTree = "<group>";
 		};
 		F0FC47571E95918400538C3C /* Subviews */ = {
@@ -289,13 +292,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F05F09981E9C348600B28952 /* fabian.ttf in Resources */,
+				A7DF613B1E9CF4CB0050C52E /* highway.gif in Resources */,
 				A7F098C51E929B0C00BF3FAB /* LaunchScreen.storyboard in Resources */,
+				A7DF61381E9CF4CB0050C52E /* bellerose.ttf in Resources */,
 				A74695A81E929EF400C18CC1 /* GoogleService-Info.plist in Resources */,
-				A7FA957E1E9C15C0006D6F27 /* city.gif in Resources */,
-				A7FA95821E9C1B15006D6F27 /* tropical.gif in Resources */,
+				A7DF613C1E9CF4CB0050C52E /* tropical.gif in Resources */,
+				A7DF61391E9CF4CB0050C52E /* fabian.ttf in Resources */,
+				A7DF613A1E9CF4CB0050C52E /* city.gif in Resources */,
 				A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */,
-				A7FA957F1E9C15C0006D6F27 /* highway.gif in Resources */,
 				A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -46,14 +46,18 @@ class FacebookFriendCell: UITableViewCell {
         }
         
         _ = nameLabel.then {
+            $0.font = UIFont(name: "BelleroseLight", size: 20)
+            // Anchors
             $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: friendImageView.trailingAnchor, constant: 5).isActive = true
         }
         
         _ = addButton.then {
             $0.setTitle("Add", for: .normal)
-            $0.setTitleColor(.white, for: .normal)
-            $0.backgroundColor = .blue
+            $0.setTitleColor(.black, for: .normal)
+            $0.titleLabel?.font = UIFont(name: "BelleroseLight", size: 20)
+            // Border
+            $0.purpleBorder()
             // Call delegate method when tapped
             $0.addTarget(self, action: #selector(self.inviteFriend(_:)), for: UIControlEvents.touchUpInside)
             // Anchors

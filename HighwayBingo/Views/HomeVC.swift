@@ -17,10 +17,13 @@ class HomeVC: UIViewController {
     var views: [UIView] {
         return [newGameLabel, playingLabel, playingStackView]
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "BelleroseLight", size: 20)!]
+        
+        playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         // Fetch User and Game data before setting up View
         DataStore.shared.fetchCurrentUser() { self.setupView() }
     }
@@ -113,11 +116,6 @@ class HomeVC: UIViewController {
     func pushNewGameVC(_ sender: UITapGestureRecognizer) {
         let newGameVC = self.storyboard?.instantiateViewController(withIdentifier: "newGameVC") as! NewGameVC
         self.navigationController?.pushViewController(newGameVC, animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     @IBAction func buttonTapped(_ sender: Any) {
