@@ -9,6 +9,7 @@
 import UIKit
 import GameKit
 import MobileCoreServices
+import Kingfisher
 
 private let reuseIdentifier = "boardCell"
 

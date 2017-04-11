@@ -150,9 +150,7 @@ extension GameOverviewVC {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("GETTING CALLED")
         guard let game = game else { return }
-        print("1.")
         let player = players[indexPath.row]
         FirebaseManager.shared.getBoard(for: game, userid: player.id) { (board) in
             if let board = board {
