@@ -18,11 +18,11 @@ typealias Params = [String : Any]
 
 extension FIRDatabaseReference {
     var invitations: FIRDatabaseReference {
-        return child("notifications").child("invitations")
+        return child("messages").child("invitations")
     }
     
     var verifications: FIRDatabaseReference {
-        return child("notifications").child("verifications")
+        return child("messages").child("verifications")
     }
 }
 

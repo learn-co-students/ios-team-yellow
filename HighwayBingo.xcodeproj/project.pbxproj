@@ -25,6 +25,7 @@
 		A7DF613A1E9CF4CB0050C52E /* city.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7DF61351E9CF4CB0050C52E /* city.gif */; };
 		A7DF613B1E9CF4CB0050C52E /* highway.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7DF61361E9CF4CB0050C52E /* highway.gif */; };
 		A7DF613C1E9CF4CB0050C52E /* tropical.gif in Resources */ = {isa = PBXBuildFile; fileRef = A7DF61371E9CF4CB0050C52E /* tropical.gif */; };
+		A7DF613E1E9D4CCE0050C52E /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DF613D1E9D4CCE0050C52E /* AppController.swift */; };
 		A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */; };
 		A7F098C01E929B0C00BF3FAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F098BE1E929B0C00BF3FAB /* Main.storyboard */; };
 		A7F098C21E929B0C00BF3FAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F098C11E929B0C00BF3FAB /* Assets.xcassets */; };
@@ -39,8 +40,8 @@
 		F0FC47541E95912700538C3C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47521E95912700538C3C /* Game.swift */; };
 		F0FC47561E95917800538C3C /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47551E95917800538C3C /* DataStore.swift */; };
 		F0FC47591E95918400538C3C /* PlayingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47581E95918400538C3C /* PlayingGame.swift */; };
-		F0FC4B4B1E969CC900538C3C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC4B4A1E969CC900538C3C /* Notifications.swift */; };
-		F0FC4B4D1E969CDA00538C3C /* NotificationModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC4B4C1E969CDA00538C3C /* NotificationModal.swift */; };
+		F0FC4B4B1E969CC900538C3C /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC4B4A1E969CC900538C3C /* Messages.swift */; };
+		F0FC4B4D1E969CDA00538C3C /* MessageModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC4B4C1E969CDA00538C3C /* MessageModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		A7DF61351E9CF4CB0050C52E /* city.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = city.gif; sourceTree = "<group>"; };
 		A7DF61361E9CF4CB0050C52E /* highway.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = highway.gif; sourceTree = "<group>"; };
 		A7DF61371E9CF4CB0050C52E /* tropical.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tropical.gif; sourceTree = "<group>"; };
+		A7DF613D1E9D4CCE0050C52E /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		A7F098B71E929B0C00BF3FAB /* HighwayBingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighwayBingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7F098BF1E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,8 +82,8 @@
 		F0FC47521E95912700538C3C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		F0FC47551E95917800538C3C /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		F0FC47581E95918400538C3C /* PlayingGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingGame.swift; sourceTree = "<group>"; };
-		F0FC4B4A1E969CC900538C3C /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
-		F0FC4B4C1E969CDA00538C3C /* NotificationModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationModal.swift; sourceTree = "<group>"; };
+		F0FC4B4A1E969CC900538C3C /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		F0FC4B4C1E969CDA00538C3C /* MessageModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				A7B426711E940C5B00FF9352 /* FacebookUser.swift */,
-				F0FC4B4A1E969CC900538C3C /* Notifications.swift */,
+				F0FC4B4A1E969CC900538C3C /* Messages.swift */,
 				F0FC47511E95912700538C3C /* Board.swift */,
 				F0FC47521E95912700538C3C /* Game.swift */,
 				A7B426651E93E11300FF9352 /* Player.swift */,
@@ -196,6 +198,7 @@
 		A7F098B91E929B0C00BF3FAB /* HighwayBingo */ = {
 			isa = PBXGroup;
 			children = (
+				A7DF613D1E9D4CCE0050C52E /* AppController.swift */,
 				A7F098BA1E929B0C00BF3FAB /* AppDelegate.swift */,
 				F0FC47551E95917800538C3C /* DataStore.swift */,
 				A7F098C11E929B0C00BF3FAB /* Assets.xcassets */,
@@ -214,7 +217,7 @@
 		F0FC47571E95918400538C3C /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				F0FC4B4C1E969CDA00538C3C /* NotificationModal.swift */,
+				F0FC4B4C1E969CDA00538C3C /* MessageModal.swift */,
 				F0FC47581E95918400538C3C /* PlayingGame.swift */,
 			);
 			path = Subviews;
@@ -359,8 +362,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0FC4B4D1E969CDA00538C3C /* NotificationModal.swift in Sources */,
-				F0FC4B4B1E969CC900538C3C /* Notifications.swift in Sources */,
+				F0FC4B4D1E969CDA00538C3C /* MessageModal.swift in Sources */,
+				F0FC4B4B1E969CC900538C3C /* Messages.swift in Sources */,
 				F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */,
 				A7B426741E9418CA00FF9352 /* FacebookFriendCell.swift in Sources */,
 				A7B426701E940A9600FF9352 /* FacebookManager.swift in Sources */,
@@ -370,6 +373,7 @@
 				A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */,
 				A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */,
 				F0FC47561E95917800538C3C /* DataStore.swift in Sources */,
+				A7DF613E1E9D4CCE0050C52E /* AppController.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
 				F09B0F5E1E96D62700F8828E /* GameOverviewVC.swift in Sources */,
 				A7B426721E940C5B00FF9352 /* FacebookUser.swift in Sources */,

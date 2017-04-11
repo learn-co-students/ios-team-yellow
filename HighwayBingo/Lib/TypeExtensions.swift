@@ -60,10 +60,6 @@ extension UIView {
     func freeConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    func moveUp5px() {
-        layer.sublayerTransform = CATransform3DMakeTranslation(0, -5, 0)
-    }
 }
 
 extension UIImage {

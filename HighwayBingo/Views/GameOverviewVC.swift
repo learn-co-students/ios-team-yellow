@@ -29,12 +29,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var views: [UIView] {
         return [lastPhotoLabel, playerLabel, playersTableView, startGameButton, waitingForLabel]
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
+        
     override func viewDidLoad() {
         
         playersTableView.delegate = self
