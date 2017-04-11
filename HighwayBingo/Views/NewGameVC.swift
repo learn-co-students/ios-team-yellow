@@ -13,6 +13,7 @@ protocol InviteFriendDelegate: class {
 class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, InviteFriendDelegate {
     
     let boardTypeImageView = UIImageView()
+    let boardTypeTintView = UIView()
     let boardTypeLabel = UILabel()
     let friendsTableView = UITableView()
     let friendsToInviteStackView = UIStackView()
@@ -24,7 +25,8 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     let search = UITextField()
     
     let boardTypes = BoardType.all
-    var currentBoardType = BoardType.Highway.rawValue
+    var boardTypeSelected = false
+    var currentBoardType = BoardType.Highway
     var facebookFriends = [FacebookUser]()
     let firebaseManager = FirebaseManager.shared
     var friendsMatchingSearch = [FacebookUser]()
@@ -35,7 +37,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     }
     
     var views: [UIView] {
-        return [boardTypeImageView, boardTypeLabel, leftArrow, rightArrow, friendsTableView, friendsToInviteStackView, inviteButton, inviteLabel, search]
+        return [boardTypeImageView, boardTypeTintView, boardTypeLabel, leftArrow, rightArrow, friendsTableView, friendsToInviteStackView, inviteButton, inviteLabel, search]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,7 +72,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         navigationBarHeight = navigationController!.navigationBar.frame.height
         
         _ = boardTypeImageView.then {
-            $0.loadGif(name: currentBoardType.lowercased())
+            $0.loadGif(name: currentBoardType.rawValue.lowercased())
             // Anchors
             $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -78,11 +80,23 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.bottomAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.45).isActive = true
         }
         
+        _ = boardTypeTintView.then {
+            $0.topAnchor.constraint(equalTo: boardTypeImageView.topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: boardTypeImageView.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: boardTypeImageView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: boardTypeImageView.trailingAnchor).isActive = true
+        }
+        
+        let boardTypeTap = UITapGestureRecognizer(target: self, action: #selector(self.boardTypeTapped(_:)))
+        
         _ = boardTypeLabel.then {
-            $0.text = currentBoardType.uppercased()
+            $0.text = currentBoardType.rawValue.uppercased()
             $0.textAlignment = .center
             $0.textColor = .white
             $0.font = UIFont(name: "Fabian", size: 60)
+            // Gesture Recognizer
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(boardTypeTap)
             // Anchors
             $0.centerXAnchor.constraint(equalTo: boardTypeImageView.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: boardTypeImageView.centerYAnchor).isActive = true
@@ -199,6 +213,21 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         friendsToInviteStackView.addArrangedSubview(friendView)
     }
     
+    func boardTypeTapped (_: UILabel) {
+        boardTypeSelected = !boardTypeSelected
+        if boardTypeSelected {
+            boardTypeTintView.backgroundColor = currentBoardType.tint
+            leftArrow.isHidden = true
+            rightArrow.isHidden = true
+            boardTypeLabel.textColor = .black
+        } else {
+            boardTypeTintView.backgroundColor = .clear
+            leftArrow.isHidden = false
+            rightArrow.isHidden = false
+            boardTypeLabel.textColor = .white
+        }
+    }
+    
     func cycleBoardTypeLeft(_: UIImageView) {
         guard var i = boardTypes.index(of: currentBoardType) else { return }
         i = i == boardTypes.startIndex ? boardTypes.endIndex - 1 : i - 1
@@ -213,16 +242,15 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     
     func transitionBoardType(index: Int) {
         currentBoardType = boardTypes[index]
-        boardTypeImageView.loadGif(name: currentBoardType.lowercased())
-        boardTypeLabel.text = currentBoardType.uppercased()
+        boardTypeImageView.loadGif(name: currentBoardType.rawValue.lowercased())
+        boardTypeLabel.text = currentBoardType.rawValue.uppercased()
     }
 
     func createGameAndSendInvitations(_ sender: UIButton!) {
         disableButton(sender)
-        let boardType = BoardType.Highway
-        let gameId = FirebaseManager.shared.createGame(boardType, participants: friendsToInvite)
+        let gameId = FirebaseManager.shared.createGame(currentBoardType, participants: friendsToInvite)
         let from = DataStore.shared.currentUser.kindName
-        FirebaseManager.shared.sendInvitations(to: friendsToInvite, from: from, for: gameId, boardType: boardType)
+        FirebaseManager.shared.sendInvitations(to: friendsToInvite, from: from, for: gameId, boardType: currentBoardType)
     }
     
     func disableButton(_ sender: UIButton) {
@@ -275,4 +303,3 @@ extension FriendsTableView {
         return 60
     }
 }
-
