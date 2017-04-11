@@ -25,7 +25,12 @@ class HomeVC: UIViewController {
         
         playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         // Fetch User and Game data before setting up View
-        DataStore.shared.fetchCurrentUser() { self.setupView() }
+        DataStore.shared.fetchCurrentUser() {
+            print("CURRENT USER ID: \(DataStore.shared.currentUser.id)")
+            self.setupView()
+        }
+        
+        
     }
     
     func setupView() {
