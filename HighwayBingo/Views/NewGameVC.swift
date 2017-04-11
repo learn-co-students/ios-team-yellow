@@ -20,7 +20,6 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     let inviteButton = UIButton()
     let inviteLabel = UILabel()
     let leftArrow = UIImageView()
-    var navigationBarHeight: CGFloat = 0
     let rightArrow = UIImageView()
     let search = UITextField()
     
@@ -42,8 +41,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     
     override func viewWillAppear(_ animated: Bool) {
         FacebookManager.getFriends() { self.facebookFriends = $0 }
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.title = "New Game"
+        title = "New Game"
     }
     
     override func viewWillLayoutSubviews() {
@@ -60,7 +58,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         views.forEach(view.addSubview)
         views.forEach { $0.freeConstraints() }
         
-        navigationBarHeight = navigationController!.navigationBar.frame.height
+        let navigationBarHeight: CGFloat = navigationController!.navigationBar.frame.height
         
         _ = boardTypeImageView.then {
             $0.loadGif(name: currentBoardType.rawValue.lowercased())
@@ -145,7 +143,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.axis = .horizontal
             $0.distribution = .equalSpacing
             $0.alignment = .center
-            $0.spacing = 20
+            $0.spacing = 10
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 10).isActive = true

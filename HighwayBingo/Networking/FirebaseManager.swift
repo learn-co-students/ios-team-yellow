@@ -18,11 +18,11 @@ typealias Params = [String : Any]
 
 extension FIRDatabaseReference {
     var invitations: FIRDatabaseReference {
-        return child("notifications").child("invitations")
+        return child("messages").child("invitations")
     }
     
     var verifications: FIRDatabaseReference {
-        return child("notifications").child("verifications")
+        return child("messages").child("verifications")
     }
 }
 
@@ -161,7 +161,8 @@ final class FirebaseManager {
         incrementGameStatus(game)
     }
     
-    //BOARD//
+    
+    //// BOARD ////
     
     func getBoardImages(game: Game) -> [String:String] {
         let boardType = game.boardType
@@ -195,23 +196,22 @@ final class FirebaseManager {
     }
     
     
+    //// IMAGES ////
     
-    //IMAGES//
-    
-    //Updates the image url in Firebase Database
+    // Updates the image url in Firebase Database
     func updateImage(imageURL: URL, game: Game, userid: String, index: String) {
         Child.boards.child(game.id).child(userid).updateChildValues([index : String(describing: imageURL)])
     }
     
-    //Retrieves the name of the image
+    // Retrieves the name of the image
     func getBoardImage(game: Game, userid: String, index: String, completion: @escaping (String) -> ()) {
         Child.boards.child(game.id).child(userid).child(index).observeSingleEvent(of: .value, with: { (snapshot) in
             let imageName = snapshot.value as! String
             completion(imageName)
         })
     }
-
-    //Downloads the image from a url
+    
+    // Downloads the image from a url
     func downloadImage(url: String, completion: @escaping (UIImage) -> ()) {
         let url = URL(string: url)
         let session = URLSession.shared
@@ -221,13 +221,13 @@ final class FirebaseManager {
                     if let image = UIImage(data: imageData) {
                         completion(image)
                     }
-                    
                 }
             }
             dataTask.resume()
         }
     }
     
+
     func addLastPic(imageURL: URL, game: Game, userid: String) {
         Child.games.child(game.id).child("participants").child(userid).child("last pic").setValue(String(describing: imageURL))
     }
@@ -243,6 +243,8 @@ final class FirebaseManager {
     
 
     
+
+
     //// INVITATIONS ////
     
     func acceptInvitation(gameId: GameID) {
