@@ -4,7 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>fabian.regular.ttf</string>
+		<string>fabian.ttf</string>
 	</array>
 	<key>LSApplicationCategoryType</key>
 	<string></string>

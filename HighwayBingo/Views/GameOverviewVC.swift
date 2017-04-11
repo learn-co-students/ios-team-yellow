@@ -109,6 +109,16 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let game = game else { return }
         FirebaseManager.shared.start(game: game)
     }
+    
+    func pushBoardCollectionVC(board: Board, game: Game, player: Player) {
+        let boardCollectionVC = self.storyboard?.instantiateViewController(withIdentifier: "boardCollectionVC") as! BoardCollectionVC
+        boardCollectionVC.board = board
+        boardCollectionVC.game = game
+        boardCollectionVC.player = player
+        self.navigationController?.pushViewController(boardCollectionVC, animated: true)
+        
+    }
+
 }
 
 
@@ -122,17 +132,26 @@ extension GameOverviewVC {
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath) as! PlayerCell
         cell.selectionStyle = .none
         cell.player = players[indexPath.row]
+        cell.game = game!
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
-}
-
-extension GameOverviewVC {
     
-    func startGame() {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("GETTING CALLED")
+        guard let game = game else { return }
+        print("1.")
+        let player = players[indexPath.row]
+        FirebaseManager.shared.getBoard(for: game, userid: player.id) { (board) in
+            if let board = board {
+                self.pushBoardCollectionVC(board: board, game: game, player: player)
+            }
+        }
+        
         
     }
+    
 }

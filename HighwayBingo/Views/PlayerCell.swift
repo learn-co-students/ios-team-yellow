@@ -14,6 +14,7 @@ class PlayerCell: UITableViewCell {
     
     static let reuseID = "player"
     
+    var game: Game?
     var player: Player? {
         didSet {
             guard let player = player else { return }
@@ -43,6 +44,8 @@ class PlayerCell: UITableViewCell {
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         }
         
+
+        
         _ = playerImageView.then {
             // Anchors
             $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -10).isActive = true
@@ -51,6 +54,8 @@ class PlayerCell: UITableViewCell {
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
     }
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -149,24 +149,76 @@ final class FirebaseManager {
     
     // Increment game status and remove non-participating users
     func start(game: Game) {
-        incrementGameStatus(game)
+        let images = getBoardImages(game: game)
+        let id = game.id
         game.participants.forEach { (userId, accepted) in
-            if !accepted { removeGame(game.id, for: userId) }
+            if accepted {
+                Child.boards.child(id).child(userId).setValue(images)
+            } else {
+                removeGame(id, for: userId)
+            }
         }
-        createBoard(game: game)
+        incrementGameStatus(game)
     }
     
     //BOARD//
     
-    func createBoard(game: Game) {
+    func getBoardImages(game: Game) -> [String:String] {
         let boardType = game.boardType
         let board = Board(boardType: boardType)
         let images = board.images
-        let id = game.id
         var convertedImages = [String:String]()
         images.forEach { convertedImages[String($0.0)] = $0.1 }
-        Child.boards.child(id).child("master").setValue(convertedImages)
+        return convertedImages
     }
+    
+    
+    func getBoard(for game: Game, userid: String, handler: @escaping (Board?) -> ()) {
+        let boardType = game.boardType
+        Child.boards.child(game.id).child(userid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let json = JSON(snapshot.value).arrayValue
+            let board = Board(boardType: boardType, images: json)
+            handler(board)
+        }) { (error) in
+            print("FirebaseManager -> error fetching boards\n\t\(error.localizedDescription)")
+        }
+    }
+    
+    
+    
+    //IMAGES//
+    
+    //Updates the image url in Firebase Database
+    func updateImage(imageURL: URL, game: Game, userid: String, index: String) {
+        Child.boards.child(game.id).child(userid).updateChildValues([index : String(describing: imageURL)])
+    }
+    
+    //Retrieves the name of the image
+    func getBoardImage(game: Game, userid: String, index: String, completion: @escaping (String) -> ()) {
+        Child.boards.child(game.id).child(userid).child(index).observeSingleEvent(of: .value, with: { (snapshot) in
+            let imageName = snapshot.value as! String
+            completion(imageName)
+        })
+    }
+
+    //Downloads the image from a url
+    func downloadImage(url: String, completion: @escaping (UIImage) -> ()) {
+        let url = URL(string: url)
+        let session = URLSession.shared
+        if let url = url {
+            let dataTask = session.dataTask(with: url) { (data, response, error) in
+                if let imageData = data {
+                    if let image = UIImage(data: imageData) {
+                        completion(image)
+                    }
+                    
+                }
+            }
+            dataTask.resume()
+        }
+        
+    }
+    
 
     
     //// INVITATIONS ////
@@ -198,7 +250,7 @@ private typealias FirebaseStorageManager = FirebaseManager
 extension FirebaseStorageManager {
     
     // Saves player and game images in Firebase Storage
-    fileprivate func saveImage(_ image: UIImage, at location: FIRStorageReference, handler: @escaping (URL?) -> ()) {
+     func saveImage(_ image: UIImage, at location: FIRStorageReference, handler: @escaping (URL?) -> ()) {
         guard let data = UIImageJPEGRepresentation(image, 0.8) else { handler(nil); return }
         let metaData = FIRStorageMetadata()
         metaData.contentType = "image/jpg"

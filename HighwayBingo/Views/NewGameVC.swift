@@ -54,6 +54,15 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        for family: String in UIFont.familyNames
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNames(forFamilyName: family)
+            {
+                print("== \(names)")
+            }
+        }
+        
         friendsTableView.delegate = self
         friendsTableView.dataSource = self
 
@@ -84,7 +93,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.text = currentBoardType.rawValue.uppercased()
             $0.textAlignment = .center
             $0.textColor = .white
-            $0.font = UIFont(name: "Fabian-Regular", size: 60)
+            $0.font = UIFont(name: "Fabian", size: 60)
             // Gesture Recognizer
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(boardTypeTap)

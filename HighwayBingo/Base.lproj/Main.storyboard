@@ -139,7 +139,7 @@
         <!--Board CollectionVC-->
         <scene sceneID="3tS-S6-5Sb">
             <objects>
-                <viewController id="yEb-oO-Tgk" customClass="BoardCollectionVC" customModule="HighwayBingo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="boardCollectionVC" id="yEb-oO-Tgk" customClass="BoardCollectionVC" customModule="HighwayBingo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HUx-gK-1gX"/>
                         <viewControllerLayoutGuide type="bottom" id="ym9-gx-asz"/>
