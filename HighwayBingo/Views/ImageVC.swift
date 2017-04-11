@@ -75,7 +75,8 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                     self.statusLabel.text = "TRUE"
                     self.statusLabel.textColor = UIColor.green
                     self.delegate?.updateCell(image: image)
-                    let location = self.storage.child("images/\(self.cellTitle).jpg")
+                    guard let game = self.game, let player = self.player else {return}
+                    let location = self.storage.child("images/\(game.id)/\(player.id)/\(self.cellTitle).jpg")
                     FirebaseManager.shared.saveImage(image, at: location) { imageUrl in
                         guard let url = imageUrl, let game = self.game, let player = self.player else { return }
                         FirebaseManager.shared.updateImage(imageURL: url, game: game, userid: player.id, index: self.index)
@@ -113,7 +114,8 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     func verifyButtonTapped(_ sender: UIButton) {
-        let location = self.storage.child("images/\(self.cellTitle).jpg")
+        guard let game = game, let player = player else {return}
+        let location = self.storage.child("images/\(game.id)/\(player.id)/\(self.cellTitle).jpg")
         guard let image = self.imageView.image else {return}
         FirebaseManager.shared.saveImage(image, at: location) { imageUrl in
             guard let url = imageUrl, let game = self.game, let player = self.player  else { return }
