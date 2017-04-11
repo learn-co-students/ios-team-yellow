@@ -118,7 +118,4 @@ class HomeVC: UIViewController {
         self.navigationController?.pushViewController(newGameVC, animated: true)
     }
     
-    @IBAction func buttonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "boardSegue", sender: self)
-    }
 }
