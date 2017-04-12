@@ -6,7 +6,8 @@ import SwiftyJSON
 
 struct Game {
     
-    typealias Participating = [String : Accepted]
+    typealias AcceptedInvitation = Bool
+    typealias Participating = [String : AcceptedInvitation]
     
     let currentUserIsLeader: Bool
     let gameProgress: GameProgress

@@ -40,7 +40,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
-
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -48,7 +47,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("*****GETTING CALLED!*****")
@@ -95,7 +93,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             }
         }
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     func setUpVerificationButton() {
@@ -125,8 +122,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             var playerIDs = game.playerIds
             let currentUserID = player.id
             playerIDs.remove(object: currentUserID)
-            FirebaseManager.shared.sendVerification(to: playerIDs, from: player.kindName, game: game, imageURL: url, imageName: self.cellTitle)
-
+            FirebaseManager.shared.sendVerification(to: playerIDs, from: player, game: game, imageURL: url, imageName: self.cellTitle)
         }
     }
     
@@ -135,7 +131,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
 
 
-    
     @IBAction func retakeTapped(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
@@ -145,12 +140,5 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
-
     }
-    
-    
-
-    
 }
-
-

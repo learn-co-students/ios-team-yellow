@@ -20,9 +20,9 @@ struct Player {
         self.imageUrl = URL(string: json["imageUrl"].stringValue)
         self.name = json["name"].stringValue
         self.kindName = name.firstWord
-        let invitations = json["messages"]["invitations"].dictionaryValue.map(Invitation.init)
-        // let verifications = json["messages"]["verifications"].arrayValue.map(Verification.init)
-        self.messages = invitations
+        let invitations: [Message] = json["messages"]["invitations"].dictionaryValue.map(Invitation.init)
+        let verifications: [Message] = json["messages"]["verifications"].dictionaryValue.flatMap(Verification.init)
+        self.messages = invitations + verifications
     }
 }
 
