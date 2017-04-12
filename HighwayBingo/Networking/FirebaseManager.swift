@@ -269,14 +269,15 @@ final class FirebaseManager {
     
     ///VERIFICATIONS///
     
-    func sendVerification(to userIds: [String], from: Player, game: Game, imageURL: URL, imageName: String) {
+    func sendVerification(to userIds: [String], from: Player, game: Game, imageURL: URL, imageName: String, imageIndex: String) {
         let uuid = UUID().uuidString
         let params = [
             "fromPlayerId" : from.id,
             "fromPlayerName" : from.kindName,
             "gameId" : game.id,
             "imageName" : imageName,
-            "imageUrl": String(describing: imageURL)
+            "imageUrl": String(describing: imageURL),
+            "imageIndex": imageIndex
         ]
         userIds.forEach { Child.users.child($0).verifications.child(uuid).updateChildValues(params) }
     }
@@ -284,12 +285,10 @@ final class FirebaseManager {
     func acceptVerification(message: Message) {
         guard
             let ver = message as? Verification,
-            let game = DataStore.shared.currentUserGames.filter({ $0.id == ver.gameId }).first,
-            // Hack - get the index of the boardImage for the player
-            let index = game.boards[ver.fromPlayerId]?.images.filter({ $0.1 == ver.imageName }).first?.key
+            let game = DataStore.shared.currentUserGames.filter({ $0.id == ver.gameId }).first
         else { return }
-        // Replace image name with imageUrl for player
-        Child.boards.child(ver.gameId).child(ver.fromPlayerId).updateChildValues([index : ver.imageName])
+        // Replace imageName with imageUrl for player
+        Child.boards.child(ver.gameId).child(ver.fromPlayerId).updateChildValues([ver.imageIndex : String(describing: ver.imageUrl)])
         // Remove verification message all users
         game.playerIds.forEach { Child.users.child($0).verifications.child(ver.id).removeValue() }
     }
