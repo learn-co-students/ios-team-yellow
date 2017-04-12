@@ -19,7 +19,7 @@ class FacebookFriendCell: UITableViewCell {
         didSet {
             guard let friend = friend else { return }
             nameLabel.text = friend.name
-            if let url = friend.imageUrl { friendImageView.kfSetPlayerImage(with: url, diameter: 40) }
+            if let url = friend.imageUrl { friendImageView.kfSetPlayerImageRound(with: url, diameter: 40) }
         }
     }
     

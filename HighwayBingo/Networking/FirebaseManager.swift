@@ -11,7 +11,6 @@ import Foundation
 import SwiftyJSON
 
 
-typealias Accepted = Bool
 typealias GameID = String
 typealias Params = [String : Any]
 
@@ -227,7 +226,6 @@ final class FirebaseManager {
         }
     }
     
-
     func addLastPic(imageURL: URL, game: Game, userid: String) {
         Child.games.child(game.id).child("participants").child(userid).child("last pic").setValue(String(describing: imageURL))
     }
@@ -239,16 +237,10 @@ final class FirebaseManager {
         })
     }
 
-    
-    
-
-    
-
-
     //// INVITATIONS ////
     
-    func acceptInvitation(gameId: GameID) {
-        currentUserNode.invitations.child(gameId).removeValue()
+    func acceptInvitation(messageId: String, gameId: GameID) {
+        currentUserNode.invitations.child(messageId).removeValue()
         Child.games.child(gameId).child("participants").updateChildValues([currentUserId : true])
         currentUserNode.child("games").updateChildValues([gameId : true])
     }
@@ -257,22 +249,46 @@ final class FirebaseManager {
         removeGame(gameId, for: currentUserId)
     }
     
-    // Updates game statuses to true or discards them based on response
-    func respondToInvitation(id: GameID, accept: Accepted) {
-        accept ? acceptInvitation(gameId: id) : denyInvitation(gameId: id)
-    }
-    
     // Sends an invitation to a group of users
     func sendInvitations(to users: [FacebookUser], from: String, for gameId: GameID, boardType: BoardType) {
-        let params = ["from" : from, "title": boardType.rawValue]
-        users.forEach { Child.users.child($0.id).invitations.child(gameId).updateChildValues(params) }
+        let uuid = UUID().uuidString
+        let params = [
+            "boardType": boardType.rawValue,
+            "from" : from,
+            "gameId" : gameId
+        ]
+        users.forEach { Child.users.child($0.id).invitations.child(uuid).updateChildValues(params) }
     }
     
     ///VERIFICATIONS///
     
-    func sendVerification(to users: [String], from: String, game: Game, imageURL: URL, imageName: String) {
-        let params = ["from":from, "imageURL":String(describing: imageURL)]
-        users.forEach {Child.users.child($0).verifications.child(game.id).child(imageName).updateChildValues(params)}
+    func sendVerification(to userIds: [String], from: Player, game: Game, imageURL: URL, imageName: String) {
+        let uuid = UUID().uuidString
+        let params = [
+            "fromPlayerId" : from.id,
+            "fromPlayerName" : from.kindName,
+            "gameId" : game.id,
+            "imageName" : imageName,
+            "imageUrl": String(describing: imageURL)
+        ]
+        userIds.forEach { Child.users.child($0).verifications.child(uuid).updateChildValues(params) }
+    }
+    
+    func acceptVerification(message: Message) {
+        guard
+            let ver = message as? Verification,
+            let game = DataStore.shared.currentUserGames.filter({ $0.id == ver.gameId }).first,
+            // Hack - get the index of the boardImage for the player
+            let index = game.boards[ver.fromPlayerId]?.images.filter({ $0.1 == ver.imageName }).first?.key
+        else { return }
+        // Replace image name with imageUrl for player
+        Child.boards.child(ver.gameId).child(ver.fromPlayerId).updateChildValues([index : ver.imageName])
+        // Remove verification message all users
+        game.playerIds.forEach { Child.users.child($0).verifications.child(ver.id).removeValue() }
+    }
+    
+    func denyVerification(messageId: String) {
+        currentUserNode.verifications.child(messageId).removeValue()
     }
 }
 

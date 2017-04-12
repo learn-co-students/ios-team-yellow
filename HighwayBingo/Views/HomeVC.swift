@@ -124,7 +124,8 @@ class HomeVC: UIViewController {
     }
     
     func display(message: Message) {
-        _ = MessageModal(message: message).then {
+        guard let messageModal = MessageModal(message: message) else { return }
+        _ = messageModal.then {
             view.addSubview($0)
             // Border
             $0.purpleBorder()

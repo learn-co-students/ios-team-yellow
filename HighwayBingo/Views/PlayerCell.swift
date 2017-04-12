@@ -22,9 +22,9 @@ class PlayerCell: UITableViewCell {
             guard let player = player else { return }
             nameLabel.text = player.kindName
             guard let url = player.imageUrl else { return }
-            playerImageView.kfSetPlayerImage(with: url, diameter: 80)
+            playerImageView.kfSetPlayerImageRound(with: url, diameter: 80)
             if let lastPicURL = player.lastPic {
-                lastPicImageView.kfSetPlayerImage(with: lastPicURL, diameter: 80)
+                lastPicImageView.kfSetPlayerImageRound(with: lastPicURL, diameter: 80)
             }
             
         }

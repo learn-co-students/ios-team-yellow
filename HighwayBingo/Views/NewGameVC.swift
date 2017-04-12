@@ -197,7 +197,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         
         if let url = friend.imageUrl {
             let _ = friendImageView.then {
-                $0.kfSetPlayerImage(with: url, diameter: 40)
+                $0.kfSetPlayerImageRound(with: url, diameter: 40)
                 friendView.addSubview($0)
                 // Anchors
                 $0.widthAnchor.constraint(equalToConstant: 40).isActive = true
