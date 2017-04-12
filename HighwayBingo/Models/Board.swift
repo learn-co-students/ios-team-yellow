@@ -76,7 +76,6 @@ class Board {
     }
     
     func checkForWin() -> Bool {
-        print("CHECKING FOR WIN")
         for combo in winningCombos {
             let filledList = Set(filled)
             let comboSet = Set(combo)

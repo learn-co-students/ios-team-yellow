@@ -49,8 +49,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         
         setUpPicView()
         
-        print(board!.filled)
-        
     }
     
     // MARK: UICollectionViewDataSource
@@ -166,6 +164,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         picView.isHidden = true
     }
     
+  
+    
     
     
     // animates winner popup in
@@ -232,5 +232,27 @@ extension BoardCollectionVC {
             board?.filled.append(cell.id)
         }
         
+    }
+}
+
+//Ability to Test Win without Taking Pictures
+
+extension BoardCollectionVC {
+    
+    func displayWinner() {
+        animateIn()
+    }
+    
+    func testWin(cell: BingoCollectionViewCell) {
+        if let board = board {
+            board.filled.append(cell.id)
+            cell.isFilled = true
+            cell.layer.borderWidth = 2
+            cell.layer.borderColor = UIColor.green.cgColor
+            let winner = board.checkForWin()
+            if winner == true {
+                displayWinner()
+            }
+        }
     }
 }

@@ -19,14 +19,6 @@ class WatsonAPIClient {
         }, to: urlString) { (encodingResult) in
             switch encodingResult {
             case .success(let upload, _, _):
-                upload.uploadProgress { progress in
-                    print("progress is \(progress.fractionCompleted)")
-                }
-                
-                upload.downloadProgress { progress in // main queue by default
-                    print("Download Progress: \(progress.fractionCompleted)")
-                }
-                
                 upload.responseJSON(completionHandler: { (response) in
                     debugPrint(response)
                     let JSON = response.result.value as? [String:Any] ?? [:]
