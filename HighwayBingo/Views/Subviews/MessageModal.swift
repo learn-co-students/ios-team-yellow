@@ -6,43 +6,64 @@ import UIKit
 
 class MessageModal: UIView {
     
-    let message: Message
-    
+    var message: Message
     let acceptButton = UIButton()
     let denyButton = UIButton()
     let displayHeadingLabel = UILabel()
     let gameLabel = UILabel()
+    var isInvitation = true
+    let verificationImageView = UIImageView()
     
     var views: [UIView] {
-        return [acceptButton, denyButton, displayHeadingLabel, gameLabel]
+        return [acceptButton, denyButton, displayHeadingLabel, gameLabel, verificationImageView]
     }
     
-    init(message: Message) {
+    init?(message: Message) {
         self.message = message
         super.init(frame: .zero)
         
         views.forEach(self.addSubview)
         views.forEach { $0.freeConstraints() }
         
-        _ = gameLabel.then {
-            $0.font = UIFont(name: "Fabian", size: 60)
-            $0.text = message.gameTitle
-            $0.numberOfLines = 0
-            $0.textAlignment = .center
-            // Anchors
-            $0.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        }
+        if let invitation = message as? Invitation {
+
+            _ = gameLabel.then {
+                $0.font = UIFont(name: "Fabian", size: 60)
+                $0.text = invitation.gameTitle
+                $0.numberOfLines = 0
+                $0.textAlignment = .center
+                // Anchors
+                $0.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+                $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+                $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+            }
+            
+        } else if let verification = message as? Verification {
+            
+            isInvitation = false
+            
+            _ = verificationImageView.then {
+                $0.kfSetPlayerImage(with: verification.imageUrl)
+                // Anchors
+                $0.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.75).isActive = true
+                $0.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.75).isActive = true
+                $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+                $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+            }
+            
+        } else { return nil }
+        
+        let gameLabelOrVerificationImageView = isInvitation ? gameLabel : verificationImageView
         
         _ = displayHeadingLabel.then {
             $0.text = message.displayHeading
             $0.textAlignment = .center
+            $0.numberOfLines = 0
             $0.font = UIFont(name: "BelleroseLight", size: 20)
             // Anchors
-            $0.bottomAnchor.constraint(equalTo: gameLabel.topAnchor, constant: -30).isActive = true
-            $0.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-            $0.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: gameLabelOrVerificationImageView.topAnchor, constant: -30).isActive = true
         }
         
         _ = acceptButton.then {
@@ -53,9 +74,9 @@ class MessageModal: UIView {
             // Border
             $0.purpleBorder()
             // Accept Invitation
-            $0.addTarget(self, action: #selector(self.acceptInvitation(_:)), for: UIControlEvents.touchUpInside)
+            $0.addTarget(self, action: #selector(self.accept(_:)), for: UIControlEvents.touchUpInside)
             // Anchors
-            $0.topAnchor.constraint(equalTo: gameLabel.bottomAnchor, constant: 30).isActive = true
+            $0.topAnchor.constraint(equalTo: gameLabelOrVerificationImageView.bottomAnchor, constant: 30).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -75).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
@@ -69,22 +90,30 @@ class MessageModal: UIView {
             // Border
             $0.purpleBorder()
             // Deny Invitation
-            $0.addTarget(self, action: #selector(self.denyInvitation(_:)), for: UIControlEvents.touchUpInside)
+            $0.addTarget(self, action: #selector(self.deny(_:)), for: UIControlEvents.touchUpInside)
             // Anchors
-            $0.topAnchor.constraint(equalTo: gameLabel.bottomAnchor, constant: 30).isActive = true
+            $0.topAnchor.constraint(equalTo: gameLabelOrVerificationImageView.bottomAnchor, constant: 30).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 75).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
         }
     }
     
-    func acceptInvitation(_ sender: UIButton!) {
-        FirebaseManager.shared.respondToInvitation(id: message.id, accept: true)
+    func accept(_ sender: UIButton!) {
+        if isInvitation {
+            FirebaseManager.shared.acceptInvitation(messageId: message.id, gameId: message.gameId)
+        } else {
+            FirebaseManager.shared.acceptVerification(message: message)
+        }
         dismissMessage(sender)
     }
     
-    func denyInvitation(_ sender: UIButton!) {
-        FirebaseManager.shared.respondToInvitation(id: message.id, accept: false)
+    func deny(_ sender: UIButton!) {
+        if isInvitation {
+            FirebaseManager.shared.denyInvitation(gameId: message.gameId)
+        } else {
+            FirebaseManager.shared.denyVerification(messageId: message.id)
+        }
         dismissMessage(sender)
     }
     
