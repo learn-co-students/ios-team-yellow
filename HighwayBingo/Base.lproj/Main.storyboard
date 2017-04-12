@@ -144,7 +144,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EXx-a1-B8s">
-                                <rect key="frame" x="20" y="102" width="374" height="374"/>
+                                <rect key="frame" x="20" y="181" width="374" height="374"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EXx-a1-B8s" secondAttribute="height" multiplier="1:1" id="07m-9k-GJ9"/>
@@ -194,9 +194,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="EXx-a1-B8s" firstAttribute="top" secondItem="HUx-gK-1gX" secondAttribute="bottom" constant="38" id="80q-yD-k6I"/>
                             <constraint firstItem="EXx-a1-B8s" firstAttribute="leading" secondItem="5AM-gR-WVk" secondAttribute="leadingMargin" id="pY3-mi-FOc"/>
                             <constraint firstItem="EXx-a1-B8s" firstAttribute="trailing" secondItem="5AM-gR-WVk" secondAttribute="trailingMargin" id="tuL-Sk-BM0"/>
+                            <constraint firstItem="EXx-a1-B8s" firstAttribute="centerY" secondItem="5AM-gR-WVk" secondAttribute="centerY" id="uwq-kT-cE4"/>
                         </constraints>
                     </view>
                     <connections>
@@ -326,7 +326,7 @@
             <objects>
                 <navigationController storyboardIdentifier="navVC" automaticallyAdjustsScrollViewInsets="NO" id="bIX-Af-4yT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WA2-3U-wbm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WA2-3U-wbm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
