@@ -75,21 +75,24 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             FirebaseManager.shared.getBoardImage(game: game, userid: player.id, index: index, completion: { (imageName) in
                 if imageName.contains("https") {
                     //Set Up Cell if Image is Not a Stock Image
-                    let firstURLComponents = imageName.components(separatedBy: "2F")
-                    let secondHalf = firstURLComponents[1]
-                    let secondURLComponents = secondHalf.components(separatedBy: ".jpg")
-                    let name = secondURLComponents[0]
-                    cell.title = name
-                    cell.layer.borderColor = UIColor.green.cgColor
-                    cell.layer.borderWidth = 2
-                    cell.isFilled = true
-                    FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
-                        DispatchQueue.main.async {
-                            cell.cellImageView.image = image
-                            board.filled.append(cell.id)
-                        }
-                        
-                    })
+                    let firstURLComponents = imageName.components(separatedBy: ".jpg")
+                    let firstHalf = firstURLComponents[0]
+                    let secondURLComponents = firstHalf.components(separatedBy: "%2F")
+                    let name = secondURLComponents.last
+                    if let name = name {
+                        cell.title = name
+                        cell.layer.borderColor = UIColor.green.cgColor
+                        cell.layer.borderWidth = 2
+                        cell.isFilled = true
+                        FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
+                            DispatchQueue.main.async {
+                                cell.cellImageView.image = image
+                                board.filled.append(cell.id)
+                            }
+                            
+                        })
+                    }
+                    
                 } else {
                     //Set Up Cell if Image is a Stock Image
                     let name = board.images[indexPath.item]
