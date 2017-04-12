@@ -260,6 +260,13 @@ final class FirebaseManager {
         users.forEach { Child.users.child($0.id).invitations.child(uuid).updateChildValues(params) }
     }
     
+//    func checkForInviteResponse(game: Game, id: String, completion: (Bool) -> ()) {
+//        Child.games.child(game.id).child("participants").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+//            let response = snapshot.value
+//            print(response)
+//        })
+//    }
+    
     ///VERIFICATIONS///
     
     func sendVerification(to userIds: [String], from: Player, game: Game, imageURL: URL, imageName: String) {

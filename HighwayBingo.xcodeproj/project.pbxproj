@@ -35,6 +35,7 @@
 		F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */; };
 		F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AA1E92EC50006EE15C /* ImageVC.swift */; };
 		F05B49B11E97D67C000EA57B /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05B49B01E97D67C000EA57B /* PlayerCell.swift */; };
+		F063AC601E9E78B90030FBE4 /* PlayerPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F063AC5F1E9E78B90030FBE4 /* PlayerPhoto.swift */; };
 		F09B0F5E1E96D62700F8828E /* GameOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */; };
 		F0FC47531E95912700538C3C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47511E95912700538C3C /* Board.swift */; };
 		F0FC47541E95912700538C3C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47521E95912700538C3C /* Game.swift */; };
@@ -77,6 +78,7 @@
 		F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BingoCollectionViewCell.swift; path = ../Models/BingoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F02AB1AA1E92EC50006EE15C /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		F05B49B01E97D67C000EA57B /* PlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
+		F063AC5F1E9E78B90030FBE4 /* PlayerPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerPhoto.swift; sourceTree = "<group>"; };
 		F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverviewVC.swift; sourceTree = "<group>"; };
 		F0FC47511E95912700538C3C /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		F0FC47521E95912700538C3C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			children = (
 				F0FC4B4C1E969CDA00538C3C /* MessageModal.swift */,
 				F0FC47581E95918400538C3C /* PlayingGame.swift */,
+				F063AC5F1E9E78B90030FBE4 /* PlayerPhoto.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				F0FC47561E95917800538C3C /* DataStore.swift in Sources */,
 				A7DF613E1E9D4CCE0050C52E /* AppController.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
+				F063AC601E9E78B90030FBE4 /* PlayerPhoto.swift in Sources */,
 				F09B0F5E1E96D62700F8828E /* GameOverviewVC.swift in Sources */,
 				A7B426721E940C5B00FF9352 /* FacebookUser.swift in Sources */,
 				F0FC47591E95918400538C3C /* PlayingGame.swift in Sources */,

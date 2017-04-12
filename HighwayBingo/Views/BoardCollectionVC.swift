@@ -49,6 +49,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         
         setUpPicView()
         
+        print(board!.filled)
+        
     }
     
     // MARK: UICollectionViewDataSource
@@ -100,7 +102,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                 }
             })
         }
-        cell.id = indexPath.item + 1
+        cell.id = indexPath.item
         cell.setUpCell()
         
         return cell

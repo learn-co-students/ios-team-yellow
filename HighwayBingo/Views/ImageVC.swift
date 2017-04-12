@@ -129,23 +129,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     func disableButton(_ sender: UIButton) {
         sender.isEnabled = false
     }
-//    _ = inviteButton.then {
-//    $0.isUserInteractionEnabled = false
-//    $0.setTitle("Send", for: .normal)
-//    $0.setTitleColor(.black, for: .normal)
-//    $0.setTitle("Sent", for: .disabled)
-//    $0.setTitleColor(.white, for: .disabled)
-//    $0.titleLabel?.font = UIFont(name: "BelleroseLight", size: 20)
-//    // Border
-//    $0.purpleBorder()
-//    // Create Game and send Invitations when touched
-//    $0.addTarget(self, action: #selector(self.createGameAndSendInvitations(_:)), for: UIControlEvents.touchUpInside)
-//    // Anchors
-//    $0.rightAnchor.constraint(equalTo: margin.rightAnchor).isActive = true
-//    $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
-//    $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//    $0.topAnchor.constraint(equalTo: margin.bottomAnchor, constant: -80).isActive = true
-//    }
+
 
     @IBAction func retakeTapped(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {

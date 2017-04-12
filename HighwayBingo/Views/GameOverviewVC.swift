@@ -73,16 +73,22 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if currentUserIsLeader {
             _ = startGameButton.then {
-                $0.setTitle("Start", for: .normal)
-                $0.setTitleColor(.white, for: .normal)
-                $0.backgroundColor = .blue
-                // Start game
-                $0.addTarget(self, action: #selector(self.startGame(_:)), for: UIControlEvents.touchUpInside)
-                // Anchors
-                $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-                $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
-                $0.widthAnchor.constraint(equalToConstant: 150).isActive = true
-                $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+                if game?.gameProgress == .notStarted {
+                    $0.isHidden = false
+                    $0.setTitle("Start", for: .normal)
+                    $0.setTitleColor(.white, for: .normal)
+                    $0.backgroundColor = .blue
+                    // Start game
+                    $0.addTarget(self, action: #selector(self.startGame(_:)), for: UIControlEvents.touchUpInside)
+                    // Anchors
+                    $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+                    $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                    $0.widthAnchor.constraint(equalToConstant: 150).isActive = true
+                    $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+                } else {
+                    $0.isHidden = true
+                }
+                
             }
         } else {
             guard
@@ -103,7 +109,8 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func startGame(_: UIButton!) {
+    func startGame(_ sender: UIButton!) {
+        sender.removeFromSuperview()
         guard let game = game else { return }
         FirebaseManager.shared.start(game: game)
     }
@@ -116,7 +123,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.pushViewController(boardCollectionVC, animated: true)
         
     }
-
+    
 }
 
 
