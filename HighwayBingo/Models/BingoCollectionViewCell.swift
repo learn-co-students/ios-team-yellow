@@ -29,10 +29,9 @@ class BingoCollectionViewCell: UICollectionViewCell {
             self.layer.borderColor = UIColor.green.cgColor
             self.layer.borderWidth = 2
         } else {
-            self.layer.borderColor = UIColor.black.cgColor
-            self.layer.borderWidth = 1
+            purpleBorder()
         }
-        
+        self.backgroundColor = UIColor.white
     }
     
 }

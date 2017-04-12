@@ -36,10 +36,16 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     var selectedCell: BingoCollectionViewCell?
     
     let picView = UIImageView()
+    let backgroundImage = UIImageView()
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        
+        //view.addSubview(backgroundImage)
+       // collectionView.backgroundView = backgroundImage
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         winnerView.layer.cornerRadius = 5
@@ -47,7 +53,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        collectionView.backgroundColor = UIColor.clear
+        
         setUpPicView()
+        
         
     }
     
@@ -69,6 +78,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
         let index = String(indexPath.item)
         if var board = board, let game = self.game, let player = player {
+            let boardName = board.boardType.rawValue.lowercased()
+            setUpBackgroundImage(image: boardName)
             //Retrieve Image From Firebase
             FirebaseManager.shared.getBoardImage(game: game, userid: player.id, index: index, completion: { (imageName) in
                 if imageName.contains("https") {
@@ -148,6 +159,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         picView.isHidden = true
         picView.isUserInteractionEnabled = true
         picView.backgroundColor = UIColor.white
+        picView.purpleBorder()
         picView.translatesAutoresizingMaskIntoConstraints = false
         picView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         picView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -167,7 +179,18 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         picView.isHidden = true
     }
     
-  
+    func setUpBackgroundImage(image: String) {
+        view.addSubview(backgroundImage)
+        view.sendSubview(toBack: backgroundImage)
+        backgroundImage.image = UIImage(named: image)
+        backgroundImage.contentMode = .scaleToFill
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        backgroundImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        backgroundImage.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        backgroundImage.heightAnchor.constraint(equalToConstant: screen.height).isActive = true
+        backgroundImage.widthAnchor.constraint(equalToConstant: screen.width).isActive = true
+    }
+
     
     
     
