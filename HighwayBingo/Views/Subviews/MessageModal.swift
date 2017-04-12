@@ -79,12 +79,12 @@ class MessageModal: UIView {
     }
     
     func acceptInvitation(_ sender: UIButton!) {
-        //FirebaseManager.shared.respondToInvitation(id: message.id, accept: true)
+        FirebaseManager.shared.respondToInvitation(id: message.id, accept: true)
         dismissMessage(sender)
     }
     
     func denyInvitation(_ sender: UIButton!) {
-        //FirebaseManager.shared.respondToInvitation(id: message.id, accept: false)
+        FirebaseManager.shared.respondToInvitation(id: message.id, accept: false)
         dismissMessage(sender)
     }
     
