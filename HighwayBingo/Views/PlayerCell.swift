@@ -10,9 +10,11 @@ class PlayerCell: UITableViewCell {
     let nameLabel = UILabel()
     let playerImageView = UIImageView()
     let lastPicImageView = UIImageView()
+    let numberLabel = UILabel()
     
     let screenSize = UIScreen.main.bounds
     var lastPicImageURL: URL?
+    
     
     static let reuseID = "player"
     
@@ -31,7 +33,7 @@ class PlayerCell: UITableViewCell {
     }
     
     var views: [UIView] {
-        return [nameLabel, playerImageView, lastPicImageView]
+        return [nameLabel, playerImageView, lastPicImageView, numberLabel]
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -65,6 +67,16 @@ class PlayerCell: UITableViewCell {
             $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -10).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        }
+        
+        _ = numberLabel.then {
+//            $0.text = "3 Away"
+            $0.textAlignment = .center
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -22).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
         }
     }
     

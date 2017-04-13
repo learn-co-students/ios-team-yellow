@@ -108,7 +108,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                     if let name = name {
                         cell.title = name
                     }
-
+                    
                     cell.setUpCell()
                     cell.cellImageView.image = UIImage(named: imageName)
                 }

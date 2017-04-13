@@ -89,6 +89,38 @@ class Board {
         return false
     }
     
+    func howManyAwayFromWin() -> Int {
+        var numberAwayArray: [Int] = []
+        var numberAway = 5
+        for combo in winningCombos {
+            let filledList = Set(filled)
+            let comboSet = Set(combo)
+            let commonSet = comboSet.intersection(filledList)
+            switch commonSet.count {
+            case 0:
+                numberAwayArray.append(5)
+            case 1:
+                numberAwayArray.append(4)
+            case 2:
+                numberAwayArray.append(3)
+            case 3:
+                numberAwayArray.append(2)
+            case 4:
+                numberAwayArray.append(1)
+            case 5:
+                numberAwayArray.append(0)
+            default:
+                print("NOTHING")
+            }
+        }
+        numberAwayArray.sort {$0 < $1}
+        if let firstNumber = numberAwayArray.first {
+            numberAway = firstNumber
+        }
+        print("NUMBER FROM WIN: \(numberAway)")
+        return numberAway
+    }
+    
 }
 
 func shuffle(images: [String]) -> [String] {

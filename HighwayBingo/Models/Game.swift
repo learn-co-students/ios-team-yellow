@@ -18,6 +18,10 @@ struct Game {
     let boardType: BoardType
     var boards = [String:Board]()
     
+    //PlayerID:NumberFromWin
+    //var places = [String:Int]()
+    
+    
     var playerIds: [String] {
         return participants.map { $0.key }
     }
