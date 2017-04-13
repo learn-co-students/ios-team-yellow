@@ -43,7 +43,6 @@ extension Notification.Name {
     
     static let closeLoginVC = Notification.Name("close-login-view-controller")
     static let closeHomeVC = Notification.Name("close-game-view-controller")
-    static let pushBoardCollectionVC = Notification.Name("push-board-collection-view-controller")
 }
 
 
