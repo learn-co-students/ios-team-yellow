@@ -110,7 +110,7 @@ class MessageModal: UIView {
     
     func deny(_ sender: UIButton!) {
         if isInvitation {
-            FirebaseManager.shared.denyInvitation(gameId: message.gameId)
+            FirebaseManager.shared.denyInvitation(gameId: message.gameId, messageId: message.id)
         } else {
             FirebaseManager.shared.denyVerification(messageId: message.id)
         }

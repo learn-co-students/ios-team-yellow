@@ -245,7 +245,8 @@ final class FirebaseManager {
         currentUserNode.child("games").updateChildValues([gameId : true])
     }
     
-    func denyInvitation(gameId: GameID) {
+    func denyInvitation(gameId: GameID, messageId: String) {
+        currentUserNode.invitations.child(messageId).removeValue()
         removeGame(gameId, for: currentUserId)
     }
     
