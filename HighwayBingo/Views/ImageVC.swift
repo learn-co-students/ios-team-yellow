@@ -122,7 +122,14 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             var playerIDs = game.playerIds
             let currentUserID = player.id
             playerIDs.remove(object: currentUserID)
-            FirebaseManager.shared.sendVerification(to: playerIDs, from: player, game: game, imageURL: url, imageName: self.cellTitle)
+            FirebaseManager.shared.sendVerification(
+                to: playerIDs,
+                from: player,
+                game: game,
+                imageURL: url,
+                imageName: self.cellTitle,
+                imageIndex: self.index
+            )
         }
     }
     

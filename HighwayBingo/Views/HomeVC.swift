@@ -6,7 +6,26 @@ import Firebase
 import Then
 import UIKit
 
-class HomeVC: UIViewController {
+
+protocol TransitionToPlayerBoardDelegate: class {
+    var storyboard: UIStoryboard? { get }
+    var navigationController: UINavigationController? { get }
+    func pushBoardVC(board: Board, game: Game, player: Player)
+}
+
+
+extension TransitionToPlayerBoardDelegate {
+    func pushBoardVC(board: Board, game: Game, player: Player) {
+        let boardCollectionVC = self.storyboard?.instantiateViewController(withIdentifier: "boardCollectionVC") as! BoardCollectionVC
+        boardCollectionVC.board = board
+        boardCollectionVC.game = game
+        boardCollectionVC.player = player
+        self.navigationController?.pushViewController(boardCollectionVC, animated: true)
+    }
+}
+
+
+class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
     
     let newGameLabel = UILabel()
     let newGameButton = UIImageView()
@@ -25,7 +44,6 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "We need a name for our app!"
-        
         playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         // Fetch User and Game data before setting up View
         DataStore.shared.fetchCurrentUser() { self.setupView() }
@@ -44,7 +62,7 @@ class HomeVC: UIViewController {
         
         _ = newGameLabel.then {
             $0.text = "NEW GAME"
-            $0.font = UIFont(name: "BelleroseLight", size: 30)
+            $0.font = UIFont(name: "BelleroseLight", size: 24)
             // Gesture Recognizer
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(newGameTap)
@@ -60,7 +78,7 @@ class HomeVC: UIViewController {
             $0.addGestureRecognizer(newGameButtonTap)
             // Anchors
             $0.leadingAnchor.constraint(equalTo: newGameLabel.trailingAnchor, constant: 5).isActive = true
-            $0.bottomAnchor.constraint(equalTo: newGameLabel.bottomAnchor, constant: -5).isActive = true
+            $0.bottomAnchor.constraint(equalTo: newGameLabel.bottomAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 40).isActive = true
         }
@@ -68,7 +86,7 @@ class HomeVC: UIViewController {
         // Setup views for user's games
         _ = playingLabel.then {
             $0.text = "GAMES"
-            $0.font = UIFont(name: "BelleroseLight", size: 30)
+            $0.font = UIFont(name: "BelleroseLight", size: 24)
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: newGameLabel.bottomAnchor).isActive = true
@@ -107,7 +125,7 @@ class HomeVC: UIViewController {
         
         let gameTap = UITapGestureRecognizer(target: self, action: #selector(self.pushGameOverviewVC(_:)))
         
-        _ = PlayingGame(game: game).then {
+        _ = PlayingGame(game: game, delegate: self).then {
             playingStackView.addArrangedSubview($0)
             // Border
             $0.layer.borderColor = game.boardType.tint.cgColor

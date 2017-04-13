@@ -80,11 +80,7 @@ class Board {
             let filledList = Set(filled)
             let comboSet = Set(combo)
             let winner = comboSet.isSubset(of: filledList)
-            if winner {
-                print("WINNER")
-                return true
-                
-            }
+            if winner { return true }
         }
         return false
     }

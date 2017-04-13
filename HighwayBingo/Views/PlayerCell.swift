@@ -18,22 +18,22 @@ class PlayerCell: UITableViewCell {
     
     static let reuseID = "player"
     
+    weak var delegate: TransitionToPlayerBoardDelegate?
+    
     var game: Game?
     var player: Player? {
         didSet {
             guard let player = player else { return }
             nameLabel.text = player.kindName
-            guard let url = player.imageUrl else { return }
-            playerImageView.kfSetPlayerImageRound(with: url, diameter: 80)
-            if let lastPicURL = player.lastPic {
-                lastPicImageView.kfSetPlayerImageRound(with: lastPicURL, diameter: 80)
-            }
-            
+            if let url = player.lastPic { lastPicImageView.kfSetPlayerImageRound(with: url, diameter: 80) }
+            if let game = game { addPlayerPhoto(game: game, player: player) }
         }
     }
     
     var views: [UIView] {
-        return [nameLabel, playerImageView, lastPicImageView, numberLabel]
+
+        return [nameLabel, lastPicImageView]
+
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -41,7 +41,6 @@ class PlayerCell: UITableViewCell {
         
         views.forEach { contentView.addSubview($0) }
         views.forEach { $0.freeConstraints() }
-        
         
         _ = nameLabel.then {
             $0.textAlignment = .center
@@ -52,9 +51,22 @@ class PlayerCell: UITableViewCell {
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         }
         
-
+        _ = lastPicImageView.then {
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: screenSize.width * 0.64).isActive = true
+            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -10).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        }
+    }
+    
+    func addPlayerPhoto(game: Game, player: Player) {
         
-        _ = playerImageView.then {
+        let playerPhoto = PlayerPhoto(game: game, player: player)
+        
+        _ = playerPhoto.then {
+            $0.delegate = self.delegate
+            self.addSubview(playerPhoto)
+            playerPhoto.freeConstraints()
             // Anchors
             $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -10).isActive = true
             $0.centerXAnchor.constraint(equalTo: nameLabel.centerXAnchor).isActive = true
@@ -62,26 +74,16 @@ class PlayerCell: UITableViewCell {
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
         
-        _ = lastPicImageView.then {
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: screenSize.width * 0.64).isActive = true
-            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -10).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        }
-        
-        _ = numberLabel.then {
-//            $0.text = "3 Away"
-            $0.textAlignment = .center
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -22).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            
-        }
+//        _ = numberLabel.then {
+////            $0.text = "3 Away"
+//            $0.textAlignment = .center
+//            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -22).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        
+//        }
     }
-    
-        
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
