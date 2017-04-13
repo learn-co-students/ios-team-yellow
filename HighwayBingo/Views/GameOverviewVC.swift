@@ -4,7 +4,8 @@
 
 import UIKit
 
-class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSource, TransitionToPlayerBoardDelegate {
     
     let lastPhotoLabel = UILabel()
     let playerLabel = UILabel()
@@ -12,7 +13,6 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     let startGameButton = UIButton()
     let waitingForLabel = UILabel()
     
-
     var currentUserIsLeader = false
     
     var game: Game? {
@@ -69,8 +69,6 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
         }
         
-        
-        
         if currentUserIsLeader {
             _ = startGameButton.then {
                 if game?.gameProgress == .notStarted {
@@ -114,16 +112,6 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let game = game else { return }
         FirebaseManager.shared.start(game: game)
     }
-    
-    func pushBoardCollectionVC(board: Board, game: Game, player: Player) {
-        let boardCollectionVC = self.storyboard?.instantiateViewController(withIdentifier: "boardCollectionVC") as! BoardCollectionVC
-        boardCollectionVC.board = board
-        boardCollectionVC.game = game
-        boardCollectionVC.player = player
-        self.navigationController?.pushViewController(boardCollectionVC, animated: true)
-        
-    }
-    
 }
 
 
@@ -136,6 +124,7 @@ extension GameOverviewVC {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath) as! PlayerCell
         cell.selectionStyle = .none
+        cell.delegate = self
         cell.game = game!
         FirebaseManager.shared.getLastPic(game: game!, userid: players[indexPath.row].id) { (imageString) in
             let imageURL = URL(string: imageString)
@@ -143,24 +132,9 @@ extension GameOverviewVC {
             cell.player = self.players[indexPath.row]
         }
         return cell
-        
-        
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let game = game else { return }
-        let player = players[indexPath.row]
-        FirebaseManager.shared.getBoard(for: game, userid: player.id) { (board) in
-            if let board = board {
-                self.pushBoardCollectionVC(board: board, game: game, player: player)
-            }
-        }
-        
-        
-    }
-    
 }
