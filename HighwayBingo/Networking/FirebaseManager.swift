@@ -146,6 +146,21 @@ final class FirebaseManager {
         Child.games.child(gameId).child("participants").child(userId).removeValue()
     }
     
+    func leave(game: Game, handler: @escaping () -> ()) {
+        // TODO: - remove game if no more participants
+        let gameId = game.id
+        switch game.gameProgress {
+        case .notStarted:
+            currentUserNode.invitations.child(gameId).removeValue()
+            fallthrough
+        default:
+            Child.games.child(gameId).child("participants").child(currentUserId).removeValue()
+            currentUserNode.child("games").child(gameId).removeValue(completionBlock: { _ in
+                handler()
+            })
+        }
+    }
+    
     // Increment game status and remove non-participating users
     func start(game: Game) {
         let images = getBoardImages(game: game)

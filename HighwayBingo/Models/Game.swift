@@ -16,11 +16,7 @@ struct Game {
     var players = [Player]()
     var participants: Participating
     let boardType: BoardType
-    var boards = [String:Board]()
-    
-    //PlayerID:NumberFromWin
-    //var places = [String:Int]()
-    
+    var boards = [String : Board]()
     
     var playerIds: [String] {
         return participants.map { $0.key }
@@ -28,6 +24,17 @@ struct Game {
     
     enum GameProgress: String {
         case notStarted, inProgress, ended
+        
+        var status: String {
+            switch self {
+            case .notStarted:
+                return "Status: Not Started"
+            case .inProgress:
+                return "Status: In Progress"
+            case .ended:
+                return "Status: Game Over"
+            }
+        }
     }
     
     init(id: String, json: JSON, userId: String) {

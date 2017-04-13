@@ -6,6 +6,7 @@ import UIKit
 
 class PlayingGame: UIView {
     
+    let gameStatusLabel = UILabel()
     let gameTitleLabel = UILabel()
     let playersStackView = UIStackView()
     
@@ -14,7 +15,7 @@ class PlayingGame: UIView {
     var game: Game
     
     var views: [UIView] {
-        return [gameTitleLabel, playersStackView]
+        return [gameStatusLabel, gameTitleLabel, playersStackView]
     }
     
     init(game: Game, delegate: TransitionToPlayerBoardDelegate) {
@@ -25,14 +26,20 @@ class PlayingGame: UIView {
         views.forEach(self.addSubview)
         views.forEach { $0.freeConstraints() }
         
+        _ = gameStatusLabel.then {
+            $0.text = game.gameProgress.status
+            $0.font = UIFont(name: "BelleroseLight", size: 15)
+            // Anchors
+            $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
+        }
+        
         _ = gameTitleLabel.then {
-            self.addSubview($0)
             $0.text = "\(game.boardType) Bingo"
             $0.font = UIFont(name: "Fabian", size: 25)
             // Anchors
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
-            $0.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
-            $0.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
         
