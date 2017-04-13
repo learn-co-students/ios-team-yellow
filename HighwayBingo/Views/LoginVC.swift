@@ -18,12 +18,8 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var loginMaskImageView: UIImageView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let loginManager = FBSDKLoginManager()
-//        loginManager.logOut()
         
         _ = loginButton.then {
             $0.delegate = self
@@ -31,13 +27,8 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             // Anchors
             $0.freeConstraints()
             $0.centerXAnchor.constraint(equalTo: loginMaskImageView.centerXAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: loginMaskImageView.centerYAnchor, constant: +30 ).isActive = true
+            $0.centerYAnchor.constraint(equalTo: loginMaskImageView.centerYAnchor, constant: 30 ).isActive = true
         }
-    }
-    
-    func navigateToHomeVC() {
-        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "homeVC") as! HomeVC
-        self.navigationController?.pushViewController(homeVC, animated: true)
     }
 }
 
@@ -64,12 +55,11 @@ extension FacebookLoginManager {
             if let validationError = error {
                 print("LoginVC -> error validating login: %@", validationError)
             } else if let user = user, let userId = AccessToken.current?.userId {
+                UserDefaults.standard.set(userId, forKey: "userId")
+                FirebaseManager.shared.createOrUpdate(user)
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .closeLoginVC, object: nil)
                 }
-                UserDefaults.standard.set(userId, forKey: "userId")
-                FirebaseManager.shared.createOrUpdate(user)
-                // self.navigateToHomeVC()
             } else {
                 print("LoginVC -> error validating login")
             }

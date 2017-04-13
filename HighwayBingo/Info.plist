@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>fabian.ttf</string>
-		<string>bellerose.ttf</string>
-	</array>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -38,6 +31,8 @@
 	<string>1866342433638560</string>
 	<key>FacebookDisplayName</key>
 	<string>HighwayBingo</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth2</string>
@@ -46,6 +41,11 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>NEED CAMERA</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>fabian.ttf</string>
+		<string>bellerose.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -2,13 +2,14 @@
 /// PlayingGame.swift
 ///
 
-import Kingfisher
 import UIKit
 
 class PlayingGame: UIView {
-   
+    
     let gameTitleLabel = UILabel()
     let playersStackView = UIStackView()
+    
+    weak var delegate: TransitionToPlayerBoardDelegate?
     
     var game: Game
     
@@ -16,8 +17,9 @@ class PlayingGame: UIView {
         return [gameTitleLabel, playersStackView]
     }
     
-    init(game: Game) {
+    init(game: Game, delegate: TransitionToPlayerBoardDelegate) {
         self.game = game
+        self.delegate = delegate
         super.init(frame: .zero)
         
         views.forEach(self.addSubview)
@@ -51,7 +53,7 @@ class PlayingGame: UIView {
             let nameLabel = UILabel()
             let playerImageView = UIImageView()
             
-            [playerCell, nameLabel, playerImageView].forEach { $0.freeConstraints() }
+            [playerCell, nameLabel].forEach { $0.freeConstraints() }
             
             _ = playerCell.then {
                 $0.addSubview(nameLabel)
@@ -74,8 +76,12 @@ class PlayingGame: UIView {
             }
             
             if let url = player.imageUrl {
-                _ = playerImageView.then {
-                    $0.kfSetPlayerImageRound(with: url, diameter: 50)
+                
+                let playerPhoto = PlayerPhoto(game: game, player: player)
+                _ = playerPhoto.then {
+                    $0.delegate = self.delegate
+                    self.addSubview(playerPhoto)
+                    playerPhoto.freeConstraints()
                     // Anchors
                     $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: 5).isActive = true
                     $0.centerXAnchor.constraint(equalTo: playerCell.centerXAnchor).isActive = true
