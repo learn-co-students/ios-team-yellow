@@ -62,7 +62,7 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
         
         _ = newGameLabel.then {
             $0.text = "NEW GAME"
-            $0.font = UIFont(name: "BelleroseLight", size: 30)
+            $0.font = UIFont(name: "BelleroseLight", size: 24)
             // Gesture Recognizer
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(newGameTap)
@@ -78,7 +78,7 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
             $0.addGestureRecognizer(newGameButtonTap)
             // Anchors
             $0.leadingAnchor.constraint(equalTo: newGameLabel.trailingAnchor, constant: 5).isActive = true
-            $0.bottomAnchor.constraint(equalTo: newGameLabel.bottomAnchor, constant: -5).isActive = true
+            $0.bottomAnchor.constraint(equalTo: newGameLabel.bottomAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 40).isActive = true
         }
@@ -86,7 +86,7 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
         // Setup views for user's games
         _ = playingLabel.then {
             $0.text = "GAMES"
-            $0.font = UIFont(name: "BelleroseLight", size: 30)
+            $0.font = UIFont(name: "BelleroseLight", size: 24)
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: newGameLabel.bottomAnchor).isActive = true
