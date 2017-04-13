@@ -22,9 +22,9 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     let leftArrow = UIImageView()
     let rightArrow = UIImageView()
     let search = UITextField()
+    let selectBoardLabel = UILabel()
     
     let boardTypes = BoardType.all
-    var boardTypeSelected = false
     var currentBoardType = BoardType.Highway
     var facebookFriends = [FacebookUser]()
     let firebaseManager = FirebaseManager.shared
@@ -36,7 +36,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     }
     
     var views: [UIView] {
-        return [boardTypeImageView, boardTypeTintView, boardTypeLabel, leftArrow, rightArrow, friendsTableView, friendsToInviteStackView, inviteButton, inviteLabel, search]
+        return [boardTypeImageView, boardTypeTintView, boardTypeLabel, leftArrow, rightArrow, friendsTableView, selectBoardLabel, friendsToInviteStackView, inviteButton, inviteLabel, search]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,15 +58,70 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         views.forEach(view.addSubview)
         views.forEach { $0.freeConstraints() }
         
+        let dismissKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+        view.addGestureRecognizer(dismissKeyboardTap)
+        
         let navigationBarHeight: CGFloat = navigationController!.navigationBar.frame.height
+        
+        _ = inviteLabel.then {
+            $0.font = UIFont(name: "BelleroseLight", size: 24)
+            $0.text = "Invite Friends"
+            // Anchors
+            $0.leadingAnchor.constraint(equalTo: margin.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight + 30).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        }
+        
+        _ = friendsToInviteStackView.then {
+            $0.axis = .horizontal
+            $0.distribution = .equalSpacing
+            $0.alignment = .center
+            $0.spacing = 10
+            // Anchors
+            $0.leadingAnchor.constraint(equalTo: inviteLabel.trailingAnchor, constant: 15).isActive = true
+            $0.topAnchor.constraint(equalTo: inviteLabel.topAnchor, constant: 5).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        }
+        
+        _ = search.then {
+            $0.placeholder = "Search"
+            $0.underline()
+            $0.font = UIFont(name: "BelleroseLight", size: 20)
+            // Sends alert when changed
+            $0.addTarget(self, action: #selector(textFieldChanged(_:)), for: .editingChanged)
+            // Anchors
+            $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 25).isActive = true
+            $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        }
+        
+        _ = friendsTableView.then {
+            $0.register(FacebookFriendCell.self, forCellReuseIdentifier: FacebookFriendCell.reuseID)
+            $0.separatorColor = .white
+            // Anchors
+            $0.topAnchor.constraint(equalTo: search.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: margin.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: search.widthAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.topAnchor, constant: screen.height * 0.375).isActive = true
+        }
+        
+        _ = selectBoardLabel.then {
+            $0.font = UIFont(name: "BelleroseLight", size: 24)
+            $0.text = "Select Game Type"
+            // Anchors
+            $0.leadingAnchor.constraint(equalTo: margin.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: friendsTableView.bottomAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        }
         
         _ = boardTypeImageView.then {
             $0.loadGif(name: currentBoardType.rawValue.lowercased())
             // Anchors
-            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight).isActive = true
+            $0.topAnchor.constraint(equalTo: selectBoardLabel.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.45).isActive = true
+            $0.bottomAnchor.constraint(equalTo: margin.bottomAnchor, constant: -110).isActive = true
         }
         
         _ = boardTypeTintView.then {
@@ -76,16 +131,11 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.trailingAnchor.constraint(equalTo: boardTypeImageView.trailingAnchor).isActive = true
         }
         
-        let boardTypeTap = UITapGestureRecognizer(target: self, action: #selector(self.boardTypeTapped(_:)))
-        
         _ = boardTypeLabel.then {
             $0.text = currentBoardType.rawValue.uppercased()
             $0.textAlignment = .center
             $0.textColor = .white
             $0.font = UIFont(name: "Fabian", size: 60)
-            // Gesture Recognizer
-            $0.isUserInteractionEnabled = true
-            $0.addGestureRecognizer(boardTypeTap)
             // Anchors
             $0.centerXAnchor.constraint(equalTo: boardTypeImageView.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: boardTypeImageView.centerYAnchor).isActive = true
@@ -120,51 +170,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
         }
         
-        _ = inviteLabel.then {
-            $0.font = UIFont(name: "BelleroseLight", size: 30)
-            $0.text = "Invite Friends"
-            // Anchors
-            $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: margin.topAnchor, constant: screen.height * 0.475).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        }
-        
-        _ = friendsTableView.then {
-            $0.register(FacebookFriendCell.self, forCellReuseIdentifier: FacebookFriendCell.reuseID)
-            $0.separatorColor = .white
-            // Anchors
-            $0.topAnchor.constraint(equalTo: search.bottomAnchor, constant: 20).isActive = true
-            $0.leadingAnchor.constraint(equalTo: margin.leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: search.widthAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: margin.bottomAnchor, constant: -110).isActive = true
-        }
-        
-        _ = friendsToInviteStackView.then {
-            $0.axis = .horizontal
-            $0.distribution = .equalSpacing
-            $0.alignment = .center
-            $0.spacing = 10
-            // Anchors
-            $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        }
-        
-        _ = search.then {
-            $0.placeholder = "Search"
-            $0.underline()
-            $0.font = UIFont(name: "BelleroseLight", size: 20)
-            // Sends alert when changed
-            $0.addTarget(self, action: #selector(textFieldChanged(_:)), for: .editingChanged)
-            // Anchors
-            $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: friendsToInviteStackView.bottomAnchor, constant: 10).isActive = true
-            $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        }
-        
         _ = inviteButton.then {
-            $0.isUserInteractionEnabled = false
             $0.setTitle("Send", for: .normal)
             $0.setTitleColor(.black, for: .normal)
             $0.setTitle("Sent", for: .disabled)
@@ -210,21 +216,12 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         friendsToInviteStackView.addArrangedSubview(friendView)
     }
     
-    func boardTypeTapped (_: UILabel) {
-        boardTypeSelected = !boardTypeSelected
-        if boardTypeSelected {
-            inviteButton.isUserInteractionEnabled = true
-            boardTypeTintView.backgroundColor = currentBoardType.tint
-            leftArrow.isHidden = true
-            rightArrow.isHidden = true
-            boardTypeLabel.textColor = .black
-        } else {
-            inviteButton.isUserInteractionEnabled = false
-            boardTypeTintView.backgroundColor = .clear
-            leftArrow.isHidden = false
-            rightArrow.isHidden = false
-            boardTypeLabel.textColor = .white
-        }
+    func changeBoardImageViewStyles() {
+        inviteButton.isUserInteractionEnabled = true
+        boardTypeTintView.backgroundColor = currentBoardType.tint
+        leftArrow.isHidden = true
+        rightArrow.isHidden = true
+        boardTypeLabel.textColor = .black
     }
     
     func cycleBoardTypeLeft(_: UIImageView) {
@@ -247,6 +244,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
 
     func createGameAndSendInvitations(_ sender: UIButton!) {
         disableButton(sender)
+        changeBoardImageViewStyles()
         let gameId = FirebaseManager.shared.createGame(currentBoardType, participants: friendsToInvite)
         let from = DataStore.shared.currentUser.kindName
         FirebaseManager.shared.sendInvitations(to: friendsToInvite, from: from, for: gameId, boardType: currentBoardType)
@@ -255,6 +253,10 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     func disableButton(_ sender: UIButton) {
         sender.isEnabled = false
         sender.backgroundColor = UIColor(red:0.76, green:0.14, blue:1.00, alpha:1.0)
+    }
+    
+    func dismissKeyboard(_:UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
     // Called from FacebookFriendCell.swift
