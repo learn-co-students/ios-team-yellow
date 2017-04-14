@@ -8,8 +8,9 @@ import UIKit
 
 class PlayerPhoto: UIView {
     
-    let imageView = UIImageView()
+    let playerImageView = UIImageView()
     let invitationImageView = UIImageView()
+    let rankLabel = UILabel()
     
     weak var delegate: TransitionToPlayerBoardDelegate?
     
@@ -20,19 +21,25 @@ class PlayerPhoto: UIView {
         return game.participants[player.id] ?? false
     }
     
+    var rank: String? {
+        return game.playerPositions.filter({ $0.playerId == player.id }).first?.rankText
+    }
+    
+    var views: [UIView] {
+        return [playerImageView, invitationImageView, rankLabel]
+    }
+    
     init(game: Game, player: Player) {
         self.game = game
         self.player = player
         super.init(frame: .zero)
         
-        [imageView, invitationImageView].forEach { view in
-            self.addSubview(view)
-            view.freeConstraints()
-        }
+        views.forEach(addSubview)
+        views.forEach { $0.freeConstraints() }
         
         let playerTap = UITapGestureRecognizer(target: self, action: #selector(self.playerTapped(_:)))
         
-        _ = imageView.then {
+        _ = playerImageView.then {
             // Gesture Recognizer
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(playerTap)
@@ -43,8 +50,16 @@ class PlayerPhoto: UIView {
             $0.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         }
         
+        _ = rankLabel.then {
+            $0.text = rank
+            $0.font = UIFont(name: "Fabian", size: 16)
+            // Anchors
+            $0.topAnchor.constraint(equalTo: playerImageView.topAnchor, constant: -6).isActive = true
+            $0.leadingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: -6).isActive = true
+        }
+        
         if let url = player.imageUrl {
-            imageView.kfSetPlayerImageRound(with: url, diameter: 50)
+            playerImageView.kfSetPlayerImageRound(with: url, diameter: 50)
         }
         
         if !acceptedInvitation {
@@ -52,8 +67,8 @@ class PlayerPhoto: UIView {
             _ = invitationImageView.then {
                 $0.image = #imageLiteral(resourceName: "invitation")
                 // Anchors
-                $0.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 6).isActive = true
-                $0.topAnchor.constraint(equalTo: imageView.topAnchor, constant: -6).isActive = true
+                $0.trailingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: 6).isActive = true
+                $0.topAnchor.constraint(equalTo: playerImageView.topAnchor, constant: -6).isActive = true
                 $0.widthAnchor.constraint(equalToConstant: 20).isActive = true
                 $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
             }

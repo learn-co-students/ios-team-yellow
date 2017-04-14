@@ -13,9 +13,7 @@ class Player {
     let messages: [Message]
     let imageUrl: URL?
     var lastPic: URL?
-
-    var place = [GameID:Int]()
-        
+ 
     init(id: String, from json: JSON) {
         self.gameIds = json["games"].dictionaryValue.map { $0.key }
         self.id = id

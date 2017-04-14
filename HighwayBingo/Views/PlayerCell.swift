@@ -23,17 +23,16 @@ class PlayerCell: UITableViewCell {
     var game: Game?
     var player: Player? {
         didSet {
-            guard let player = player else { return }
+            guard let player = player, let game = game else { return }
             nameLabel.text = player.kindName
             if let url = player.lastPic { lastPicImageView.kfSetPlayerImageRound(with: url, diameter: 80) }
-            if let game = game { addPlayerPhoto(game: game, player: player) }
+            addPlayerPhoto(game: game, player: player)
+            
         }
     }
     
     var views: [UIView] {
-
         return [nameLabel, lastPicImageView]
-
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

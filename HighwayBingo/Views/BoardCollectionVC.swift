@@ -1,10 +1,6 @@
-//
-//  BoardCollectionVC.swift
-//  HighwayBingo
-//
-//  Created by William Leahy on 4/4/17.
-//  Copyright © 2017 Oliver . All rights reserved.
-//
+///
+///  BoardCollectionVC.swift
+///
 
 import UIKit
 import GameKit
@@ -92,30 +88,19 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         cell.layer.borderWidth = 2
                         cell.isFilled = true
                         board.filled.append(cell.id)
-                        let numberFromWin = board.howManyAwayFromWin()
-                        player.numberFromWin = numberFromWin
-                        game.updatePlace(players: game.players)
-                        game.getPlaces(players: game.players, places: game.places)
-                        print(game.places)
-//                        print(player.numberFromWin)
-//                        print(board.filled)
+                        print(board.filled)
                         FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
                             DispatchQueue.main.async {
                                 cell.cellImageView.image = image
-                                //board.filled.append(cell.id)
                             }
-                            
                         })
                     }
-                    
                 } else {
                     //Set Up Cell if Image is a Stock Image
                     let name = board.images[indexPath.item]
                     if let name = name {
                         cell.title = name
                     }
-                    let numberFromWin = board.howManyAwayFromWin()
-                    player.numberFromWin = numberFromWin
                     cell.setUpCell()
                     cell.cellImageView.image = UIImage(named: imageName)
                 }
@@ -263,8 +248,11 @@ extension BoardCollectionVC {
             cell.layer.borderWidth = 2
             cell.cellImageView.image = image
             board?.filled.append(cell.id)
+            //
+            // Update how close player is to winning in Firebase
+            guard let number = board?.howManyAwayFromWin(), let gameId = game?.id else { return }
+            FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
         }
-        
     }
 }
 
