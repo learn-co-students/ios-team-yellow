@@ -13,7 +13,8 @@ class Player {
     let messages: [Message]
     let imageUrl: URL?
     var lastPic: URL?
-
+    
+    var numberFromWin = 4
     var place = [GameID:Int]()
         
     init(id: String, from json: JSON) {
