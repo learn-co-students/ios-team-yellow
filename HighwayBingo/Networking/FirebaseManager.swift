@@ -140,6 +140,10 @@ final class FirebaseManager {
         }
     }
     
+    func numberAwayFromWin(_ number: Int, gameId: GameID) {
+        Child.games.child(gameId).child("movesAway").updateChildValues([currentUserId : number])
+    }
+    
     func removeGame(_ gameId: GameID, for userId: String) {
         Child.users.child(userId).invitations.child(gameId).removeValue()
         Child.users.child(userId).child("games").child(gameId).removeValue()
@@ -167,7 +171,10 @@ final class FirebaseManager {
         let id = game.id
         game.participants.forEach { (userId, accepted) in
             if accepted {
+                // Set board images
                 Child.boards.child(id).child(userId).setValue(images)
+                // Set moves away
+                Child.games.child(id).child("movesAway").updateChildValues([userId : 4])
             } else {
                 removeGame(id, for: userId)
             }

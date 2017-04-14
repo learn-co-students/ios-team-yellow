@@ -21,7 +21,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         didSet {
             if let game = game {
                 title = "\(game.boardType) Bingo"
-                players = game.players
+                players = game.gameProgress == .notStarted ? game.players : game.playersOrderedByRank
                 currentUserIsLeader = game.currentUserIsLeader
             }
         }
