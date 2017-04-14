@@ -44,16 +44,17 @@ class PlayerCell: UITableViewCell {
         
         _ = nameLabel.then {
             $0.textAlignment = .center
+            $0.font = UIFont(name: "BelleroseLight", size: 20)
             // Anchors
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: screenSize.width * 0.15).isActive = true
             $0.widthAnchor.constraint(equalToConstant: screenSize.width * 0.25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         }
         
         _ = lastPicImageView.then {
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: screenSize.width * 0.64).isActive = true
-            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -10).isActive = true
+            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
@@ -68,21 +69,11 @@ class PlayerCell: UITableViewCell {
             self.addSubview(playerPhoto)
             playerPhoto.freeConstraints()
             // Anchors
-            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -10).isActive = true
+            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: nameLabel.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
-        
-//        _ = numberLabel.then {
-////            $0.text = "3 Away"
-//            $0.textAlignment = .center
-//            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -22).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        
-//        }
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -13,22 +13,9 @@ class Player {
     let messages: [Message]
     let imageUrl: URL?
     var lastPic: URL?
-    //
-    var numberFromWin = 4
-    
-    //GameID:NumberFromWin
-    var place = [GameID:Int]()
-    
-    init() {
-        self.gameIds = []
-        self.id = "n/a"
-        self.kindName = "n/a"
-        self.name = "n/a"
-        self.messages = []
-        self.imageUrl = nil
-    }
 
-    
+    var place = [GameID:Int]()
+        
     init(id: String, from json: JSON) {
         self.gameIds = json["games"].dictionaryValue.map { $0.key }
         self.id = id
@@ -38,6 +25,15 @@ class Player {
         let invitations: [Message] = json["messages"]["invitations"].dictionaryValue.map(Invitation.init)
         let verifications: [Message] = json["messages"]["verifications"].dictionaryValue.flatMap(Verification.init)
         self.messages = invitations + verifications
+    }
+  
+    init() {
+        self.gameIds = []
+        self.id = "n/a"
+        self.kindName = "n/a"
+        self.name = "n/a"
+        self.messages = []
+        self.imageUrl = nil
     }
 }
 
