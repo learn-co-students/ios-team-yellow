@@ -279,6 +279,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     //
     func invite(_ friend: FacebookUser) {
         friendsToInvite.append(friend)
+        search.text = ""
         reloadFriendsTableView()
     }
     
