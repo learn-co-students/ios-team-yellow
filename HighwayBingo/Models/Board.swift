@@ -31,7 +31,7 @@ enum BoardType: String {
     var images: [String] {
         switch self {
         case .Highway:
-            return ["building", "airport", "barn", "bicycle", "boat", "bus", "car", "gas station", "rv", "motel", "motorcycle", "police car", "power line", "restaurant", "restroom", "river", "silo", "subway", "telephone", "train", "truck", "animal", "stop sign", "billboard", "speed limit", "bridge"]
+            return ["building", "airport", "barn", "bicycle", "boat", "bus", "car", "gas station", "rv", "motel", "motorcycle", "police car", "power line", "restaurant", "restroom", "river", "water tower", "subway", "telephone", "train", "truck", "animal", "stop sign", "billboard", "speed limit", "bridge"]
         case .City:
             return ["ambulance", "bank", "bar", "bus", "car", "coffee", "crosswalk", "garbage", "hotel", "hydrant", "laundromat", "mailbox", "manhole", "map", "museum", "newspaper", "park", "parking meter", "police car", "statue", "stoplight", "taxi", "tourist", "vendor", "streetlight"]
         case .Tropical:
