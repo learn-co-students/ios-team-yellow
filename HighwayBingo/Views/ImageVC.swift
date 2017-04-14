@@ -139,6 +139,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
 
 
     @IBAction func retakeTapped(_ sender: Any) {
+        verificationButton.isHidden = true
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self

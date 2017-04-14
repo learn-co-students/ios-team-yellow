@@ -8,6 +8,7 @@ import UIKit
 
 protocol InviteFriendDelegate: class {
     func invite(_ friend: FacebookUser)
+    func limitFriends()
 }
 
 class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, InviteFriendDelegate {
@@ -23,6 +24,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     let rightArrow = UIImageView()
     let search = UITextField()
     let selectBoardLabel = UILabel()
+    let maxFriendsLabel = UILabel()
     
     let boardTypes = BoardType.all
     var currentBoardType = BoardType.Highway
@@ -36,7 +38,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     }
     
     var views: [UIView] {
-        return [boardTypeImageView, boardTypeTintView, boardTypeLabel, leftArrow, rightArrow, friendsTableView, selectBoardLabel, friendsToInviteStackView, inviteButton, inviteLabel, search]
+        return [boardTypeImageView, boardTypeTintView, boardTypeLabel, leftArrow, rightArrow, friendsTableView, selectBoardLabel, friendsToInviteStackView, inviteButton, inviteLabel, search, maxFriendsLabel]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +53,8 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        maxFriendsLabel.isHidden = true
         
         friendsTableView.delegate = self
         friendsTableView.dataSource = self
@@ -94,6 +98,17 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 25).isActive = true
             $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        }
+        
+        _ = maxFriendsLabel.then {
+            $0.text = "Maximum Number of Invitees is 3"
+            $0.font = UIFont(name: "BelleroseLight", size: 20)
+            $0.textColor = UIColor.red
+            $0.textAlignment = .center
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 50).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
         
         _ = friendsTableView.then {
@@ -259,16 +274,26 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         view.endEditing(true)
     }
     
+    
     // Called from FacebookFriendCell.swift
     //
     func invite(_ friend: FacebookUser) {
         friendsToInvite.append(friend)
+        search.text = ""
         reloadFriendsTableView()
     }
     
     func textFieldChanged(_: UITextField) {
         reloadFriendsTableView()
     }
+    
+    func limitFriends() {
+        if friendsToInvite.count == 3 {
+            search.removeFromSuperview()
+            maxFriendsLabel.isHidden = false
+        }
+    }
+
 }
 
 

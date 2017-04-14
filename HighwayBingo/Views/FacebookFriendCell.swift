@@ -71,6 +71,7 @@ class FacebookFriendCell: UITableViewCell {
     func inviteFriend(_ sender: UIButton!) {
         guard let friend = friend else { return }
         delegate?.invite(friend)
+        delegate?.limitFriends()
     }
     
     required init?(coder aDecoder: NSCoder) {

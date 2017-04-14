@@ -15,6 +15,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     let waitingForLabel = UILabel()
     
     var currentUserIsLeader = false
+    var allPlayersAccepted = true
     
     var game: Game? {
         didSet {
@@ -25,6 +26,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
+    
     
     var players = [Player]()
     
@@ -83,7 +85,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             $0.topAnchor.constraint(equalTo: playerLabel.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
         }
         
         if game?.gameProgress == .notStarted {
@@ -105,7 +107,17 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             // Border
             $0.purpleBorder()
             // Start game
-            $0.addTarget(self, action: #selector(self.startGame(_:)), for: UIControlEvents.touchUpInside)
+            for player in players {
+                if game?.participants[player.id] == false {
+                    allPlayersAccepted = false
+                }
+            }
+            if allPlayersAccepted == false {
+                $0.addTarget(self, action: #selector(self.displayAlert(_:)), for: .touchUpInside)
+            } else {
+                $0.addTarget(self, action: #selector(self.startGame(_:)), for: UIControlEvents.touchUpInside)
+            }
+            
             // Anchors
             $0.trailingAnchor.constraint(equalTo: margin.trailingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
@@ -126,7 +138,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
             $0.widthAnchor.constraint(equalToConstant: screen.width * 0.75).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25).isActive = true
         }
     }
     
@@ -149,6 +161,17 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         sender.removeFromSuperview()
         guard let game = game else { return }
         FirebaseManager.shared.start(game: game)
+    }
+    
+    func displayAlert(_ sender: UIButton!) {
+        let alert = UIAlertController(title: "Start Game?", message: "Not everyone has accepted the invite", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+            self.startGame(sender)
+        }
+        let noAction = UIAlertAction(title: "No", style: .default, handler: nil)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        self.present(alert, animated: true)
     }
 }
 
