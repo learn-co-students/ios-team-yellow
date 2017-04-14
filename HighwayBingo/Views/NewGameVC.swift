@@ -196,7 +196,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             // Create Game and send Invitations when touched
             $0.addTarget(self, action: #selector(self.createGameAndSendInvitations(_:)), for: UIControlEvents.touchUpInside)
             // Anchors
-            $0.rightAnchor.constraint(equalTo: margin.rightAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: margin.trailingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
             $0.topAnchor.constraint(equalTo: margin.bottomAnchor, constant: -80).isActive = true

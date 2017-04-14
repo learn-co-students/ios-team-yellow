@@ -53,6 +53,10 @@ extension UIViewController {
     var screen: (height: CGFloat, width: CGFloat) {
         return (view.frame.size.height, view.frame.size.width)
     }
+    
+    var navBarHeight: CGFloat {
+        return navigationController!.navigationBar.frame.height
+    }
 }
 
 extension UIView {
