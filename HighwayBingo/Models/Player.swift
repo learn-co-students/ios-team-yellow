@@ -4,7 +4,7 @@
 
 import SwiftyJSON
 
-struct Player {
+class Player {
     
     var gameIds: [GameID]
     let id: String
@@ -14,10 +14,20 @@ struct Player {
     let imageUrl: URL?
     var lastPic: URL?
     //
-    //var numberFromWin = 4
+    var numberFromWin = 4
     
     //GameID:NumberFromWin
-    //var place = [GameID:Int]()
+    var place = [GameID:Int]()
+    
+    init() {
+        self.gameIds = []
+        self.id = "n/a"
+        self.kindName = "n/a"
+        self.name = "n/a"
+        self.messages = []
+        self.imageUrl = nil
+    }
+
     
     init(id: String, from json: JSON) {
         self.gameIds = json["games"].dictionaryValue.map { $0.key }
@@ -37,12 +47,4 @@ extension Player: CustomStringConvertible {
         return "Name: \(kindName), ID: \(id)\n\tGames count: \(gameIds.count)\n\tMessages count: \(messages.count)"
     }
     
-    init() {
-        self.gameIds = []
-        self.id = "n/a"
-        self.kindName = "n/a"
-        self.name = "n/a"
-        self.messages = []
-        self.imageUrl = nil
-    }
 }
