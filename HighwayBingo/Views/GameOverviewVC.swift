@@ -83,7 +83,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             $0.topAnchor.constraint(equalTo: playerLabel.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
         }
         
         if game?.gameProgress == .notStarted {
@@ -126,7 +126,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
             $0.widthAnchor.constraint(equalToConstant: screen.width * 0.75).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25).isActive = true
         }
     }
     

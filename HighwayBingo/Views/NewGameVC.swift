@@ -101,7 +101,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         }
         
         _ = maxFriendsLabel.then {
-            $0.text = "Maximum Number of Invitees is 4"
+            $0.text = "Maximum Number of Invitees is 3"
             $0.font = UIFont(name: "BelleroseLight", size: 20)
             $0.textColor = UIColor.red
             $0.textAlignment = .center
@@ -288,7 +288,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     }
     
     func limitFriends() {
-        if friendsToInvite.count == 4 {
+        if friendsToInvite.count == 3 {
             search.removeFromSuperview()
             maxFriendsLabel.isHidden = false
         }
