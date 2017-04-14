@@ -138,15 +138,19 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         //If it is your board...
                         if boardID == currentUserID {
                             self.selectedCell = cell
-                            let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
-                            imageVC.cellTitle = cell.title
-                            imageVC.game = self.game
-                            imageVC.player = self.player
-                            imageVC.index = String(indexPath.item)
-                            imageVC.delegate = self
-                            print(cell.title)
-                            self.navigationController?.pushViewController(imageVC, animated: false)
-                            print("Cell \(cell.id) was tapped")
+                            if cell.isFilled == true {
+                                self.updatePic(image: cell.cellImageView.image!)
+                            } else {
+                                let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
+                                imageVC.cellTitle = cell.title
+                                imageVC.game = self.game
+                                imageVC.player = self.player
+                                imageVC.index = String(indexPath.item)
+                                imageVC.delegate = self
+                                print(cell.title)
+                                self.navigationController?.pushViewController(imageVC, animated: false)
+                                print("Cell \(cell.id) was tapped")
+                            }
                         //If it is not your board...
                         } else {
                             self.updatePic(image: cell.cellImageView.image!)
