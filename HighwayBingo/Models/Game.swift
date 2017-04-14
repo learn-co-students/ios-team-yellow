@@ -17,6 +17,7 @@ struct Game {
     var participants: Participating
     let boardType: BoardType
     var boards = [String : Board]()
+    var places = [String:Int]()
     
     var playerIds: [String] {
         return participants.map { $0.key }
@@ -47,6 +48,27 @@ struct Game {
         }
         self.participants[leaderId] = true
         self.boardType = BoardType(rawValue: json["boardType"].stringValue)!
+    }
+    
+    //Game Rank Functions
+    
+    mutating func updatePlace(players: [Player]) {
+        for player in players {
+            places.updateValue(player.numberFromWin, forKey: player.id)
+        }
+    }
+    
+    func getPlaces(players: [Player], places: [String:Int]) {
+        let newPlaces = places.sorted {$0.1 < $1.1}
+        print(newPlaces)
+        for (index, place) in newPlaces.enumerated() {
+            for player in players {
+                if player.id == place.key {
+                    player.place[id] = index + 1
+                    print("\(player.id): \(player.place)")
+                }
+            }
+        }
     }
 }
 

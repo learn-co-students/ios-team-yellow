@@ -113,7 +113,6 @@ class Board {
         if let firstNumber = numberAwayArray.first {
             numberAway = firstNumber
         }
-        print("NUMBER FROM WIN: \(numberAway)")
         return numberAway
     }
     

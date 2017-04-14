@@ -44,8 +44,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         super.viewDidLoad()
         
         
-        //view.addSubview(backgroundImage)
-       // collectionView.backgroundView = backgroundImage
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         winnerView.layer.cornerRadius = 5
@@ -77,7 +75,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
         let index = String(indexPath.item)
-        if var board = board, let game = self.game, let player = player {
+        if let board = board, var game = self.game, var player = player {
             let boardName = board.boardType.rawValue.lowercased()
             setUpBackgroundImage(image: boardName)
             //Retrieve Image From Firebase
@@ -93,10 +91,18 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         cell.layer.borderColor = UIColor.green.cgColor
                         cell.layer.borderWidth = 2
                         cell.isFilled = true
+                        board.filled.append(cell.id)
+                        let numberFromWin = board.howManyAwayFromWin()
+                        player.numberFromWin = numberFromWin
+                        game.updatePlace(players: game.players)
+                        game.getPlaces(players: game.players, places: game.places)
+                        print(game.places)
+//                        print(player.numberFromWin)
+//                        print(board.filled)
                         FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
                             DispatchQueue.main.async {
                                 cell.cellImageView.image = image
-                                board.filled.append(cell.id)
+                                //board.filled.append(cell.id)
                             }
                             
                         })
@@ -108,7 +114,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                     if let name = name {
                         cell.title = name
                     }
-                    
+                    let numberFromWin = board.howManyAwayFromWin()
+                    player.numberFromWin = numberFromWin
                     cell.setUpCell()
                     cell.cellImageView.image = UIImage(named: imageName)
                 }
