@@ -25,6 +25,7 @@ private typealias DisplayingVCs = AppController
 
 
 enum StoryboardID: String  {
+    case instructionsVC = "instructionsVC"
     case loginVC = "loginVC"
     case homeVC = "navVC"
 }
@@ -33,16 +34,18 @@ enum StoryboardID: String  {
 extension NotificationObservers {
     
     func addNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeLoginVC, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeHomeVC, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .showHomeVC, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .showInstructionsVC, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .showLoginVC, object: nil)
     }
 }
 
 
 extension Notification.Name {
     
-    static let closeLoginVC = Notification.Name("close-login-view-controller")
-    static let closeHomeVC = Notification.Name("close-game-view-controller")
+    static let showHomeVC = Notification.Name("show-home-view-controller")
+    static let showInstructionsVC = Notification.Name("show-instructions-view-controller")
+    static let showLoginVC = Notification.Name("show-login-view-controller")
 }
 
 
@@ -80,10 +83,12 @@ extension DisplayingVCs {
     
     func switchViewController(with notification: Notification) {
         switch notification.name {
-        case Notification.Name.closeLoginVC:
+        case Notification.Name.showHomeVC:
             switchToViewController(with: .homeVC)
-        case Notification.Name.closeHomeVC:
+        case Notification.Name.showLoginVC:
             switchToViewController(with: .loginVC)
+        case Notification.Name.showInstructionsVC:
+            switchToViewController(with: .instructionsVC)
         default:
             fatalError("\(#function) - Unable to match notification name.")
         }
