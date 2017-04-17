@@ -91,16 +91,18 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         cell.isFilled = true
                         board.filled.append(cell.id)
                         let winner = board.checkForWin()
-                        if winner {
+                        if winner && game.gameProgress != .ended {
                             self.animateIn()
                             FirebaseManager.shared.incrementGameStatus(game)
                         }
                         //print(board.filled)
-                        FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
-                            DispatchQueue.main.async {
-                                cell.cellImageView.image = image
-                            }
-                        })
+                        let url = URL(string: imageName)
+                        cell.cellImageView.kf.setImage(with: url)
+//                        FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
+//                            DispatchQueue.main.async {
+//                                cell.cellImageView.image = image
+//                            }
+//                        })
                     }
                 } else {
                     //Set Up Cell if Image is a Stock Image

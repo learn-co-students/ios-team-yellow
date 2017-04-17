@@ -25,7 +25,7 @@ class PlayerCell: UITableViewCell {
         didSet {
             guard let player = player, let game = game else { return }
             nameLabel.text = player.kindName
-            if let url = player.lastPic { lastPicImageView.kfSetPlayerImageRound(with: url, diameter: 80) }
+            if let url = player.lastPic { lastPicImageView.kf.setImage(with: url) }
             addPlayerPhoto(game: game, player: player)
             
         }
