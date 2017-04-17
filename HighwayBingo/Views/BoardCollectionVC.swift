@@ -94,6 +94,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         let winner = board.checkForWin()
                         if winner {
                             self.animateIn()
+                            FirebaseManager.shared.incrementGameStatus(game)
                         }
                         print(board.filled)
                         FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
