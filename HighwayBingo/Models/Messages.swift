@@ -25,7 +25,7 @@ struct Invitation: Message {
     init(_ data: (key: String, value: JSON)) {
         self.id = data.key
         self.gameId = data.value["gameId"].stringValue
-        self.gameTitle = "\(data.value["title"].stringValue) Bingo"
+        self.gameTitle = "\(data.value["boardType"].stringValue) Bingo"
         self.fromPlayerName = data.value["from"].stringValue
     }
 }
