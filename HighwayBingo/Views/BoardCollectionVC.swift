@@ -85,7 +85,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                     let name = secondURLComponents.last
                     if let name = name {
                         let finalName = name.replacingOccurrences(of: "%20", with: " ")
-                        cell.title = finalName
+                        cell.title = finalName.capitalized
                         cell.layer.borderColor = UIColor.green.cgColor
                         cell.layer.borderWidth = 2
                         cell.isFilled = true
@@ -108,7 +108,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                     //Set Up Cell if Image is a Stock Image
                     let name = board.images[indexPath.item]
                     if let name = name {
-                        cell.title = name
+                        cell.title = name.capitalized
                     }
                     cell.setUpCell()
                     cell.cellImageView.image = UIImage(named: imageName)

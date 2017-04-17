@@ -11,6 +11,11 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="bellerose.ttf">
+            <string>BelleroseLight</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--LoginVC-->
         <scene sceneID="tne-QT-ifu">
@@ -185,8 +190,8 @@
                                                     <rect key="frame" x="8" y="3" width="34" height="31"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="INV-Ok-YWa" userLabel="Horse">
-                                                    <rect key="frame" x="1" y="34" width="48" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <rect key="frame" x="1" y="26" width="48" height="24"/>
+                                                    <fontDescription key="fontDescription" name="BelleroseLight" family="Bellerose" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -198,7 +203,7 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="10h-Os-R5Q" secondAttribute="trailing" id="QNt-l1-G0r"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="10h-Os-R5Q" secondAttribute="bottom" constant="8" id="i2W-Cr-rpE"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="INV-Ok-YWa" secondAttribute="bottom" constant="-8" id="mLi-iY-P0o"/>
-                                            <constraint firstItem="INV-Ok-YWa" firstAttribute="top" secondItem="10h-Os-R5Q" secondAttribute="bottom" id="nVq-zf-YlL"/>
+                                            <constraint firstItem="INV-Ok-YWa" firstAttribute="top" secondItem="10h-Os-R5Q" secondAttribute="bottom" constant="-8" id="nVq-zf-YlL"/>
                                             <constraint firstItem="INV-Ok-YWa" firstAttribute="centerX" secondItem="cBC-7V-R4d" secondAttribute="centerX" id="o4u-97-YJg"/>
                                             <constraint firstItem="10h-Os-R5Q" firstAttribute="leading" secondItem="cBC-7V-R4d" secondAttribute="leadingMargin" id="uOI-Ky-sol"/>
                                         </constraints>
@@ -336,7 +341,7 @@
             <objects>
                 <navigationController storyboardIdentifier="navVC" automaticallyAdjustsScrollViewInsets="NO" id="bIX-Af-4yT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WA2-3U-wbm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WA2-3U-wbm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
