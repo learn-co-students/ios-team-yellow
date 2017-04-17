@@ -85,8 +85,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                     let name = secondURLComponents.last
                     if let name = name {
                         let finalName = name.replacingOccurrences(of: "%20", with: " ")
-                        let number = board.howManyAwayFromWin()
-                        let gameId = game.id
                         cell.title = finalName
                         cell.layer.borderColor = UIColor.green.cgColor
                         cell.layer.borderWidth = 2
@@ -97,8 +95,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                             self.animateIn()
                             FirebaseManager.shared.incrementGameStatus(game)
                         }
-                        print(board.filled)
-                        FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
+                        //print(board.filled)
                         FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
                             DispatchQueue.main.async {
                                 cell.cellImageView.image = image
@@ -115,6 +112,18 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                     cell.cellImageView.image = UIImage(named: imageName)
                 }
             })
+            
+            //Check to See How Many Away From a Win and Update Firebase
+            FirebaseManager.shared.getBoardID(for: game, userid: player.id) { (boardID) in
+                let currentUserID = DataStore.shared.currentUser.id
+                //If it is your board...
+                if boardID == currentUserID {
+                    let number = board.howManyAwayFromWin()
+                    let gameId = game.id
+                    FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
+                }
+            }
+
         }
         cell.id = indexPath.item
         cell.setUpCell()

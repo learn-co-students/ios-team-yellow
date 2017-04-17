@@ -18,6 +18,7 @@ class MessageModal: UIView {
         return [acceptButton, denyButton, displayHeadingLabel, gameLabel, verificationImageView]
     }
     
+    
     init?(message: Message) {
         self.message = message
         super.init(frame: .zero)
