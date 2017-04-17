@@ -11,6 +11,7 @@ class PlayerPhoto: UIView {
     let playerImageView = UIImageView()
     let invitationImageView = UIImageView()
     let rankLabel = UILabel()
+    let medalImageView = UIImageView()
     
     weak var delegate: TransitionToPlayerBoardDelegate?
     
@@ -26,7 +27,7 @@ class PlayerPhoto: UIView {
     }
     
     var views: [UIView] {
-        return [playerImageView, invitationImageView, rankLabel]
+        return [playerImageView, invitationImageView, rankLabel, medalImageView]
     }
     
     init(game: Game, player: Player) {
@@ -50,13 +51,40 @@ class PlayerPhoto: UIView {
             $0.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         }
         
-        _ = rankLabel.then {
-            $0.text = rank
-            $0.font = UIFont(name: "Fabian", size: 16)
-            // Anchors
-            $0.topAnchor.constraint(equalTo: playerImageView.topAnchor, constant: -6).isActive = true
-            $0.leadingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: -6).isActive = true
+        if game.gameProgress != .ended {
+            _ = rankLabel.then {
+                $0.text = rank
+                $0.font = UIFont(name: "Fabian", size: 16)
+                // Anchors
+                $0.topAnchor.constraint(equalTo: playerImageView.topAnchor, constant: -6).isActive = true
+                $0.leadingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: -6).isActive = true
+            }
+        } else {
+            _ = medalImageView.then {
+                if let rank = rank {
+                    switch rank {
+                    case "1st":
+                        $0.image = #imageLiteral(resourceName: "1st")
+                    case "2nd":
+                        $0.image = #imageLiteral(resourceName: "2nd")
+                    case "3rd":
+                        $0.image = #imageLiteral(resourceName: "3rd")
+                    default:
+                        print("No Image")
+                        
+                    }
+                }
+                $0.leadingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: -8).isActive = true
+                $0.topAnchor.constraint(equalTo: playerImageView.topAnchor, constant: -6).isActive = true
+                $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
+                $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
+                
+            }
         }
+
+        
+        
+        
         
         if let url = player.imageUrl {
             playerImageView.kfSetPlayerImageRound(with: url, diameter: 50)

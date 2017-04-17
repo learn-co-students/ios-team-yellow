@@ -163,6 +163,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         FirebaseManager.shared.start(game: game)
     }
     
+    
     func displayAlert(_ sender: UIButton!) {
         let alert = UIAlertController(title: "Start Game?", message: "Not everyone has accepted the invite", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
