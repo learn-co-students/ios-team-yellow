@@ -97,7 +97,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                             self.animateIn()
                             FirebaseManager.shared.incrementGameStatus(game)
                         }
-                        
                         print(board.filled)
                         FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
                         FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in

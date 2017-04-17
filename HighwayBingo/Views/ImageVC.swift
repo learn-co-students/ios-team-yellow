@@ -29,6 +29,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        statusLabel.font = UIFont(name: "BelleroseLight", size: 24)
         print("CELL TITLE: \(cellTitle)")
         loadingSpinner.isHidden = true
         statusLabel.isHidden = true
@@ -102,12 +103,13 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         view.addSubview(verificationButton)
         verificationButton.translatesAutoresizingMaskIntoConstraints = false
         verificationButton.isUserInteractionEnabled = true
+        verificationButton.titleLabel?.font = UIFont(name: "BelleroseLight", size: 24)
         verificationButton.setTitle("Ask Friends to Verify", for: .normal)
-        verificationButton.setTitleColor(UIColor.red, for: .normal)
+        verificationButton.setTitleColor(UIColor.green, for: .normal)
         verificationButton.setTitle("Sent", for: .disabled)
         verificationButton.setTitleColor(UIColor.white, for: .disabled)
         verificationButton.addTarget(self, action: #selector(verifyButtonTapped), for: .touchUpInside)
-        verificationButton.backgroundColor = UIColor.gray
+        verificationButton.backgroundColor = UIColor(red:0.76, green:0.14, blue:1.00, alpha:1.0)
         verificationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         verificationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         verificationButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0).isActive = true
