@@ -36,6 +36,10 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
 private typealias FacebookLoginManager = LoginVC
 extension FacebookLoginManager {
     
+    var newUser: Bool {
+        return UserDefaults.standard.string(forKey: "userId") == nil
+    }
+    
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print("LoginVC -> error while logging in")
@@ -55,11 +59,10 @@ extension FacebookLoginManager {
             if let validationError = error {
                 print("LoginVC -> error validating login: %@", validationError)
             } else if let user = user, let userId = AccessToken.current?.userId {
-                UserDefaults.standard.set(userId, forKey: "userId")
+                let notificationName: Notification.Name = self.newUser ? .showInstructionsVC : .showHomeVC
+                if self.newUser { UserDefaults.standard.set(userId, forKey: "userId") }
                 FirebaseManager.shared.createOrUpdate(user)
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
-                }
+                DispatchQueue.main.async { NotificationCenter.default.post(name: notificationName, object: nil) }
             } else {
                 print("LoginVC -> error validating login")
             }

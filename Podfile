@@ -8,6 +8,7 @@ target 'HighwayBingo' do
   # Pods for HighwayBingo
   pod 'Alamofire'
   pod 'AlamofireImage'
+  pod 'CHIPageControl'
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FBSDKCoreKit'

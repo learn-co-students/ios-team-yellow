@@ -43,7 +43,13 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
         
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        title = "We need a name for our app!"
+        title = "AI - Spy"
+        
+        var image = #imageLiteral(resourceName: "instruction")
+        image = resizeImage(image: image, targetSize: CGSize(width: 35, height: 35))
+        image = image.withRenderingMode(.alwaysOriginal)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.pushInstructionsVC(_:)))
+
         playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         // Fetch User and Game data before setting up View
         DataStore.shared.fetchCurrentUser() { self.setupView() }
@@ -162,6 +168,10 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
         let gameOverviewVC = self.storyboard?.instantiateViewController(withIdentifier: "gameOverviewVC") as! GameOverviewVC
         gameOverviewVC.game = game
         self.navigationController?.pushViewController(gameOverviewVC, animated: true)
+    }
+    
+    func pushInstructionsVC(_:UIBarButtonItem) {
+        DispatchQueue.main.async { NotificationCenter.default.post(name: .showInstructionsVC, object: nil) }
     }
     
     func pushNewGameVC(_ sender: UITapGestureRecognizer) {
