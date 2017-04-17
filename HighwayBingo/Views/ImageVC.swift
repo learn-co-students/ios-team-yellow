@@ -67,6 +67,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             let lowercasedSearch = search.lowercased()
             for match in WatsonAPIClient.possibleMatches {
                 if match.contains(lowercasedSearch) {
+                    self.verificationButton.isHidden = true
                     self.loadingSpinner.stopAnimating()
                     self.loadingSpinner.isHidden = true
                     self.statusLabel.isHidden = false

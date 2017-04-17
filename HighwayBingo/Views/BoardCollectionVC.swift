@@ -91,6 +91,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         cell.layer.borderWidth = 2
                         cell.isFilled = true
                         board.filled.append(cell.id)
+                        let winner = board.checkForWin()
+                        if winner {
+                            self.animateIn()
+                        }
                         print(board.filled)
                         FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
                         FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
