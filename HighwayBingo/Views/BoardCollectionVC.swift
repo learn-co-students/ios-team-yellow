@@ -35,6 +35,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     let backgroundImage = UIImageView()
     
     
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -96,6 +97,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                             self.animateIn()
                             FirebaseManager.shared.incrementGameStatus(game)
                         }
+                        
                         print(board.filled)
                         FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
                         FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
@@ -213,6 +215,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             self.winnerView.alpha = 1
             self.winnerView.transform = CGAffineTransform.identity
         }
+        
     }
     
     // animates winner popup out
@@ -226,6 +229,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         }) { (success : Bool) in
             self.winnerView.removeFromSuperview()
         }
+        
         
     }
 

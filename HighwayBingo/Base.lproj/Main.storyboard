@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rbi-iu-nZR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rbi-iu-nZR">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -274,9 +274,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lrD-rJ-Sxn">
-                                <rect key="frame" x="169" y="424" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lrD-rJ-Sxn">
+                                <rect key="frame" x="188.66666666666666" y="434" width="37" height="37"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGX-wB-qgB">
@@ -295,6 +294,8 @@
                             <constraint firstItem="kGX-wB-qgB" firstAttribute="centerX" secondItem="W8Z-Ku-kc7" secondAttribute="centerX" id="Wrv-Lj-etn"/>
                             <constraint firstItem="l8l-p9-ELZ" firstAttribute="centerX" secondItem="W8Z-Ku-kc7" secondAttribute="centerX" id="dvY-7W-CIS"/>
                             <constraint firstItem="l8l-p9-ELZ" firstAttribute="top" secondItem="Wu2-iK-JRV" secondAttribute="bottom" constant="105" id="q0e-JL-Z9J"/>
+                            <constraint firstItem="lrD-rJ-Sxn" firstAttribute="centerX" secondItem="W8Z-Ku-kc7" secondAttribute="centerX" id="shE-Mj-VVj"/>
+                            <constraint firstItem="u92-n3-e08" firstAttribute="top" secondItem="lrD-rJ-Sxn" secondAttribute="bottom" constant="10" id="xHB-N4-tjP"/>
                         </constraints>
                     </view>
                     <connections>

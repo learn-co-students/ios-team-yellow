@@ -273,7 +273,7 @@
 				TargetAttributes = {
 					A7F098B61E929B0C00BF3FAB = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = VX33YRD3F6;
+						DevelopmentTeam = X3V4LZU6AD;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -519,7 +519,7 @@
 			baseConfigurationReference = 147540FFA226930511475AE7 /* Pods-HighwayBingo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VX33YRD3F6;
+				DEVELOPMENT_TEAM = X3V4LZU6AD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
@@ -533,7 +533,7 @@
 				);
 				INFOPLIST_FILE = HighwayBingo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Oliver.Dronestrike;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TJ.Bingos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -544,7 +544,7 @@
 			baseConfigurationReference = 074ED3FCE8F94180214CACFC /* Pods-HighwayBingo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VX33YRD3F6;
+				DEVELOPMENT_TEAM = X3V4LZU6AD;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
@@ -558,7 +558,7 @@
 				);
 				INFOPLIST_FILE = HighwayBingo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Oliver.Dronestrike;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TJ.Bingos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

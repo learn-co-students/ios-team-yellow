@@ -21,6 +21,7 @@ struct Game {
     var participants: Participating
     let boardType: BoardType
     var movesAway: [MovesAway]
+    
 
     var playerIds: [String] {
         return participants.map { $0.key }

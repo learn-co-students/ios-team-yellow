@@ -62,7 +62,7 @@ class PlayerPhoto: UIView {
             playerImageView.kfSetPlayerImageRound(with: url, diameter: 50)
         }
         
-        if !acceptedInvitation {
+        if !acceptedInvitation && game.gameProgress == .notStarted {
             
             _ = invitationImageView.then {
                 $0.image = #imageLiteral(resourceName: "invitation")
