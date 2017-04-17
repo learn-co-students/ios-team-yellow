@@ -83,14 +83,15 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                     let secondURLComponents = firstHalf.components(separatedBy: "%2F")
                     let name = secondURLComponents.last
                     if let name = name {
-                        cell.title = name
+                        let finalName = name.replacingOccurrences(of: "%20", with: " ")
+                        let number = board.howManyAwayFromWin()
+                        let gameId = game.id
+                        cell.title = finalName
                         cell.layer.borderColor = UIColor.green.cgColor
                         cell.layer.borderWidth = 2
                         cell.isFilled = true
                         board.filled.append(cell.id)
                         print(board.filled)
-                        let number = board.howManyAwayFromWin()
-                        let gameId = game.id
                         FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
                         FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
                             DispatchQueue.main.async {
