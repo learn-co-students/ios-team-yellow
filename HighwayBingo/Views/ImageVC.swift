@@ -16,8 +16,11 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
+
+    
     
     let verificationButton = UIButton()
+    let retakeButton = UIButton()
     
     private let storage = FIRStorage.storage(url: Secrets.Firebase.storageUrl).reference()
     
@@ -29,6 +32,8 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpRetakeButton()
+        retakeButton.isHidden = true
         statusLabel.font = UIFont(name: "BelleroseLight", size: 24)
         print("CELL TITLE: \(cellTitle)")
         loadingSpinner.isHidden = true
@@ -62,12 +67,14 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         statusLabel.isHidden = false
         statusLabel.textColor = UIColor.black
         statusLabel.text = "Thinking..."
+        retakeButton.isHidden = true
         WatsonAPIClient.verifyImage(image: imageData) {
             let search = self.cellTitle
             print("SEARCH: \(search)")
             let lowercasedSearch = search.lowercased()
             for match in WatsonAPIClient.possibleMatches {
                 if match.contains(lowercasedSearch) {
+                    self.retakeButton.isHidden = true
                     self.verificationButton.isHidden = true
                     self.loadingSpinner.stopAnimating()
                     self.loadingSpinner.isHidden = true
@@ -85,6 +92,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
 
                     break
                 } else {
+                    self.retakeButton.isHidden = false
                     self.setUpVerificationButton()
                     self.loadingSpinner.stopAnimating()
                     self.loadingSpinner.isHidden = true
@@ -105,7 +113,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         verificationButton.isUserInteractionEnabled = true
         verificationButton.titleLabel?.font = UIFont(name: "BelleroseLight", size: 24)
         verificationButton.setTitle("Ask Friends to Verify", for: .normal)
-        verificationButton.setTitleColor(UIColor.green, for: .normal)
+        verificationButton.setTitleColor(UIColor.white, for: .normal)
         verificationButton.setTitle("Sent", for: .disabled)
         verificationButton.setTitleColor(UIColor.white, for: .disabled)
         verificationButton.addTarget(self, action: #selector(verifyButtonTapped), for: .touchUpInside)
@@ -114,6 +122,25 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         verificationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         verificationButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0).isActive = true
         verificationButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setUpRetakeButton() {
+        view.addSubview(retakeButton)
+        retakeButton.purpleBorder()
+        retakeButton.translatesAutoresizingMaskIntoConstraints = false
+        retakeButton.isUserInteractionEnabled = true
+        retakeButton.contentVerticalAlignment = .center
+        retakeButton.contentHorizontalAlignment = .center
+        retakeButton.titleLabel?.font = UIFont(name: "BelleroseLight", size: 24)
+        retakeButton.setTitle("Retake", for: .normal)
+        retakeButton.setTitleColor(UIColor.green, for: .normal)
+        retakeButton.addTarget(self, action: #selector(retakeTapped(_:)), for: .touchUpInside)
+        retakeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        retakeButton.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10).isActive = true
+        retakeButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        retakeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        
     }
     
     func verifyButtonTapped(_ sender: UIButton) {
@@ -142,7 +169,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
 
 
-    @IBAction func retakeTapped(_ sender: Any) {
+    func retakeTapped(_ sender: UIButton) {
         verificationButton.isHidden = true
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()

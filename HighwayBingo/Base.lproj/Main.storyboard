@@ -11,11 +11,6 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="bellerose.ttf">
-            <string>BelleroseLight</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--LoginVC-->
         <scene sceneID="tne-QT-ifu">
@@ -283,25 +278,11 @@
                                 <rect key="frame" x="188.66666666666666" y="418" width="37" height="37"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGX-wB-qgB">
-                                <rect key="frame" x="186.33333333333334" y="496" width="43" height="10"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="43" id="4eS-NB-jqc"/>
-                                    <constraint firstAttribute="height" constant="10" id="Hiw-Gu-D2j"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="BelleroseLight" family="Bellerose" pointSize="17"/>
-                                <state key="normal" title="Retake"/>
-                                <connections>
-                                    <action selector="retakeTapped:" destination="3vk-4n-HqB" eventType="touchUpInside" id="eKr-5x-CgC"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="u92-n3-e08" firstAttribute="centerX" secondItem="W8Z-Ku-kc7" secondAttribute="centerX" id="0Nn-Dn-klV"/>
-                            <constraint firstItem="kGX-wB-qgB" firstAttribute="top" secondItem="u92-n3-e08" secondAttribute="bottom" constant="10" id="I51-Z6-sr9"/>
                             <constraint firstItem="u92-n3-e08" firstAttribute="top" secondItem="l8l-p9-ELZ" secondAttribute="bottom" constant="100" id="NK4-sq-rSV"/>
-                            <constraint firstItem="kGX-wB-qgB" firstAttribute="centerX" secondItem="W8Z-Ku-kc7" secondAttribute="centerX" id="Wrv-Lj-etn"/>
                             <constraint firstItem="l8l-p9-ELZ" firstAttribute="centerX" secondItem="W8Z-Ku-kc7" secondAttribute="centerX" id="dvY-7W-CIS"/>
                             <constraint firstItem="l8l-p9-ELZ" firstAttribute="top" secondItem="Wu2-iK-JRV" secondAttribute="bottom" constant="105" id="q0e-JL-Z9J"/>
                             <constraint firstItem="lrD-rJ-Sxn" firstAttribute="centerX" secondItem="W8Z-Ku-kc7" secondAttribute="centerX" id="shE-Mj-VVj"/>
@@ -355,7 +336,7 @@
             <objects>
                 <navigationController storyboardIdentifier="navVC" automaticallyAdjustsScrollViewInsets="NO" id="bIX-Af-4yT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WA2-3U-wbm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WA2-3U-wbm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
