@@ -137,29 +137,34 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         if let indexPath = collectionView.indexPathsForSelectedItems?.first {
             if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
                 if let game = game, let player = player {
-                    FirebaseManager.shared.getBoardID(for: game, userid: player.id) { (boardID) in
-                        let currentUserID = DataStore.shared.currentUser.id
-                        //If it is your board...
-                        if boardID == currentUserID {
-                            self.selectedCell = cell
-                            if cell.isFilled == true {
-                                self.updatePic(image: cell.cellImageView.image!)
+                    if game.gameProgress != .ended {
+                        FirebaseManager.shared.getBoardID(for: game, userid: player.id) { (boardID) in
+                            let currentUserID = DataStore.shared.currentUser.id
+                            //If it is your board...
+                            if boardID == currentUserID {
+                                self.selectedCell = cell
+                                if cell.isFilled == true {
+                                    self.updatePic(image: cell.cellImageView.image!)
+                                } else {
+                                    let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
+                                    imageVC.cellTitle = cell.title
+                                    imageVC.game = self.game
+                                    imageVC.player = self.player
+                                    imageVC.index = String(indexPath.item)
+                                    imageVC.delegate = self
+                                    print(cell.title)
+                                    self.navigationController?.pushViewController(imageVC, animated: false)
+                                    print("Cell \(cell.id) was tapped")
+                                }
+                                //If it is not your board...
                             } else {
-                                let imageVC = self.storyboard?.instantiateViewController(withIdentifier: "imageVC") as! ImageViewController
-                                imageVC.cellTitle = cell.title
-                                imageVC.game = self.game
-                                imageVC.player = self.player
-                                imageVC.index = String(indexPath.item)
-                                imageVC.delegate = self
-                                print(cell.title)
-                                self.navigationController?.pushViewController(imageVC, animated: false)
-                                print("Cell \(cell.id) was tapped")
+                                self.updatePic(image: cell.cellImageView.image!)
+                                print("THIS IS NOT YOUR BORAD")
                             }
-                        //If it is not your board...
-                        } else {
-                            self.updatePic(image: cell.cellImageView.image!)
-                            print("THIS IS NOT YOUR BORAD")
                         }
+
+                    } else {
+                        self.updatePic(image: cell.cellImageView.image!)
                     }
                 }
             }
