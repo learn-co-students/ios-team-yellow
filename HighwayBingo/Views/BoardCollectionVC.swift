@@ -89,6 +89,9 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         cell.isFilled = true
                         board.filled.append(cell.id)
                         print(board.filled)
+                        let number = board.howManyAwayFromWin()
+                        let gameId = game.id
+                        FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
                         FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
                             DispatchQueue.main.async {
                                 cell.cellImageView.image = image

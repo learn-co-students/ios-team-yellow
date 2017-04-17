@@ -97,6 +97,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     func setUpVerificationButton() {
         print("SETTING UP BUTTON")
+        verificationButton.isHidden = false
         view.addSubview(verificationButton)
         verificationButton.translatesAutoresizingMaskIntoConstraints = false
         verificationButton.isUserInteractionEnabled = true
