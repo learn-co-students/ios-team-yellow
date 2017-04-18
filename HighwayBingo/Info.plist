@@ -41,6 +41,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>NEED CAMERA</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Used to invite friends to download the app</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>fabian.ttf</string>

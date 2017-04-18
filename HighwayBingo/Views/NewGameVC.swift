@@ -2,6 +2,7 @@
 /// NewGameVC.swift
 ///
 
+import MessageUI
 import Then
 import SwiftGifOrigin
 import UIKit
@@ -11,7 +12,15 @@ protocol InviteFriendDelegate: class {
     func limitFriends()
 }
 
-class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, InviteFriendDelegate {
+protocol InviteContactToDownloadAppDelegate: class {
+    func invite(_ contact: Contact)
+}
+
+protocol EnableDismissKeyboardGestureRecognizerDelegate: class {
+    func enableDismissKeyboardGestureRecognizer()
+}
+
+class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, InviteFriendDelegate, InviteContactToDownloadAppDelegate, EnableDismissKeyboardGestureRecognizerDelegate {
     
     let boardTypeImageView = UIImageView()
     let boardTypeTintView = UIView()
@@ -19,6 +28,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     let friendsTableView = UITableView()
     let friendsToInviteStackView = UIStackView()
     let inviteButton = UIButton()
+    let inviteContactsButton = UIButton()
     let inviteLabel = UILabel()
     let leftArrow = UIImageView()
     let rightArrow = UIImageView()
@@ -37,18 +47,47 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         }
     }
     
+    var dismissKeyboardTap: UITapGestureRecognizer?
+    
     var views: [UIView] {
-        return [boardTypeImageView, boardTypeTintView, boardTypeLabel, leftArrow, rightArrow, friendsTableView, selectBoardLabel, friendsToInviteStackView, inviteButton, inviteLabel, search, maxFriendsLabel]
+        return [boardTypeImageView, boardTypeTintView, boardTypeLabel, leftArrow, rightArrow, friendsTableView, selectBoardLabel, friendsToInviteStackView, inviteButton, inviteContactsButton, inviteLabel, search, maxFriendsLabel]
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        FacebookManager.getFriends() { self.facebookFriends = $0 }
+        FacebookManager.getFriends() {
+            self.facebookFriends = $0
+            self.reloadFriendsTableView()
+        }
         title = "New Game"
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         fixTableViewInsets()
+    }
+    
+    func enableDismissKeyboardGestureRecognizer() {
+        dismissKeyboardTap?.cancelsTouchesInView = true
+    }
+    
+    func openInviteContacts(_: UIButton) {
+        
+        // Necessary, otherwise the Gesture Recognizer will intercept taps on the table view
+        dismissKeyboardTap?.cancelsTouchesInView = false
+        
+        _ = InviteContacts().then {
+            view.addSubview($0)
+            $0.inviteContactDelegate = self
+            $0.keyboardDelegate = self
+            // Border
+            $0.purpleBorder()
+            // Anchors
+            $0.freeConstraints()
+            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navBarHeight + 50).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+            $0.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
+            $0.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
+        }
     }
     
     override func viewDidLoad() {
@@ -62,8 +101,8 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         views.forEach(view.addSubview)
         views.forEach { $0.freeConstraints() }
         
-        let dismissKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
-        view.addGestureRecognizer(dismissKeyboardTap)
+        dismissKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+        if let tap = dismissKeyboardTap { view.addGestureRecognizer(tap) }
         
         let navigationBarHeight: CGFloat = navigationController!.navigationBar.frame.height
         
@@ -74,6 +113,21 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.leadingAnchor.constraint(equalTo: margin.leadingAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight + 30).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        }
+        
+        _ = inviteContactsButton.then {
+            $0.setTitle("Don't see your friends?", for: .normal)
+            $0.setTitleColor(.black, for: .normal)
+            $0.titleLabel?.font = UIFont(name: "BelleroseLight", size: 15)
+            // Border
+            $0.purpleBorder()
+            // Create Game and send Invitations when touched
+            $0.addTarget(self, action: #selector(self.openInviteContacts(_:)), for: UIControlEvents.touchUpInside)
+            // Anchors
+            $0.trailingAnchor.constraint(equalTo: margin.trailingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 150).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            $0.bottomAnchor.constraint(equalTo: inviteLabel.bottomAnchor).isActive = true
         }
         
         _ = friendsToInviteStackView.then {
@@ -95,20 +149,9 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.addTarget(self, action: #selector(textFieldChanged(_:)), for: .editingChanged)
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 25).isActive = true
+            $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 10).isActive = true
             $0.widthAnchor.constraint(equalTo: margin.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        }
-        
-        _ = maxFriendsLabel.then {
-            $0.text = "Maximum Number of Invitees is 3"
-            $0.font = UIFont(name: "BelleroseLight", size: 20)
-            $0.textColor = UIColor.red
-            $0.textAlignment = .center
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: inviteLabel.bottomAnchor, constant: 50).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
         
         _ = friendsTableView.then {
@@ -118,7 +161,18 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.topAnchor.constraint(equalTo: search.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: margin.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: search.widthAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.topAnchor, constant: screen.height * 0.375).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.topAnchor, constant: screen.height * 0.4).isActive = true
+        }
+        
+        _ = maxFriendsLabel.then {
+            $0.text = "Maximum Number of Invitees Reached"
+            $0.font = UIFont(name: "BelleroseLight", size: 20)
+            $0.textColor = UIColor.red
+            $0.textAlignment = .center
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: screen.height * 0.25).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
         
         _ = selectBoardLabel.then {
@@ -158,7 +212,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         }
         
         let leftArrowTap = UITapGestureRecognizer(target: self, action: #selector(self.cycleBoardTypeLeft(_:)))
-    
+        
         _ = leftArrow.then {
             $0.image = #imageLiteral(resourceName: "arrow-left")
             // Gesture Recognizer
@@ -274,7 +328,6 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         view.endEditing(true)
     }
     
-    
     // Called from FacebookFriendCell.swift
     //
     func invite(_ friend: FacebookUser) {
@@ -293,7 +346,6 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             maxFriendsLabel.isHidden = false
         }
     }
-
 }
 
 
@@ -302,7 +354,9 @@ extension FriendsTableView {
     
     func reloadFriendsTableView() {
         guard let searchText = search.text else { return }
-        friendsMatchingSearch = facebookFriends.filter { $0.name.contains(searchText) && !friendsToInvite.contains($0) }
+        friendsMatchingSearch = facebookFriends.filter { friend in
+            (friend.name.contains(searchText) || searchText.isEmpty) && !friendsToInvite.contains(friend)
+        }
         friendsTableView.reloadData()
     }
     
@@ -325,6 +379,35 @@ extension FriendsTableView {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 50
+    }
+}
+
+private typealias MessageController = NewGameVC
+extension MessageController: MFMessageComposeViewControllerDelegate {
+    
+    // Called from InviteContacts.swift
+    //
+    func invite(_ contact: Contact) {
+        let phoneNumber = contact.phoneNumber
+        sendSMSText(phoneNumber)
+    }
+    
+    func sendSMSText(_ phoneNumber: String) {
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "Download this cool app, AI - Spy"
+            controller.recipients = [phoneNumber]
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
     }
 }

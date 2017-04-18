@@ -82,10 +82,6 @@ class PlayerPhoto: UIView {
             }
         }
 
-        
-        
-        
-        
         if let url = player.imageUrl {
             playerImageView.kfSetPlayerImageRound(with: url, diameter: 50)
         }
