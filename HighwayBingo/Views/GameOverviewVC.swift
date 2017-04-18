@@ -127,7 +127,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func addWaitingForLabel() {
-        
+    
         guard let game = game, let leader = players.filter({ $0.id == game.leaderId }).first else { return }
         
         _ = waitingForLabel.then {

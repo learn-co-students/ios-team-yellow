@@ -17,8 +17,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
 
-    
-    
     let verificationButton = UIButton()
     let retakeButton = UIButton()
     
