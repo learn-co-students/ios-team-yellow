@@ -151,30 +151,25 @@ final class FirebaseManager {
     }
     
     func leave(game: Game, handler: @escaping () -> ()) {
-        // TODO: - remove game if no more participants
         let gameId = game.id
-        print("THERE ARE \(game.participants.count) PARTICIPANTS")
+        //Delete Game from Database and Storage if Last Participant Leaves
         if game.participants.count == 1 {
-            print("DELETING GAME")
             Child.games.child(gameId).removeValue()
             for player in game.players {
                 for image in game.boardType.images {
-                    print("IMAGE TO DELETE: \(image)")
                     storage.child("images/\(gameId)/\(player.id)/\(image.capitalized).jpg").delete(completion: { (error) in
                         if error != nil {
                             print(error?.localizedDescription)
                         }
                     })
                 }
-                
             }
-            
-            
         }
         switch game.gameProgress {
         case .notStarted:
             currentUserNode.invitations.child(gameId).removeValue()
             fallthrough
+        //Removes Game/Board from Database
         default:
             Child.boards.child(gameId).child(currentUserId).removeValue()
             Child.games.child(gameId).child("participants").child(currentUserId).removeValue()

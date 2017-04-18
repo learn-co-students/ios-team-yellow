@@ -68,35 +68,40 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         retakeButton.isHidden = true
         WatsonAPIClient.verifyImage(image: imageData) {
             let search = self.cellTitle
-            print("SEARCH: \(search)")
             let lowercasedSearch = search.lowercased()
-            for match in WatsonAPIClient.possibleMatches {
-                if match.contains(lowercasedSearch) {
-                    self.retakeButton.isHidden = true
-                    self.verificationButton.isHidden = true
-                    self.loadingSpinner.stopAnimating()
-                    self.loadingSpinner.isHidden = true
-                    self.statusLabel.isHidden = false
-                    self.statusLabel.text = "TRUE"
-                    self.statusLabel.textColor = UIColor.green
-                    self.delegate?.updateCell(image: image)
-                    guard let game = self.game, let player = self.player else {return}
-                    let location = self.storage.child("images/\(game.id)/\(player.id)/\(self.cellTitle).jpg")
-                    FirebaseManager.shared.saveImage(image, at: location) { imageUrl in
-                        guard let url = imageUrl, let game = self.game, let player = self.player else { return }
-                        FirebaseManager.shared.updateImage(imageURL: url, game: game, userid: player.id, index: self.index)
-                        FirebaseManager.shared.addLastPic(imageURL: url, game: game, userid: player.id)
+            let searchArray = self.helpWatson(title: lowercasedSearch)
+            print("SEARCH ARRAY: \(searchArray)")
+            outerloop: for match in WatsonAPIClient.possibleMatches {
+                innerloop: for word in searchArray {
+                    print("MATCH: \(match)")
+                    print("SEARCH: \(word)")
+                    if match.contains(word) {
+                        self.retakeButton.isHidden = true
+                        self.verificationButton.isHidden = true
+                        self.loadingSpinner.stopAnimating()
+                        self.loadingSpinner.isHidden = true
+                        self.statusLabel.isHidden = false
+                        self.statusLabel.text = "TRUE"
+                        self.statusLabel.textColor = UIColor.green
+                        self.delegate?.updateCell(image: image)
+                        guard let game = self.game, let player = self.player else {return}
+                        let location = self.storage.child("images/\(game.id)/\(player.id)/\(self.cellTitle).jpg")
+                        FirebaseManager.shared.saveImage(image, at: location) { imageUrl in
+                            guard let url = imageUrl, let game = self.game, let player = self.player else { return }
+                            FirebaseManager.shared.updateImage(imageURL: url, game: game, userid: player.id, index: self.index)
+                            FirebaseManager.shared.addLastPic(imageURL: url, game: game, userid: player.id)
+                        }
+                        
+                        break outerloop
+                    } else {
+                        self.retakeButton.isHidden = false
+                        self.setUpVerificationButton()
+                        self.loadingSpinner.stopAnimating()
+                        self.loadingSpinner.isHidden = true
+                        self.statusLabel.isHidden = false
+                        self.statusLabel.text = "FALSE"
+                        self.statusLabel.textColor = UIColor.red
                     }
-
-                    break
-                } else {
-                    self.retakeButton.isHidden = false
-                    self.setUpVerificationButton()
-                    self.loadingSpinner.stopAnimating()
-                    self.loadingSpinner.isHidden = true
-                    self.statusLabel.isHidden = false
-                    self.statusLabel.text = "FALSE"
-                    self.statusLabel.textColor = UIColor.red
                 }
             }
         }
@@ -177,5 +182,109 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
+    }
+}
+
+extension ImageViewController {
+    
+    func helpWatson(title: String) -> [String] {
+        var searchArray = [String]()
+        switch title {
+        case "airport":
+            searchArray = [title, "airplane", "aircraft"]
+        case "barn":
+            searchArray = [title, "gambrel", "farm building"]
+        case "boat":
+            searchArray = [title, "watercraft"]
+        case "gas station":
+            searchArray = [title, "convenience store", "booth"]
+        case "rv":
+            searchArray = [title, "recreational vehicle", "camping"]
+        case "motel":
+            searchArray = [title, "room", "hotel", "motor hotel"]
+        case "police car":
+            searchArray = [title, "cruiser"]
+        case "power line":
+            searchArray = [title, "wire"]
+        case "restaurant":
+            searchArray = [title, "dining", "store"]
+        case "river":
+            searchArray = [title, "valley", "waterside", "riverbank"]
+        case "restroom":
+            searchArray = [title, "doorplate", "washroom", "toilet"]
+        case "water tower":
+            searchArray = [title, "storage tank", "reservoir"]
+        case "subway":
+            searchArray = [title, "railway", "train"]
+        case "stop sign":
+            searchArray = [title, "octagon", "alizarine red color"]
+        case "billboard":
+            searchArray = [title, "signboard"]
+        case "speed limit":
+            searchArray = [title, "plating", "signboard"]
+        case "bank":
+            searchArray = [title, "automated teller machine"]
+        case "bar":
+            searchArray = [title, "tavern"]
+        case "bus":
+            searchArray = [title, "shuttle"]
+        case "coffee":
+            searchArray = [title, "paper cup", "mug"]
+        case "crosswalk":
+            searchArray = [title, "pedestrian crossing"]
+        case "garbage":
+            searchArray = [title, "trash", "wastepaper bin", "bag"]
+        case "hotel":
+            searchArray = [title, "doubletree"]
+        case "hydrant":
+            searchArray = [title, "lamp", "fountain", "sprinkler"]
+        case "laundromat":
+            searchArray = [title, "washhouse", "dryer", "washer", "dry cleaners"]
+        case "mailbox":
+            searchArray = [title, "lamp"]
+        case "museum":
+            searchArray = [title, "exhibition", "hall", "government building"]
+        case "park":
+            searchArray = [title, "nature", "campsite"]
+        case "statue":
+            searchArray = [title, "sculpture", "figure"]
+        case "stoplight":
+            searchArray = [title, "traffic light"]
+        case "tourist":
+            searchArray = [title, "person"]
+        case "vendor":
+            searchArray = [title, "newsstand", "booth"]
+        case "streetlight":
+            searchArray = [title, "lamp"]
+        case "bathing suit":
+            searchArray = [title, "undergarment"]
+        case "beach chair":
+            searchArray = [title, "desk chair"]
+        case "beach":
+            searchArray = [title, "seaside", "atoll"]
+        case "frozen drink":
+            searchArray = [title, "fruit drink"]
+        case "jet ski":
+            searchArray = [title, "water scooter"]
+        case "lei":
+            searchArray = [title, "people in polynesian dress"]
+        case "sandal":
+            searchArray = [title, "sandal"]
+        case "sandcastle":
+            searchArray = [title, "castle"]
+        case "seagull":
+            searchArray = [title, "bird"]
+        case "seashell":
+            searchArray = [title, "shell"]
+        case "sunglasses":
+            searchArray = [title, "sunglass"]
+        case "surfboard":
+            searchArray = [title, "surfing"]
+        case "waterfall":
+            searchArray = [title, "nature"]
+        default:
+            searchArray = [title]
+        }
+        return searchArray
     }
 }
