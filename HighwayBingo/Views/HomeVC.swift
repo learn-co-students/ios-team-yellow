@@ -60,8 +60,6 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
         views.forEach(view.addSubview)
         views.forEach { $0.freeConstraints() }
         
-        navigationBarHeight = navigationController!.navigationBar.frame.height
-        
         // New game label
         let newGameTap = UITapGestureRecognizer(target: self, action: #selector(self.pushNewGameVC(_:)))
         let newGameButtonTap = UITapGestureRecognizer(target: self, action: #selector(self.pushNewGameVC(_:)))
@@ -74,7 +72,7 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
             $0.addGestureRecognizer(newGameTap)
             // Anchors
             $0.leftAnchor.constraint(equalTo: margin.leftAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight + 40).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navBarHeight + 40).isActive = true
         }
         
         _ = newGameButton.then {

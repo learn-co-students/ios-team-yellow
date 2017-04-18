@@ -26,6 +26,25 @@ extension Array where Element: Equatable {
     }
 }
 
+extension Array where Element: Hashable {
+    
+    /// Stable
+    func removeDuplicates() -> [Element] {
+        var set: Set<Iterator.Element> = []
+        var a: [Element] = []
+        
+        for i in self {
+            if set.contains(i) {
+                continue
+            }
+            set.insert(i)
+            a.append(i)
+        }
+        
+        return a
+    }
+}
+
 // MARK: - Dictionary
 
 
@@ -159,3 +178,4 @@ func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
     
     return newImage!
 }
+
