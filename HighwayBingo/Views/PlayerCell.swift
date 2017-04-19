@@ -48,7 +48,7 @@ class PlayerCell: UITableViewCell {
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: screenSize.width * 0.15).isActive = true
             $0.widthAnchor.constraint(equalToConstant: screenSize.width * 0.25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: (UIScreen.smallDevice ? -3 : 0)).isActive = true
         }
         
         _ = lastPicImageView.then {
@@ -70,8 +70,8 @@ class PlayerCell: UITableViewCell {
             // Anchors
             $0.bottomAnchor.constraint(equalTo: nameLabel.topAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: nameLabel.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (UIScreen.smallDevice ? 55 : 60)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (UIScreen.smallDevice ? 55 : 60)).isActive = true
         }
     }
     

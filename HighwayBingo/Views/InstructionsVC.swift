@@ -51,7 +51,7 @@ class InstructionsVC: UIViewController, UIScrollViewDelegate {
         }
         
         let _ = instructionLabel.then {
-            $0.font = UIFont(name: "BelleroseLight", size: 20)
+            $0.font = UIFont(name: "BelleroseLight", size: (UIScreen.smallDevice ? 18 : 20))
             $0.numberOfLines = 0
             $0.textAlignment = .center
             // Anchors

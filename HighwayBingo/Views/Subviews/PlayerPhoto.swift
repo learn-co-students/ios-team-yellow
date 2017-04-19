@@ -92,7 +92,7 @@ class PlayerPhoto: UIView {
                 $0.image = #imageLiteral(resourceName: "invitation")
                 // Anchors
                 $0.trailingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: 6).isActive = true
-                $0.topAnchor.constraint(equalTo: playerImageView.topAnchor, constant: -6).isActive = true
+                $0.topAnchor.constraint(equalTo: playerImageView.topAnchor, constant: (UIScreen.smallDevice ? -4 : -6)).isActive = true
                 $0.widthAnchor.constraint(equalToConstant: 20).isActive = true
                 $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
             }

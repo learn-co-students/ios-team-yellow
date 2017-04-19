@@ -70,7 +70,7 @@ class PlayingGame: UIView {
                 playersStackView.addArrangedSubview($0)
                 // Anchors
                 $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-                $0.widthAnchor.constraint(equalToConstant: 70).isActive = true
+                $0.widthAnchor.constraint(equalToConstant: (UIScreen.smallDevice ? 60 : 70)).isActive = true
             }
             
             _ = nameLabel.then {

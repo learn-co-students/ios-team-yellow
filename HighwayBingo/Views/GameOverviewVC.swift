@@ -59,7 +59,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         _ = playerLabel.then {
             $0.text = "Player"
             $0.textAlignment = .center
-            $0.font = UIFont(name: "BelleroseLight", size: 24)
+            $0.font = UIFont(name: "BelleroseLight", size: (UIScreen.smallDevice ? 20 : 24))
             // Anchors
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: screen.width * 0.15).isActive = true
             $0.widthAnchor.constraint(equalToConstant: screen.width * 0.25).isActive = true
@@ -70,7 +70,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         _ = lastPhotoLabel.with {
             $0.text = "Last Photo"
             $0.textAlignment = .center
-            $0.font = UIFont(name: "BelleroseLight", size: 24)
+            $0.font = UIFont(name: "BelleroseLight", size: (UIScreen.smallDevice ? 20 : 24))
             // Anchors
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: screen.width * 0.6).isActive = true
             $0.widthAnchor.constraint(equalToConstant: screen.width * 0.25).isActive = true
@@ -197,6 +197,6 @@ extension GameOverviewVC {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return (UIScreen.smallDevice ? 90 : 110)
     }
 }

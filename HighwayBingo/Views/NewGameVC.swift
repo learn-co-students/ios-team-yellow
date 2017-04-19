@@ -172,7 +172,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
             $0.textAlignment = .center
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: view.topAnchor, constant: screen.height * 0.25).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.76).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
         

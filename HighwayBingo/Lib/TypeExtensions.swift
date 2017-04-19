@@ -54,7 +54,7 @@ extension Array where Element: Hashable {
 
 extension UIScreen {
     static var smallDevice: Bool {
-        return main.bounds.width < 400
+        return main.bounds.width < 375
     }
 }
 
