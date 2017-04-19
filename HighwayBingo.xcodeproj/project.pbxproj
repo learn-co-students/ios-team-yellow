@@ -37,6 +37,9 @@
 		F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02AB1AA1E92EC50006EE15C /* ImageVC.swift */; };
 		F05B49B11E97D67C000EA57B /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05B49B01E97D67C000EA57B /* PlayerCell.swift */; };
 		F063AC601E9E78B90030FBE4 /* PlayerPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F063AC5F1E9E78B90030FBE4 /* PlayerPhoto.swift */; };
+		F07E787F1EA69E8600C89FE5 /* InviteContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07E787D1EA69E8600C89FE5 /* InviteContacts.swift */; };
+		F07E78801EA69E8600C89FE5 /* InviteContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07E787E1EA69E8600C89FE5 /* InviteContactsCell.swift */; };
+		F07E78821EA69EB300C89FE5 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07E78811EA69EB300C89FE5 /* Contact.swift */; };
 		F09B0F5E1E96D62700F8828E /* GameOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */; };
 		F0FC47531E95912700538C3C /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47511E95912700538C3C /* Board.swift */; };
 		F0FC47541E95912700538C3C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FC47521E95912700538C3C /* Game.swift */; };
@@ -77,10 +80,13 @@
 		A7F098C41E929B0C00BF3FAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F098C61E929B0C00BF3FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEAA057B1E9534960024DE2F /* BoardCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionVC.swift; sourceTree = "<group>"; };
-		F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BingoCollectionViewCell.swift; path = ../Models/BingoCollectionViewCell.swift; sourceTree = "<group>"; };
+		F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F02AB1AA1E92EC50006EE15C /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		F05B49B01E97D67C000EA57B /* PlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 		F063AC5F1E9E78B90030FBE4 /* PlayerPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerPhoto.swift; sourceTree = "<group>"; };
+		F07E787D1EA69E8600C89FE5 /* InviteContacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteContacts.swift; sourceTree = "<group>"; };
+		F07E787E1EA69E8600C89FE5 /* InviteContactsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteContactsCell.swift; sourceTree = "<group>"; };
+		F07E78811EA69EB300C89FE5 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverviewVC.swift; sourceTree = "<group>"; };
 		F0FC47511E95912700538C3C /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		F0FC47521E95912700538C3C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -144,7 +150,6 @@
 				F05B49B01E97D67C000EA57B /* PlayerCell.swift */,
 				F09B0F5D1E96D62700F8828E /* GameOverviewVC.swift */,
 				A7B426731E9418CA00FF9352 /* FacebookFriendCell.swift */,
-				F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */,
 				A7B4266D1E93EA1500FF9352 /* NewGameVC.swift */,
 				F0FC47571E95918400538C3C /* Subviews */,
 			);
@@ -154,10 +159,12 @@
 		A74695B61E92CA7200C18CC1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F022953B1E953BD8003247E1 /* BingoCollectionViewCell.swift */,
 				A7B426711E940C5B00FF9352 /* FacebookUser.swift */,
 				F0FC4B4A1E969CC900538C3C /* Messages.swift */,
 				F0FC47511E95912700538C3C /* Board.swift */,
 				F0FC47521E95912700538C3C /* Game.swift */,
+				F07E78811EA69EB300C89FE5 /* Contact.swift */,
 				A7B426651E93E11300FF9352 /* Player.swift */,
 			);
 			path = Models;
@@ -222,6 +229,8 @@
 		F0FC47571E95918400538C3C /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				F07E787D1EA69E8600C89FE5 /* InviteContacts.swift */,
+				F07E787E1EA69E8600C89FE5 /* InviteContactsCell.swift */,
 				F0FC4B4C1E969CDA00538C3C /* MessageModal.swift */,
 				F0FC47581E95918400538C3C /* PlayingGame.swift */,
 				F063AC5F1E9E78B90030FBE4 /* PlayerPhoto.swift */,
@@ -369,17 +378,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0FC4B4D1E969CDA00538C3C /* MessageModal.swift in Sources */,
+				F07E78801EA69E8600C89FE5 /* InviteContactsCell.swift in Sources */,
 				F0FC4B4B1E969CC900538C3C /* Messages.swift in Sources */,
 				F022953C1E953BD8003247E1 /* BingoCollectionViewCell.swift in Sources */,
 				A7B426741E9418CA00FF9352 /* FacebookFriendCell.swift in Sources */,
 				A7B426701E940A9600FF9352 /* FacebookManager.swift in Sources */,
 				F05B49B11E97D67C000EA57B /* PlayerCell.swift in Sources */,
 				F02AB1AB1E92EC50006EE15C /* ImageVC.swift in Sources */,
+				F07E78821EA69EB300C89FE5 /* Contact.swift in Sources */,
 				A7B4266A1E93E12C00FF9352 /* WatsonAPIClient.swift in Sources */,
 				A74695B51E92B33900C18CC1 /* HomeVC.swift in Sources */,
 				A74695AB1E92A14E00C18CC1 /* Secrets.swift in Sources */,
 				F0FC47561E95917800538C3C /* DataStore.swift in Sources */,
 				A7DF613E1E9D4CCE0050C52E /* AppController.swift in Sources */,
+				F07E787F1EA69E8600C89FE5 /* InviteContacts.swift in Sources */,
 				A7F098BB1E929B0C00BF3FAB /* AppDelegate.swift in Sources */,
 				F063AC601E9E78B90030FBE4 /* PlayerPhoto.swift in Sources */,
 				F09B0F5E1E96D62700F8828E /* GameOverviewVC.swift in Sources */,

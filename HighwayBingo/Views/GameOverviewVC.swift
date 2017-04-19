@@ -165,7 +165,7 @@ class GameOverviewVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func displayAlert(_ sender: UIButton!) {
-        let alert = UIAlertController(title: "Start Game?", message: "Not everyone has accepted the invite", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Start Game?", message: "Friends who have not accepted the invite will not be included in the game", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
             self.startGame(sender)
         }

@@ -33,7 +33,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         setUpRetakeButton()
         retakeButton.isHidden = true
         statusLabel.font = UIFont(name: "BelleroseLight", size: 24)
-        print("CELL TITLE: \(cellTitle)")
         loadingSpinner.isHidden = true
         statusLabel.isHidden = true
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
@@ -44,7 +43,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,11 +68,8 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             let search = self.cellTitle
             let lowercasedSearch = search.lowercased()
             let searchArray = self.helpWatson(title: lowercasedSearch)
-            print("SEARCH ARRAY: \(searchArray)")
             outerloop: for match in WatsonAPIClient.possibleMatches {
                 innerloop: for word in searchArray {
-                    print("MATCH: \(match)")
-                    print("SEARCH: \(word)")
                     if match.contains(word) {
                         self.retakeButton.isHidden = true
                         self.verificationButton.isHidden = true
@@ -109,7 +104,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     func setUpVerificationButton() {
-        print("SETTING UP BUTTON")
         verificationButton.isHidden = false
         view.addSubview(verificationButton)
         verificationButton.translatesAutoresizingMaskIntoConstraints = false

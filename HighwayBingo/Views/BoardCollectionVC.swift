@@ -40,14 +40,12 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         
         super.viewDidLoad()
         
-        
         effect = visualEffectView.effect
         visualEffectView.effect = nil
         winnerView.layer.cornerRadius = 5
 
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.backgroundColor = UIColor.clear
         
         setUpPicView()
@@ -62,12 +60,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return 25
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BingoCollectionViewCell
@@ -156,12 +152,10 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                                     imageVC.delegate = self
                                     print(cell.title)
                                     self.navigationController?.pushViewController(imageVC, animated: false)
-                                    print("Cell \(cell.id) was tapped")
                                 }
                                 //If it is not your board...
                             } else {
                                 self.updatePic(image: cell.cellImageView.image!)
-                                print("THIS IS NOT YOUR BORAD")
                             }
                         }
 
@@ -196,7 +190,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func imageTapped(_ sender: UITapGestureRecognizer) {
-        print("TAPPED!")
         collectionView.isUserInteractionEnabled = true
         picView.isHidden = true
     }
@@ -252,22 +245,13 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
 
 extension BoardCollectionVC : UICollectionViewDelegateFlowLayout {
 
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let availableWidth = collectionView.frame.width / (itemsPerRow + 1)
-        
-        
         let width = availableWidth
         let height = width
         
         return CGSize(width: width, height: height)
-        
-        
     }
-    
-    
 }
 
 //Delegate method to update the cells
@@ -280,7 +264,7 @@ extension BoardCollectionVC {
             cell.layer.borderWidth = 2
             cell.cellImageView.image = image
             board?.filled.append(cell.id)
-            //
+    
             // Update how close player is to winning in Firebase
             guard let number = board?.howManyAwayFromWin(), let gameId = game?.id else { return }
             FirebaseManager.shared.numberAwayFromWin(number, gameId: gameId)
