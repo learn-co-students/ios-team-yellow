@@ -33,9 +33,6 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
     let playingScrollView = UIScrollView()
     let playingStackView = UIStackView()
     
-    
-    var navigationBarHeight: CGFloat = 0
-    
     let store = DataStore.shared
     
     var views: [UIView] {
@@ -161,7 +158,7 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
             $0.purpleBorder()
             // Anchors
             $0.freeConstraints()
-            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationBarHeight + 100).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: navBarHeight + 50).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
             $0.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
             $0.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true

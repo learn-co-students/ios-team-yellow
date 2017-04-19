@@ -44,6 +44,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
     var friendsToInvite = [FacebookUser]() {
         didSet {
             addFriendToStackView()
+            inviteContactsButton.isHidden = true
         }
     }
     
@@ -166,7 +167,7 @@ class NewGameVC: UIViewController, UITableViewDelegate, UITableViewDataSource, I
         
         _ = maxFriendsLabel.then {
             $0.text = "Maximum Number of Invitees Reached"
-            $0.font = UIFont(name: "BelleroseLight", size: 20)
+            $0.font = UIFont(name: "BelleroseLight", size: (UIScreen.smallDevice ? 15 : 20))
             $0.textColor = UIColor.red
             $0.textAlignment = .center
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

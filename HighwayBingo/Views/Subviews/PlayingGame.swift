@@ -54,7 +54,9 @@ class PlayingGame: UIView {
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         }
         
-        for player in game.players {
+        let players = game.gameProgress == .notStarted ? game.players : game.playersOrderedByRank
+        
+        for player in players {
             
             let playerCell = UIView()
             let nameLabel = UILabel()
