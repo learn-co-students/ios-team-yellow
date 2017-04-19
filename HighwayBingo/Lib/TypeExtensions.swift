@@ -52,6 +52,12 @@ extension Array where Element: Hashable {
 // MARK: - UIKit
 //
 
+extension UIScreen {
+    static var smallDevice: Bool {
+        return main.bounds.width < 400
+    }
+}
+
 extension UIButton {
     
     override func purpleBorder() {
