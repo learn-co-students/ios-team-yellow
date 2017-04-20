@@ -44,13 +44,24 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
         
         FirebaseManager.shared.refreshFirebase(completion: { (success) in
             if success == true {
-                self.playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-                // Fetch User and Game data before setting up View
-                DataStore.shared.fetchCurrentUser() { self.setupView() }
+
+                self.store.fetchCurrentUser() {
+                    DispatchQueue.main.async {
+                        print("recreating views")
+                        self.playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+                        self.setupView()
+                    }
+                    
+                }
             }
         })
 
   
+    }
+    
+    
+    func createGameViews(_ games: [Game]) {
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

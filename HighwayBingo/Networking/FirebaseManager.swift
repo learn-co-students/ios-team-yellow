@@ -48,6 +48,11 @@ final class FirebaseManager {
     }
     
     
+    
+    // please make these class functions 
+    
+    
+    
     //// APP SETUP ////
     
     // Fetches user based off id in UserDefaults, fetches games and players
