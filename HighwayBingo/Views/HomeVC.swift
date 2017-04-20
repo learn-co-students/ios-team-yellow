@@ -41,8 +41,18 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
         
+        FirebaseManager.shared.refreshFirebase(completion: { (success) in
+            if success == true {
+                self.playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+                // Fetch User and Game data before setting up View
+                DataStore.shared.fetchCurrentUser() { self.setupView() }
+            }
+        })
+
+  
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "AI - Spy"
@@ -52,9 +62,12 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
         image = image.withRenderingMode(.alwaysOriginal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.pushInstructionsVC(_:)))
 
-        playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        // Fetch User and Game data before setting up View
-        DataStore.shared.fetchCurrentUser() { self.setupView() }
+//        playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+//        // Fetch User and Game data before setting up View
+//        DataStore.shared.fetchCurrentUser() { self.setupView() }
+        
+      
+
     }
     
     func setupView() {

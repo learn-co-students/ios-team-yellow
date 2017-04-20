@@ -88,6 +88,13 @@ final class FirebaseManager {
         }
     }
     
+    func refreshFirebase(completion: @escaping (Bool) -> ()) {
+        Child.games.observe(.value, with: { (snapshot) in
+                completion(true)
+
+        })
+    }
+
     
     //// USER ////
     
