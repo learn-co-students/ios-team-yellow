@@ -97,14 +97,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                             self.animateIn()
                             FirebaseManager.shared.incrementGameStatus(game)
                         }
-                        //print(board.filled)
                         let url = URL(string: imageName)
                         cell.cellImageView.kf.setImage(with: url)
-//                        FirebaseManager.shared.downloadImage(url: imageName, completion: { (image) in
-//                            DispatchQueue.main.async {
-//                                cell.cellImageView.image = image
-//                            }
-//                        })
                     }
                 } else {
                     //Set Up Cell if Image is a Stock Image
@@ -157,7 +151,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                                     imageVC.player = self.player
                                     imageVC.index = String(indexPath.item)
                                     imageVC.delegate = self
-                                    print(cell.title)
                                     self.navigationController?.pushViewController(imageVC, animated: false)
                                 }
                                 //If it is not your board...
@@ -202,8 +195,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         if let player = player {
             let reportAlert = UIAlertController(title: "Report User", message: "Are you sure you want to report \(player.kindName)?", preferredStyle: .alert)
             let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-                print("You got reported!")
-                
                 if let url = self.currentCellURL {
                     FirebaseManager.shared.reportUser(reportedUser: player.id, imageURL: url)
                 }
@@ -214,8 +205,6 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             reportAlert.addAction(noAction)
             self.present(reportAlert, animated: true)
         }
-        
-        print("I'M REPORTING YOU")
     }
     
     

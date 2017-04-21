@@ -106,7 +106,7 @@ class Board {
             case 5:
                 numberAwayArray.append(0)
             default:
-                print("NOTHING")
+                break
             }
         }
         numberAwayArray.sort {$0 < $1}

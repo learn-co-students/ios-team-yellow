@@ -149,7 +149,7 @@ final class InviteContactsController {
         do {
             allContainers = try self.store.containers(matching: nil)
         } catch {
-            print("Error fetching containers")
+            print("InviteContacts -> error fetching containers")
         }
         
         var results: [CNContact] = []
@@ -162,7 +162,7 @@ final class InviteContactsController {
                 let containerResults = try self.store.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch as! [CNKeyDescriptor])
                 results.append(contentsOf: containerResults)
             } catch {
-                print("Error fetching results for container")
+                print("InviteContacts -> error fetching results for container")
             }
         }
         

@@ -43,14 +43,12 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
         super.viewDidLoad()
         
         FirebaseManager.shared.refreshFirebase(completion: { (success) in
-            if success == true {
+            if success {
                 self.store.fetchCurrentUser() {
                     DispatchQueue.main.async {
-                        print("recreating views")
                         self.playingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
                         self.setupView()
                     }
-                    
                 }
             }
         })

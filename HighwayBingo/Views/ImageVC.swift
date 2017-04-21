@@ -51,7 +51,6 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        print("*****GETTING CALLED!*****")
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         self.imageView.image = image
         //UIImageWriteToSavedPhotosAlbum(image, self, #selector(ImageViewController.image), nil)
