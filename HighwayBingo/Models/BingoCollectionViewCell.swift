@@ -20,6 +20,7 @@ class BingoCollectionViewCell: UICollectionViewCell {
     }
     var id: Int = 0
     var isFilled: Bool = false
+    var imageURL: String?
     
     func setUpCell() {
         if id == 12 || isFilled == true {
