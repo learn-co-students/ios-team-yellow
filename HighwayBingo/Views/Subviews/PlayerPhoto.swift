@@ -70,15 +70,13 @@ class PlayerPhoto: UIView {
                     case "3rd":
                         $0.image = #imageLiteral(resourceName: "3rd")
                     default:
-                        print("No Image")
-                        
+                        break
                     }
                 }
                 $0.leadingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: -8).isActive = true
                 $0.topAnchor.constraint(equalTo: playerImageView.topAnchor, constant: -6).isActive = true
                 $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
                 $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
-                
             }
         }
 

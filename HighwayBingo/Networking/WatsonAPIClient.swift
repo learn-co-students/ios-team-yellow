@@ -18,7 +18,6 @@ class WatsonAPIClient {
             switch encodingResult {
             case .success(let upload, _, _):
                 upload.responseJSON(completionHandler: { (response) in
-                    debugPrint(response)
                     let JSON = response.result.value as? [String:Any] ?? [:]
                     let imagesArray = JSON["images"] as? [[String:Any]] ?? [[:]]
                     for image in imagesArray {
@@ -32,12 +31,10 @@ class WatsonAPIClient {
                         }
                     }
                     completion()
-                    print("POSSIBLE MATCHES: \(self.possibleMatches)")
                 })
             case .failure(let encodingError):
-                print(encodingError)
+                print("WatsonAPIClient -> \(encodingError)")
             }
         }
     }
 }
-

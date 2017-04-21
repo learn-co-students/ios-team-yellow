@@ -14,16 +14,10 @@ final class DataStore {
     
     private init() {}
     
-    
     func fetchCurrentUser(handler: @escaping () -> ()) {
         FirebaseManager.shared.fetchCurrentUser() { user in
             DataStore.shared.currentUser = user
-            print("fetching user")
             handler()
         }
     }
-    
-    
-
-
 }
