@@ -41,6 +41,7 @@ final class FirebaseManager {
         static var users: FIRDatabaseReference { return db.child("users") }
         static var games: FIRDatabaseReference { return db.child("games") }
         static var boards: FIRDatabaseReference { return db.child("boards") }
+        static var reported: FIRDatabaseReference { return db.child("reported") }
     }
     
     private var currentUserNode: FIRDatabaseReference {
@@ -337,6 +338,12 @@ final class FirebaseManager {
     
     func denyVerification(messageId: String) {
         currentUserNode.verifications.child(messageId).removeValue()
+    }
+    
+    ///REPORTED USERS///
+    
+    func reportUser(reportedUser: String, imageURL: String) {
+        Child.reported.child(currentUserId).setValue(["\(reportedUser)" : "\(imageURL)"])
     }
 }
 

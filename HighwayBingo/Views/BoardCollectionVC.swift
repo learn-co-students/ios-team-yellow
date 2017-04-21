@@ -6,6 +6,7 @@ import UIKit
 import GameKit
 import MobileCoreServices
 import Kingfisher
+import MessageUI
 
 private let reuseIdentifier = "boardCell"
 
@@ -30,9 +31,12 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     var game: Game?
     var player: Player?
     var selectedCell: BingoCollectionViewCell?
+    var currentCellURL: String?
     
     let picView = UIImageView()
     let backgroundImage = UIImageView()
+    
+    
     
     
     
@@ -49,6 +53,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.backgroundColor = UIColor.clear
         
         setUpPicView()
+        
         
         
     }
@@ -85,6 +90,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                         cell.layer.borderColor = UIColor.green.cgColor
                         cell.layer.borderWidth = 2
                         cell.isFilled = true
+                        cell.imageURL = imageName
                         board.filled.append(cell.id)
                         let winner = board.checkForWin()
                         if winner && game.gameProgress != .ended {
@@ -134,6 +140,7 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let indexPath = collectionView.indexPathsForSelectedItems?.first {
             if let cell = collectionView.cellForItem(at: indexPath) as? BingoCollectionViewCell {
+                currentCellURL = cell.imageURL
                 if let game = game, let player = player {
                     if game.gameProgress != .ended {
                         FirebaseManager.shared.getBoardID(for: game, userid: player.id) { (boardID) in
@@ -156,11 +163,14 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                                 //If it is not your board...
                             } else {
                                 self.updatePic(image: cell.cellImageView.image!)
+                                self.setUpReportButton()
+                                
                             }
                         }
 
                     } else {
                         self.updatePic(image: cell.cellImageView.image!)
+                        
                     }
                 }
             }
@@ -183,6 +193,33 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         picView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
     }
     
+    func setUpReportButton() {
+        let reportButton = UIBarButtonItem.init(title: "Report", style: .plain, target: self, action: #selector(reportUser))
+        navigationItem.rightBarButtonItem = reportButton
+    }
+    
+    func reportUser(sender: UIBarButtonItem) {
+        if let player = player {
+            let reportAlert = UIAlertController(title: "Report User", message: "Are you sure you want to report \(player.kindName)?", preferredStyle: .alert)
+            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                print("You got reported!")
+                
+                if let url = self.currentCellURL {
+                    FirebaseManager.shared.reportUser(reportedUser: player.id, imageURL: url)
+                }
+                self.navigationItem.rightBarButtonItem = nil
+            })
+            let noAction = UIAlertAction(title: "No", style: .default, handler: nil)
+            reportAlert.addAction(yesAction)
+            reportAlert.addAction(noAction)
+            self.present(reportAlert, animated: true)
+        }
+        
+        print("I'M REPORTING YOU")
+    }
+    
+    
+    
     func updatePic(image: UIImage) {
         picView.image = image
         picView.isHidden = false
@@ -192,6 +229,8 @@ class BoardCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func imageTapped(_ sender: UITapGestureRecognizer) {
         collectionView.isUserInteractionEnabled = true
         picView.isHidden = true
+        self.navigationItem.rightBarButtonItem = nil
+        
     }
     
     func setUpBackgroundImage(image: String) {

@@ -44,7 +44,6 @@ class HomeVC: UIViewController, TransitionToPlayerBoardDelegate {
         
         FirebaseManager.shared.refreshFirebase(completion: { (success) in
             if success == true {
-
                 self.store.fetchCurrentUser() {
                     DispatchQueue.main.async {
                         print("recreating views")
