@@ -1,37 +1,87 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "Icon.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "Icon@2x.png",
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "29x29",
+<<<<<<< HEAD
+      "idiom" : "iphone",
+      "filename" : "Icon-Small.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "Icon-Small@2x.png",
+=======
       "scale" : "1x"
     },
     {
       "idiom" : "iphone",
       "size" : "29x29",
+>>>>>>> 70f5d07374c86cfd42bb67d1c27bf57361c83fd2
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "29x29",
+      "idiom" : "iphone",
+<<<<<<< HEAD
+      "filename" : "Icon-Small@3x.png",
+=======
+      "size" : "29x29",
+>>>>>>> 70f5d07374c86cfd42bb67d1c27bf57361c83fd2
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "40x40",
+      "idiom" : "iphone",
+<<<<<<< HEAD
+      "filename" : "Icon-Spotlight-40@2x.png",
+=======
+      "size" : "40x40",
+>>>>>>> 70f5d07374c86cfd42bb67d1c27bf57361c83fd2
       "scale" : "2x"
     },
     {
+      "size" : "40x40",
       "idiom" : "iphone",
+<<<<<<< HEAD
+      "filename" : "Icon-Spotlight-40@3x.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "Icon-Small-50.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "Icon-Small-50@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "Icon-60@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "Icon-60@3x.png",
+=======
       "size" : "40x40",
       "scale" : "3x"
     },
@@ -53,6 +103,7 @@
     {
       "idiom" : "iphone",
       "size" : "60x60",
+>>>>>>> 70f5d07374c86cfd42bb67d1c27bf57361c83fd2
       "scale" : "3x"
     }
   ],
