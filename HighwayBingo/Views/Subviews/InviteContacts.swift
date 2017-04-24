@@ -53,7 +53,7 @@ class InviteContacts: UIView, UITableViewDelegate, UITableViewDataSource {
         }
         
         _ = descriptionLabel.then {
-            $0.text = "Invite your friends to download AI - Spy"
+            $0.text = "Invite your friends to download AI - Spy: https://itunes.apple.com/us/app/ai-spy/id1228185412?mt=8"
             $0.textAlignment = .center
             $0.numberOfLines = 0
             $0.font = UIFont(name: "BelleroseLight", size: 24)
