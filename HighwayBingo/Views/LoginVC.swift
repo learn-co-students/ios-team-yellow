@@ -21,6 +21,8 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loginButton.readPermissions = ["public_profile", "email", "user_friends"]
+        
         _ = loginButton.then {
             $0.delegate = self
             view.addSubview($0)
